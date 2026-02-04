@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import ttk
 from PIL import Image, ImageTk
 import numpy as np 
 import os
@@ -12,6 +13,8 @@ last_processed_image = None #останнє показане зображенн�
 ROOT_WIDTH = 1000 #розміри відображення
 ROOT_HEIGHT = 600
 IMAGE_DISPLAY_SIZE = 550 #фіксований розмір для відображення
+preprocess_combobox = None  # Глобальна змінна для combobox препроцесингу
+metrics_label = None
 
 def load_images():
     """
@@ -68,6 +71,56 @@ def save_image(img, original_path, suffix="_processed"):
     base, ext = os.path.splitext(original_path) #отримання поточного шляху
     save_path = f"{base}{suffix}{ext}" #створення новго шляху з суфіксом
     img.save(save_path) #збереження
+    return save_path  # Повертаємо шлях для метрик
+
+def update_metrics_display(mse):
+    global metrics_label
+    if metrics_label:
+        metrics_label.config(
+            text=f"MSE (спотворення): {mse:.4f}\n"
+        )
+
+def apply_preprocessing(original_img):
+    """
+    Застосовує попередню обробку ТІЛЬКИ якщо обрано щось окрім "Default".
+    Викликає оригінальні функції, показує/зберігає/метрика для препроцесингу.
+    Повертає препроцесоване зображення для фільтра.
+    """
+    global last_processed_image, preprocess_combobox
+    if not preprocess_combobox:
+        return original_img
+
+    option = preprocess_combobox.get()
+    if option == "Default":
+        return original_img
+
+    # Тимчасово підставляємо зображення і зберігаємо стан
+    original_current = images[current_index]
+    original_last = last_processed_image
+    images[current_index] = original_img.copy()
+
+    if option == "White Balance":
+        white_balance()
+    elif option == "Histogram Equalization":
+        histogram_equalization()
+
+    # Беремо результат
+    processed = last_processed_image if last_processed_image else images[current_index]
+
+    # Повертаємо стан
+    images[current_index] = original_current
+    last_processed_image = original_last
+
+    # Перейменовуємо збережений файл препроцесингу на "_pre_..."
+    old_suffix = "_white_balance" if option == "White Balance" else "_histogram"
+    base, ext = os.path.splitext(paths[current_index])
+    old_path = f"{base}{old_suffix}{ext}"
+    new_suffix = "_pre_" + option.lower().replace(" ", "_")
+    new_path = f"{base}{new_suffix}{ext}"
+    if os.path.exists(old_path):
+        os.rename(old_path, new_path)
+
+    return processed.copy()  # Повертаємо копію для фільтра
 
 def canny_filter():
     """
@@ -76,7 +129,10 @@ def canny_filter():
     global images, current_index, last_processed_image
     if not images:
         return
-    img = images[current_index].convert("RGB") #відкриття та конвертація у rgb
+
+    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+
+    img = img.convert("RGB") #відкриття та конвертація у rgb
     arr = np.array(img, dtype=float) #перетворення у масив
 
     #перетворення у відтінки сірого - перший етап фільтрації
@@ -170,8 +226,8 @@ def canny_filter():
     img_edges = Image.fromarray(res.astype(np.uint8)) #перетворення результату
     show_image(img_edges) #відображення на екрані
     last_processed_image = img_edges #збереження індекса
-    save_image(img_edges, paths[current_index], suffix="_canny") #збереження обробленого зображення
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_canny" + os.path.splitext(paths[current_index])[1]) #обчислення спотворення
+    save_path = save_image(img_edges, paths[current_index], suffix="_canny") #збереження обробленого зображення
+    distortion_rate(paths[current_index], save_path) #обчислення спотворення
 
 def directional():
     """
@@ -181,7 +237,9 @@ def directional():
     if not images:
         return
 
-    img = images[current_index].convert("L") #відкриття зображення у відтінках сірого 
+    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+
+    img = img.convert("L") #відкриття зображення у відтінках сірого 
     array = np.array(img, dtype=float) #перетворення у матрицю 
     height, width = array.shape #розміри масиву 
     result = np.zeros_like(array) #масив для результату
@@ -201,8 +259,8 @@ def directional():
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result) 
     show_image(img_result) #відображення на екрані
-    save_image(img_result, paths[current_index], suffix="_directional") #збереження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_directional" + os.path.splitext(paths[current_index])[1]) #обчислення спотворення
+    save_path = save_image(img_result, paths[current_index], suffix="_directional") #збереження з суфіксом
+    distortion_rate(paths[current_index], save_path) #обчислення спотворення
 
 def pruitt():
     """
@@ -212,7 +270,9 @@ def pruitt():
     if not images:
         return
 
-    img = images[current_index].convert("L") #відкриття у відтінках сірого 
+    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+
+    img = img.convert("L") #відкриття у відтінках сірого 
     array = np.array(img, dtype=float) 
     height, width = array.shape 
     result = np.zeros_like(array)
@@ -226,7 +286,7 @@ def pruitt():
         [-1, -1, -1],
         [0, 0, 0],
         [1, 1, 1]
-    ]) #ядро по вертикалі
+    ]) #ядро по вертикалі 
  
     for i in range(1, height - 1):
         for j in range(1, width - 1):
@@ -238,14 +298,14 @@ def pruitt():
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result)
     show_image(img_result) #відображення на екрані
-    save_image(img_result, paths[current_index], suffix="_pruitt") #збереження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_pruitt" + os.path.splitext(paths[current_index])[1]) #розрахунок спотворення
+    save_path = save_image(img_result, paths[current_index], suffix="_pruitt") #збереження з суфіксом
+    distortion_rate(paths[current_index], save_path) #розрахунок спотворення
 
 def white_balance():
     """
     Баланс білого 
     """
-    global images, current_index
+    global images, current_index, last_processed_image
     if not images:
         return
 
@@ -272,8 +332,8 @@ def white_balance():
     img_result = Image.fromarray(balanced) #формування назад у масив
 
     show_image(img_result) #відображення на екрані
-    save_image(img_result, paths[current_index], suffix="_white_balance") #збереження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_white_balance" + os.path.splitext(paths[current_index])[1]) #обрахунок спотворення
+    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
+    save_path = save_image(img_result, paths[current_index], suffix="_white_balance") #збереження з суфіксом
 
 def tracehold_segmentation(tracehold):
     """
@@ -283,7 +343,8 @@ def tracehold_segmentation(tracehold):
     if not images:
         return
 
-    img = images[current_index]
+    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+
     array = np.array(img, dtype=float)
     height, width, _ = array.shape
     R, G, B = array[:,:,0], array[:,:,1], array[:,:,2] #канали з зображення
@@ -299,14 +360,14 @@ def tracehold_segmentation(tracehold):
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result)
     show_image(img_result) #відображення на екрані
-    save_image(img_result, paths[current_index], suffix="_segmentation") #збееження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_segmentation" + os.path.splitext(paths[current_index])[1]) #обрахунок спотворення
+    save_path = save_image(img_result, paths[current_index], suffix="_segmentation") #збееження з суфіксом
+    distortion_rate(paths[current_index], save_path) #обрахунок спотворення
 
 def histogram_equalization():
     """
     Гістограмне вирівнювання
     """
-    global images, current_index
+    global images, current_index, last_processed_image
     if not images:
         return
 
@@ -332,8 +393,8 @@ def histogram_equalization():
 
     img_result = Image.fromarray(result) #збереження у масив
     show_image(img_result) #відображення на екрані
-    save_image(img_result, paths[current_index], suffix="_histogram") #збееження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_histogram" + os.path.splitext(paths[current_index])[1]) #обчислення спотворення
+    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
+    save_path = save_image(img_result, paths[current_index], suffix="_histogram") #збееження з суфіксом
 
 def harris_angle_detectors(threshold):
     """
@@ -343,7 +404,9 @@ def harris_angle_detectors(threshold):
     if not images:
         return
 
-    img = images[current_index].convert("L")  #зображення у відтінках сірого
+    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+
+    img = img.convert("L")  #зображення у відтінках сірого
     array = np.array(img, dtype=float)
     height, width = array.shape
     result = np.zeros_like(array)
@@ -382,8 +445,8 @@ def harris_angle_detectors(threshold):
 
     img_result = Image.fromarray(result.astype(np.uint8))  #конвертація 
     show_image(img_result)  #відображення на екані
-    save_image(img_result, paths[current_index], suffix="_harris")  #збереження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_harris" + os.path.splitext(paths[current_index])[1])  #спотворення
+    save_path = save_image(img_result, paths[current_index], suffix="_harris")  #збереження з суфіксом
+    distortion_rate(paths[current_index], save_path)  #спотворення
 
 def fast(t):
     """
@@ -393,7 +456,9 @@ def fast(t):
     if not images:
         return
 
-    img = images[current_index].convert("L") #зображення у відтінках сірого
+    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+
+    img = img.convert("L") #зображення у відтінках сірого
     array = np.array(img, dtype=float)
     height, width = array.shape
     result = np.zeros_like(array) #масив на результат
@@ -441,8 +506,8 @@ def fast(t):
 
     img_result = Image.fromarray(result.astype(np.uint8)) #конвертація результату
     show_image(img_result) #відображення на екрані
-    save_image(img_result, paths[current_index], suffix="_fast") #збереження з суфіксом
-    distortion_rate(paths[current_index], os.path.splitext(paths[current_index])[0] + "_fast" + os.path.splitext(paths[current_index])[1]) #обчислення спотворення
+    save_path = save_image(img_result, paths[current_index], suffix="_fast") #збереження з суфіксом
+    distortion_rate(paths[current_index], save_path) #обчислення спотворення
 
 def distortion_rate(original_path, filtered_path):
     """
@@ -459,11 +524,13 @@ def distortion_rate(original_path, filtered_path):
 
     print(f"Distortion rate: {mse}") #відображення у консолі
 
+    update_metrics_display(mse)
+
 def interface(): 
     """
     Інтерфейс користувача
     """
-    global root, image_label 
+    global root, image_label, preprocess_combobox 
     root = tk.Tk() 
     root.title('STEM: Image Processing') #заголовок вікна
     root.geometry(f"{ROOT_WIDTH}x{ROOT_HEIGHT}") #розміри вікна
@@ -494,10 +561,31 @@ def interface():
     right_frame.pack_propagate(False)
     tk.Label(right_frame, text="Filter Panel", bg="#e9e9e9",font=("Arial", 14, "bold")).pack(pady=10)
 
+    #панель 
+    preprocess_frame = tk.Frame(width=330, bg="#e9e9e9", relief=tk.RIDGE, bd=2)
+    preprocess_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
+    preprocess_frame.pack_propagate(False)
+    tk.Label(preprocess_frame, text="Preproccesing Panel", bg="#e9e9e9",font=("Arial", 14, "bold")).pack(pady=10)
+
+    preprocess_combobox = ttk.Combobox(preprocess_frame, values=["Default", "White Balance", "Histogram Equalization"], width=30)
+    preprocess_combobox.pack()
+    preprocess_combobox.set("Default")
+
+    global metrics_label
+    metrics_label = tk.Label(
+        preprocess_frame,
+        text="MSE:",
+        bg="#e9e9e9",
+        fg="#333333",
+        font=("Arial", 10),
+        justify="left",
+        wraplength=300
+    )
+    metrics_label.pack(side="bottom", pady=20, padx=10, fill="x")
+
     tk.Button(right_frame, text="Canny Edge Detector", width=20, command=canny_filter).pack(pady=15) #кнопка для фільтра Кенніз командою 
     tk.Button(right_frame, text="Directional Filter", width=15, command=directional).pack(pady=15) #кнопка для напрямного фільтрування з командою
     tk.Button(right_frame, text="Pruitt Filter", width=15, command=pruitt).pack(pady=15) #кнопка для фільтру Прюітта з командою
-    tk.Button(right_frame, text="White Ballance", width=15, command=white_balance).pack(pady=15) #кнопка для балансу білого з командою
 
     tk.Label(right_frame, text="Tracehold Value", bg="#e9e9e9").pack() #місце для введення значення для сегментації
     entry_tracehold = tk.Entry(right_frame) #зчитування значення
@@ -508,8 +596,6 @@ def interface():
         tracehold_segmentation(threshold)
     tk.Button(right_frame, text="Tracehold segmentation", width=25, command=apply_tracehold).pack(pady=15) #кнопка для колірної сегментації з командо пісдя застосування сегментації
 
-    tk.Button(right_frame, text="Histogram Equalization", width=20, command=histogram_equalization).pack(pady=15) #кнопка для гістагармного вирівнювання з командою
-
     tk.Label(right_frame, text="Harris angle detectors tracehold Value", bg="#e9e9e9").pack() #місце для введення порогового значення для виділення кутів
     harris_tracehold = tk.Entry(right_frame) #зчитування параметру
     harris_tracehold.pack()
@@ -519,7 +605,7 @@ def interface():
         harris_angle_detectors(harris_threshold)
     tk.Button(right_frame, text="Harris angle detectors", width=20, command=apply_harris_threshold).pack(pady=15) #кнопка для виділення кутів з командою пвсля застосування параметру
 
-    tk.Label(right_frame, text="Brightness threshold", bg="#e9e9e9").pack() #місце для введення порогу яскравості для функції виділення ключових точок
+    tk.Label(right_frame, text=" Brightness threshold", bg="#e9e9e9").pack() #місце для введення порогу яскравості для функції виділення ключових точок
     brightness_threshold = tk.Entry(right_frame) #зчитування параметру
     brightness_threshold.pack()
     brightness_threshold.insert(0, "20")
