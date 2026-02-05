@@ -1,3 +1,21 @@
+Summary:
+ - Directory: d:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM
+ - Files processed: 1
+ - Total lines: 656
+ - Duration: 0.03 seconds
+================================================================================
+Directory Structure:
+
+├── images/
+├── stem.py
+
+Files extracted:
+stem.py (starts at line 1)
+
+================================================================================
+
+File: stem.py (starts at line 1)
+
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import ttk
@@ -81,9 +99,12 @@ def update_metrics_display(mse):
         )
 
 def apply_preprocessing(original_img):
-    global last_processed_image, preprocess_combobox, current_preprocess_suffix
-    current_preprocess_suffix = ""  # Скидаємо перед кожним викликом
-
+    """
+    Застосовує попередню обробку ТІЛЬКИ якщо обрано щось окрім "Default".
+    Викликає оригінальні функції, показує/зберігає/метрика для препроцесингу.
+    Повертає препроцесоване зображення для фільтра.
+    """
+    global last_processed_image, preprocess_combobox
     if not preprocess_combobox:
         return original_img
 
@@ -91,40 +112,41 @@ def apply_preprocessing(original_img):
     if option == "Default":
         return original_img
 
-    # Тимчасово підставляємо зображення
+    # Тимчасово підставляємо зображення і зберігаємо стан
     original_current = images[current_index]
     original_last = last_processed_image
     images[current_index] = original_img.copy()
 
     if option == "White Balance":
         white_balance()
-        current_preprocess_suffix = "_pre_white_balance"
     elif option == "Histogram Equalization":
         histogram_equalization()
-        current_preprocess_suffix = "_pre_histogram"
     elif option == "Sharpen Filter":
         sharpen_filter()
-        current_preprocess_suffix = "_pre_sharpen"
 
     # Беремо результат
-    processed = last_processed_image if last_processed_image else images[current_index].copy()
+    processed = last_processed_image if last_processed_image else images[current_index]
 
     # Повертаємо стан
     images[current_index] = original_current
     last_processed_image = original_last
 
-    # Зберігаємо препроцесоване зображення з правильним суфіксом (якщо ще не збережено)
-    if current_preprocess_suffix:
-        pre_path = save_image(processed, paths[current_index], suffix=current_preprocess_suffix)
-        print(f"Збережено препроцес: {pre_path}")
+    # Перейменовуємо збережений файл препроцесингу на "_pre_..."
+    old_suffix = "_white_balance" if option == "White Balance" else "_histogram"
+    base, ext = os.path.splitext(paths[current_index])
+    old_path = f"{base}{old_suffix}{ext}"
+    new_suffix = "_pre_" + option.lower().replace(" ", "_")
+    new_path = f"{base}{new_suffix}{ext}"
+    if os.path.exists(old_path):
+        os.rename(old_path, new_path)
 
-    return processed
+    return processed.copy()  # Повертаємо копію для фільтра
 
 def canny_filter():
     """
     Функція для фільтру Кенні
     """
-    global images, current_index, last_processed_image, current_preprocess_suffix
+    global images, current_index, last_processed_image
     if not images:
         return
 
@@ -224,10 +246,8 @@ def canny_filter():
     img_edges = Image.fromarray(res.astype(np.uint8)) #перетворення результату
     show_image(img_edges) #відображення на екрані
     last_processed_image = img_edges #збереження індекса
-    filter_suffix = "_canny"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_edges, paths[current_index], suffix=full_suffix)
-    distortion_rate(paths[current_index], save_path)
+    save_path = save_image(img_edges, paths[current_index], suffix="_canny") #збереження обробленого зображення
+    distortion_rate(paths[current_index], save_path) #обчислення спотворення
 
 def directional():
     """
@@ -298,8 +318,7 @@ def pruitt():
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result)
     show_image(img_result) #відображення на екрані
-    suffix = current_preprocess_suffix + "_pruitt" if current_preprocess_suffix else "_pruitt"
-    save_path = save_image(img_result, paths[current_index], suffix=suffix) #збереження з суфіксом
+    save_path = save_image(img_result, paths[current_index], suffix="_pruitt") #збереження з суфіксом
     distortion_rate(paths[current_index], save_path) #розрахунок спотворення
 
 def sharpen_filter():
@@ -653,3 +672,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+================================================================================
