@@ -15,6 +15,7 @@ ROOT_HEIGHT = 600
 IMAGE_DISPLAY_SIZE = 550 #фіксований розмір для відображення
 preprocess_combobox = None  # Глобальна змінна для combobox препроцесингу
 metrics_label = None
+ground_truth_path = ""
 
 def load_images():
     """
@@ -73,32 +74,18 @@ def save_image(img, original_path, suffix="_processed"):
     img.save(save_path) #збереження
     return save_path  # Повертаємо шлях для метрик
 
-def update_metrics_display(metrics_dict=None):
-    """
-    """
+def update_metrics_display(mse, ssim=None, fom=None):
     global metrics_label
     if not metrics_label:
         return
 
-    if not metrics_dict:
-        metrics_label.config(text="Метрики ще не розраховано")
-        return
+    text = f"MSE: {mse:.4f}\n"
+    if ssim is not None:
+        text += f"SSIM: {ssim:.4f} (0–1)\n"
+    if fom is not None:
+        text += f"FOM: {fom:.4f} (0–1)"
 
-    lines = ["Результати метрик:"]
-    
-    for name, value in metrics_dict.items():
-        if name == 'MSE':
-            lines.append(f"MSE (спотворення): {value:.4f}   (чим менше — тим краще)")
-        elif name == 'SSIM':
-            lines.append(f"SSIM (структурна схожість): {value:.4f}   (чим ближче до 1 — тим краще)")
-        elif name == 'PSNR':
-            lines.append(f"PSNR: {value:.2f} dB   (чим більше — тим краще)")
-        else:
-            # для будь-яких інших метрик просто виводимо без коментаря
-            lines.append(f"{name}: {value:.4f}")
-
-    full_text = "\n".join(lines)
-    metrics_label.config(text=full_text)
+    metrics_label.config(text=text)
 
 def apply_preprocessing(original_img):
     global last_processed_image, preprocess_combobox, current_preprocess_suffix
@@ -247,12 +234,8 @@ def canny_filter():
     save_path = save_image(img_edges, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
-    ground_truth_path = "images/RGB_008.png"  # заміни на свій шлях
-    fom_rate(save_path, ground_truth_path)
+    fom = fom_rate(save_path)
+    update_metrics_display(mse, ssim, fom)
 
 def directional():
     """
@@ -290,10 +273,8 @@ def directional():
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    update_metrics_display(mse, ssim, fom)
 
 def pruitt():
     """
@@ -337,10 +318,8 @@ def pruitt():
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    update_metrics_display(mse, ssim, fom)
 
 def sharpen_filter():
     global images, current_index, last_processed_image
@@ -435,10 +414,8 @@ def tracehold_segmentation(tracehold):
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    update_metrics_display(mse, ssim, fom)
 
 def histogram_equalization():
     """
@@ -527,10 +504,8 @@ def harris_angle_detectors(threshold):
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    update_metrics_display(mse, ssim, fom)
 
 def fast(t):
     """
@@ -596,10 +571,8 @@ def fast(t):
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    update_metrics_display(mse, ssim, fom)
 
 def distortion_rate(original_path, filtered_path):
     """
@@ -658,47 +631,31 @@ def ssim_rate(original_path, filtered_path):
 
 from scipy.ndimage import distance_transform_edt
 
-def fom_rate(detected_path, ground_truth_path, alpha=1/9):
+def fom_rate(detected_path, alpha=1/9):
     """
-    Pratt's Figure of Merit для оцінки якості детекції країв.
-    
-    Параметри:
-        detected_path      - шлях до бінарної маски виявлених країв (255 - краї, 0 - фон)
-        ground_truth_path  - шлях до еталонної (ground truth) маски країв
-        alpha              - коефіцієнт штрафу (зазвичай 1/9 = 0.1111)
-    
-    Повертає: FOM (0..1, ближче до 1 — краще)
     """
-    # Завантажуємо зображення як grayscale
+    global ground_truth_path, metrics_label
+
+    if not ground_truth_path or not os.path.exists(ground_truth_path):
+        return None
+    
     detected = Image.open(detected_path).convert("L")
     gt       = Image.open(ground_truth_path).convert("L")
 
-    detected_arr = np.array(detected) > 127  # робимо бінарну маску (True/False)
+    detected_arr = np.array(detected) > 127 
     gt_arr       = np.array(gt)       > 127
-
-    # Кількість виявлених і еталонних пікселів
     N_d = np.sum(detected_arr)
     N_g = np.sum(gt_arr)
 
     if N_d == 0 or N_g == 0:
         return 0.0  # немає країв — FOM = 0
 
-    # Відстань до найближчого еталонного краю для кожної точки
     dist_map = distance_transform_edt(~gt_arr)  # відстань від НЕ-краю до найближчого краю
-
-    # Беремо відстані тільки для виявлених пікселів
     detected_distances = dist_map[detected_arr]
-
-    # Штраф для кожного виявленого пікселя
     penalties = 1 / (1 + alpha * detected_distances ** 2)
-
-    # Сума штрафів
     total_penalty = np.sum(penalties)
-
-    # Фінальний FOM
     fom = total_penalty / max(N_d, N_g)
 
-    print(f"FOM: {fom:.4f} (N_detected={N_d}, N_ground={N_g})")
     return fom
 
 def interface(): 
@@ -757,6 +714,21 @@ def interface():
         wraplength=300
     )
     metrics_label.pack(side="bottom", pady=20, padx=10, fill="x")
+
+    tk.Label(preprocess_frame, text="Ground Truth FOM:", bg="#e9e9e9").pack(pady=15)
+    gt_entry = tk.Entry(preprocess_frame, width=40)
+    gt_entry.pack(pady=5)
+    gt_entry.insert(0, ground_truth_path)  
+    def choose_ground_truth():
+        global ground_truth_path
+        path = filedialog.askopenfilename(title="Choose ground truth",filetypes=[("Image files", "*.jpg;*.png;*.jpeg;*.bmp")])
+        if path:
+            ground_truth_path = path
+            gt_entry.delete(0, tk.END)
+            gt_entry.insert(0, path)
+            print(f"Selected Ground truth: {path}")
+
+    tk.Button(preprocess_frame, text="Обрати файл", command=choose_ground_truth).pack(pady=5)
 
     tk.Button(right_frame, text="Canny Edge Detector", width=20, command=canny_filter).pack(pady=15) #кнопка для фільтра Кенніз командою 
     tk.Button(right_frame, text="Directional Filter", width=15, command=directional).pack(pady=15) #кнопка для напрямного фільтрування з командою
