@@ -4,6 +4,9 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import numpy as np 
 import os
+from scipy.ndimage import distance_transform_edt
+import cv2
+from sklearn.metrics import roc_auc_score
 
 images = [] #обрані зображення
 paths = [] #шляхи до зображень
@@ -74,7 +77,7 @@ def save_image(img, original_path, suffix="_processed"):
     img.save(save_path) #збереження
     return save_path  # Повертаємо шлях для метрик
 
-def update_metrics_display(mse, ssim=None, fom=None):
+def update_metrics_display(mse, ssim=None, fom=None, psnr=None, roc=None):
     global metrics_label
     if not metrics_label:
         return
@@ -83,7 +86,11 @@ def update_metrics_display(mse, ssim=None, fom=None):
     if ssim is not None:
         text += f"SSIM: {ssim:.4f} (0–1)\n"
     if fom is not None:
-        text += f"FOM: {fom:.4f} (0–1)"
+        text += f"FOM: {fom:.4f} (0–1)\n"
+    if psnr is not None:
+        text += f"PSNR: {psnr:.4f}\n"
+    if roc is not None:
+        text += f"ROC: {roc:.4f}"
 
     metrics_label.config(text=text)
 
@@ -112,6 +119,12 @@ def apply_preprocessing(original_img):
     elif option == "Sharpen Filter":
         sharpen_filter()
         current_preprocess_suffix = "_pre_sharpen"
+    elif option == "CLAHE":
+        clahe()
+        current_preprocess_suffix = "_pre_clahe"
+    elif option == "Dark channel":
+        dark_channel()
+        current_preprocess_suffix = "_pre_dark_channel"
 
     # Беремо результат
     processed = last_processed_image if last_processed_image else images[current_index].copy()
@@ -235,7 +248,9 @@ def canny_filter():
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
     fom = fom_rate(save_path)
-    update_metrics_display(mse, ssim, fom)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def directional():
     """
@@ -274,7 +289,9 @@ def directional():
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
     fom = fom_rate(save_path)
-    update_metrics_display(mse, ssim, fom)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def pruitt():
     """
@@ -319,7 +336,9 @@ def pruitt():
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
     fom = fom_rate(save_path)
-    update_metrics_display(mse, ssim, fom)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def sharpen_filter():
     global images, current_index, last_processed_image
@@ -349,6 +368,82 @@ def sharpen_filter():
     img_result = Image.fromarray(result) 
     show_image(img_result) #відображення на екрані
     last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
+
+def clahe():
+    global images, current_index, last_processed_image
+    if not images:
+        return
+    
+    img = images[current_index]
+    array = np.array(img, dtype=np.uint8)
+    img_bw = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
+    clahe = cv2.createCLAHE(clipLimit=5)
+    clahe_img = np.clip(clahe.apply(img_bw) + 30, 0, 255).astype(np.uint8)
+
+    img_result = Image.fromarray(clahe_img) #формування назад у масив
+
+    show_image(img_result) #відображення на екрані
+    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
+
+def dark_channel():
+    """
+    Реалізація Dark Channel Prior для усунення туману (dehazing).
+    Працює на оригінальному розмірі, без resize.
+    """
+    global images, current_index, last_processed_image
+    if not images:
+        return
+    
+    img = images[current_index].convert("RGB")
+    array = np.array(img, dtype=float) / 255.0  
+    height, width, channels = array.shape
+
+    patch_size = 15  # вікно 15×15
+    half_patch = patch_size // 2  # 7
+    omega = 0.95
+    t0 = 0.1
+
+    # Крок 1: Dark Channel
+    dark = np.ones((height, width))  # ініціалізуємо максимумом
+    for i in range(half_patch, height - half_patch):
+        for j in range(half_patch, width - half_patch):
+            patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
+            min_per_channel = np.min(patch, axis=(0,1))  # мінімум по кожному каналу в патчі
+            dark[i, j] = np.min(min_per_channel)         # мінімум з трьох мінімумів
+
+    # Крок 2: Оцінка повітряного світла A
+    flat_dark = dark.flatten()
+    flat_img = array.reshape(-1, 3)
+    
+    # Беремо 0.1% найяскравіших пікселів у dark channel
+    num_pixels = flat_dark.size
+    num_brightest = max(1, int(num_pixels * 0.001))  # 0.1%
+    brightest_indices = np.argsort(flat_dark)[-num_brightest:]
+    
+    # Середній колір цих пікселів в оригінальному зображенні
+    A = np.mean(flat_img[brightest_indices], axis=0)
+
+    # Крок 3: Оцінка transmission map t(x)
+    t = np.ones((height, width))
+    for i in range(half_patch, height - half_patch):
+        for j in range(half_patch, width - half_patch):
+            patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
+            min_patch = np.min(patch / A, axis=2)  # мінімум по каналах після ділення на A
+            t[i, j] = 1 - omega * np.min(min_patch)
+
+    # Крок 4: Відновлення J(x)
+    t = np.maximum(t, t0)  # нижня межа
+    J = np.zeros_like(array)
+    for c in range(3):
+        J[:,:,c] = (array[:,:,c] - A[c]) / t + A[c]
+
+    # Повертаємо в діапазон [0, 255]
+    J = np.clip(J * 255, 0, 255).astype(np.uint8)
+
+    img_result = Image.fromarray(J)
+    show_image(img_result)
+    last_processed_image = img_result
+    save_image(img_result, paths[current_index], suffix="_dehazed")
 
 def white_balance():
     """
@@ -415,7 +510,9 @@ def tracehold_segmentation(tracehold):
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
     fom = fom_rate(save_path)
-    update_metrics_display(mse, ssim, fom)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def histogram_equalization():
     """
@@ -505,7 +602,9 @@ def harris_angle_detectors(threshold):
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
     fom = fom_rate(save_path)
-    update_metrics_display(mse, ssim, fom)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def fast(t):
     """
@@ -572,7 +671,9 @@ def fast(t):
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
     fom = fom_rate(save_path)
-    update_metrics_display(mse, ssim, fom)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def distortion_rate(original_path, filtered_path):
     """
@@ -589,10 +690,19 @@ def distortion_rate(original_path, filtered_path):
 
     return mse
 
+def psnr_rate(mse):
+    if mse == 0:
+        psnr = float('inf')  # ідеальне зображення, немає помилок
+    else:
+        # Максимальне значення пікселя = 255
+        max_pixel = 255.0
+        psnr = 10 * np.log10((max_pixel ** 2) / mse)
+
+    return psnr
+
 def ssim_rate(original_path, filtered_path):
     """
     Обчислення SSIM за спрощеною формулою:
-    SSIM(x,y) = (2μ_x μ_y + c1) * (2σ_xy + c2) / [(μ_x² + μ_y² + c1) * (σ_x² + σ_y² + c2)]
     Повертає значення SSIM (0..1, ближче до 1 — краще).
     """
     orig = Image.open(original_path).convert("L")  # grayscale оригінал
@@ -629,34 +739,67 @@ def ssim_rate(original_path, filtered_path):
 
     return ssim_value
 
-from scipy.ndimage import distance_transform_edt
+def mask_to_edge_array(mask_path):
+    mask = Image.open(mask_path).convert("L")
+    mask_arr = np.array(mask)
+
+    mask_bin = mask_arr > 127
+
+    kernel = np.ones((3,3), np.uint8)
+    dilated = cv2.dilate(mask_bin.astype(np.uint8)*255, kernel)
+    edges = (dilated > 127) & (~mask_bin)
+
+    return edges
+
 
 def fom_rate(detected_path, alpha=1/9):
-    """
-    """
-    global ground_truth_path, metrics_label
+    global ground_truth_path
 
-    if not ground_truth_path or not os.path.exists(ground_truth_path):
+    if not ground_truth_path:
         return None
-    
-    detected = Image.open(detected_path).convert("L")
-    gt       = Image.open(ground_truth_path).convert("L")
 
-    detected_arr = np.array(detected) > 127 
-    gt_arr       = np.array(gt)       > 127
+    detected = Image.open(detected_path).convert("L")
+    detected_arr = np.array(detected) > 127
+
+    # отримуємо edges з маски
+    gt_edges = mask_to_edge_array(ground_truth_path)
+
     N_d = np.sum(detected_arr)
-    N_g = np.sum(gt_arr)
+    N_g = np.sum(gt_edges)
 
     if N_d == 0 or N_g == 0:
-        return 0.0  # немає країв — FOM = 0
+        return 0.0
 
-    dist_map = distance_transform_edt(~gt_arr)  # відстань від НЕ-краю до найближчого краю
+    dist_map = distance_transform_edt(~gt_edges)
     detected_distances = dist_map[detected_arr]
+
     penalties = 1 / (1 + alpha * detected_distances ** 2)
-    total_penalty = np.sum(penalties)
-    fom = total_penalty / max(N_d, N_g)
+    fom = np.sum(penalties) / max(N_d, N_g)
 
     return fom
+
+def auc_roc_rate(detected_raw_path):
+    global ground_truth_path, metrics_label  # використовуємо глобальну змінну, як у тебе
+    
+    if not ground_truth_path:
+        return None
+        
+    detected_raw = Image.open(detected_raw_path).convert("L")
+    detected_arr = np.array(detected_raw, dtype=float)
+
+        # Завантажуємо ground truth (еталон)
+    gt = Image.open(ground_truth_path).convert("L")
+    gt_arr = np.array(gt) > 127  # бінарна маска: True — позитивний клас (край/точка)
+
+
+        # Перетворюємо в 1D масиви для roc_auc_score
+    y_true = gt_arr.flatten().astype(int)      # 0/1
+    y_score = detected_arr.flatten()           # "ймовірності" (чим вище — тим ймовірніше позитив)
+
+        # Обчислюємо AUC-ROC
+    auc = roc_auc_score(y_true, y_score)
+
+    return auc
 
 def interface(): 
     """
@@ -699,7 +842,7 @@ def interface():
     preprocess_frame.pack_propagate(False)
     tk.Label(preprocess_frame, text="Preproccesing Panel", bg="#e9e9e9",font=("Arial", 14, "bold")).pack(pady=10)
 
-    preprocess_combobox = ttk.Combobox(preprocess_frame, values=["Default", "White Balance", "Histogram Equalization", "Sharpen Filter"], width=30)
+    preprocess_combobox = ttk.Combobox(preprocess_frame, values=["Default", "White Balance", "Histogram Equalization", "Sharpen Filter", "CLAHE", "Dark channel"], width=30)
     preprocess_combobox.pack()
     preprocess_combobox.set("Default")
 
