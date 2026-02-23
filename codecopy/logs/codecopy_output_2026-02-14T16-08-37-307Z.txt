@@ -1,20 +1,229 @@
 Summary:
  - Directory: d:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM
- - Files processed: 1
- - Total lines: 798
+ - Files processed: 2
+ - Total lines: 1108
  - Duration: 0.01 seconds
 ================================================================================
 Directory Structure:
 
+├── ground_truth/
 ├── images/
+├── images_1/
+├── __pycache__/
+├── batch_processor.py
 ├── stem.py
 
 Files extracted:
-stem.py (starts at line 1)
+batch_processor.py (starts at line 1)
+stem.py (starts at line 199)
 
 ================================================================================
 
-File: stem.py (starts at line 1)
+File: batch_processor.py (starts at line 1)
+
+import os
+import csv
+from PIL import Image
+import stem
+
+
+# ===============================
+# Налаштування
+# ===============================
+
+PREPROCESS_FUNCTIONS = {
+    "None": None,
+    "White Balance": stem.white_balance,
+    "Histogram Equalization": stem.histogram_equalization,
+    "Sharpen Filter": stem.sharpen_filter,
+    "CLAHE": stem.clahe,
+    "Dark channel": stem.dark_channel
+}
+
+FILTER_FUNCTIONS = {
+    "Canny": stem.canny_filter,
+    "Directional": stem.directional,
+    "Pruitt": stem.pruitt,
+    "Harris": stem.harris_angle_detectors,
+    "FAST": stem.fast
+}
+
+
+# ===============================
+# CSV логування
+# ===============================
+
+def log_metrics_to_csv(csv_path, row):
+    file_exists = os.path.exists(csv_path)
+
+    with open(csv_path, 'a', newline='', encoding='utf-8-sig') as f:
+        writer = csv.writer(f, delimiter=';')
+
+        if not file_exists:
+            writer.writerow([
+                "Image_Name", "Preprocessing", "Filter",
+                "MSE", "SSIM", "PSNR", "FOM", "AUC-ROC", "Save_Path"
+            ])
+
+        writer.writerow(row)
+
+
+# ===============================
+# Безпечний AUC (без падіння)
+# ===============================
+
+def safe_auc(save_path):
+    try:
+        detected_raw = Image.open(save_path).convert("L")
+        detected_arr = stem.np.array(detected_raw, dtype=float)
+
+        gt = Image.open(stem.ground_truth_path).convert("L")
+        gt_arr = stem.np.array(gt) > 127
+
+        y_true = gt_arr.flatten().astype(int)
+        y_score = detected_arr.flatten()
+
+        # Якщо тільки один клас → AUC не визначений
+        if len(set(y_true)) < 2:
+            return 0.0
+
+        return stem.roc_auc_score(y_true, y_score)
+
+    except Exception:
+        return None
+
+
+# ===============================
+# Batch обробка
+# ===============================
+
+def batch_process(images_folder, gt_folder, results_csv="results1.csv", start_from=None):
+
+    if not os.path.exists(images_folder):
+        print("Папка images не знайдена")
+        return
+
+    if not os.path.exists(gt_folder):
+        print("Папка ground_truth не знайдена")
+        return
+
+    image_files = [
+        f for f in os.listdir(images_folder)
+        if f.lower().endswith(('.jpg', '.jpeg'))
+    ]
+
+    image_files.sort()
+
+    # Якщо вказано start_from — пропускаємо файли до нього
+    if start_from:
+        start_idx = next((i for i, f in enumerate(image_files) if f == start_from), None)
+        if start_idx is not None:
+            image_files = image_files[start_idx:]
+            print(f"Старт з файлу: {start_from} (з індексу {start_idx})")
+        else:
+            print(f"Файл {start_from} не знайдено — починаємо з початку")
+
+    for img_file in image_files:
+
+        img_path = os.path.join(images_folder, img_file)
+        base_name = os.path.splitext(img_file)[0]
+        gt_path = os.path.join(gt_folder, base_name + ".png")
+
+        if not os.path.exists(gt_path):
+            print(f"GT не знайдено для {img_file}")
+            continue
+
+        print(f"\n=== Обробка: {img_file} ===")
+
+        img = Image.open(img_path)
+
+        stem.images.clear()
+        stem.paths.clear()
+
+        stem.images.append(img)
+        stem.paths.append(img_path)
+        stem.current_index = 0
+
+        # Встановлюємо GT напряму в модулі stem
+        stem.ground_truth_path = gt_path
+
+        for preprocess_name, preprocess_func in PREPROCESS_FUNCTIONS.items():
+
+            print(f"  Препроцесинг: {preprocess_name}")
+
+            processed_img = img.copy()
+
+            if preprocess_func:
+                stem.images[0] = processed_img
+                preprocess_func()
+                processed_img = stem.last_processed_image
+                stem.images[0] = img
+
+            for filter_name, filter_func in FILTER_FUNCTIONS.items():
+
+                print(f"    Фільтр: {filter_name}")
+
+                stem.images[0] = processed_img
+
+                try:
+                    if filter_name == "Harris":
+                        filter_func(0.01)
+                    elif filter_name == "FAST":
+                        filter_func(20)
+                    else:
+                        filter_func()
+
+                    save_path = stem.save_image(
+                        stem.last_processed_image,
+                        img_path,
+                        suffix=f"_{preprocess_name}_{filter_name}"
+                    )
+
+                except Exception as e:
+                    print(f"Помилка фільтра: {e}")
+                    continue
+
+                # ===========================
+                # Метрики
+                # ===========================
+
+                try:
+                    mse = stem.distortion_rate(img_path, save_path)
+                    ssim = stem.ssim_rate(img_path, save_path)
+                    psnr = stem.psnr_rate(mse)
+                    fom = stem.fom_rate(save_path)
+                    auc = safe_auc(save_path)
+
+                except Exception as e:
+                    print(f"Помилка метрик: {e}")
+                    mse = ssim = psnr = fom = auc = None
+
+                log_metrics_to_csv(results_csv, [
+                    img_file,
+                    preprocess_name,
+                    filter_name,
+                    f"{mse:.4f}".replace('.', ',') if mse is not None else "N/A",
+                    f"{ssim:.4f}".replace('.', ',') if ssim is not None else "N/A",
+                    f"{psnr:.4f}".replace('.', ',') if psnr is not None else "N/A",
+                    f"{fom:.4f}".replace('.', ',') if fom is not None else "N/A",
+                    f"{auc:.4f}".replace('.', ',') if auc is not None else "N/A",
+
+                    save_path
+                ])
+
+    print("\nГотово! Результати збережено.")
+
+
+# Приклад запуску
+if __name__ == "__main__":
+    images_folder = "D:\\Новая папка\\Uni 2 course  1 semestr\\КГВ\\STEM\\images"
+    gt_folder = "D:\\Новая папка\\Uni 2 course  1 semestr\\КГВ\\STEM\\ground_truth"
+    batch_process(images_folder, gt_folder, start_from="image_part_015.jpg")
+
+
+================================================================================
+
+File: stem.py (starts at line 199)
 
 import tkinter as tk
 from tkinter import filedialog
@@ -22,6 +231,9 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import numpy as np 
 import os
+from scipy.ndimage import distance_transform_edt
+import cv2
+from sklearn.metrics import roc_auc_score
 
 images = [] #обрані зображення
 paths = [] #шляхи до зображень
@@ -33,6 +245,7 @@ ROOT_HEIGHT = 600
 IMAGE_DISPLAY_SIZE = 550 #фіксований розмір для відображення
 preprocess_combobox = None  # Глобальна змінна для combobox препроцесингу
 metrics_label = None
+ground_truth_path = ""
 
 def load_images():
     """
@@ -91,32 +304,22 @@ def save_image(img, original_path, suffix="_processed"):
     img.save(save_path) #збереження
     return save_path  # Повертаємо шлях для метрик
 
-def update_metrics_display(metrics_dict=None):
-    """
-    """
+def update_metrics_display(mse, ssim=None, fom=None, psnr=None, roc=None):
     global metrics_label
     if not metrics_label:
         return
 
-    if not metrics_dict:
-        metrics_label.config(text="Метрики ще не розраховано")
-        return
+    text = f"MSE: {mse:.4f}\n"
+    if ssim is not None:
+        text += f"SSIM: {ssim:.4f} (0–1)\n"
+    if fom is not None:
+        text += f"FOM: {fom:.4f} (0–1)\n"
+    if psnr is not None:
+        text += f"PSNR: {psnr:.4f}\n"
+    if roc is not None:
+        text += f"ROC: {roc:.4f}"
 
-    lines = ["Результати метрик:"]
-    
-    for name, value in metrics_dict.items():
-        if name == 'MSE':
-            lines.append(f"MSE (спотворення): {value:.4f}   (чим менше — тим краще)")
-        elif name == 'SSIM':
-            lines.append(f"SSIM (структурна схожість): {value:.4f}   (чим ближче до 1 — тим краще)")
-        elif name == 'PSNR':
-            lines.append(f"PSNR: {value:.2f} dB   (чим більше — тим краще)")
-        else:
-            # для будь-яких інших метрик просто виводимо без коментаря
-            lines.append(f"{name}: {value:.4f}")
-
-    full_text = "\n".join(lines)
-    metrics_label.config(text=full_text)
+    metrics_label.config(text=text)
 
 def apply_preprocessing(original_img):
     global last_processed_image, preprocess_combobox, current_preprocess_suffix
@@ -143,6 +346,12 @@ def apply_preprocessing(original_img):
     elif option == "Sharpen Filter":
         sharpen_filter()
         current_preprocess_suffix = "_pre_sharpen"
+    elif option == "CLAHE":
+        clahe()
+        current_preprocess_suffix = "_pre_clahe"
+    elif option == "Dark channel":
+        dark_channel()
+        current_preprocess_suffix = "_pre_dark_channel"
 
     # Беремо результат
     processed = last_processed_image if last_processed_image else images[current_index].copy()
@@ -258,19 +467,17 @@ def canny_filter():
                     res[i,j] = 0
 
     img_edges = Image.fromarray(res.astype(np.uint8)) #перетворення результату
-    show_image(img_edges) #відображення на екрані
+    #show_image(img_edges) #відображення на екрані
     last_processed_image = img_edges #збереження індекса
     filter_suffix = "_canny"
     full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
     save_path = save_image(img_edges, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
-    ground_truth_path = "images/RGB_008.png"  # заміни на свій шлях
-    fom_rate(save_path, ground_truth_path)
+    fom = fom_rate(save_path)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def directional():
     """
@@ -301,17 +508,17 @@ def directional():
 
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result) 
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result #збереження індекса
     filter_suffix = "_directional"
     full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def pruitt():
     """
@@ -348,17 +555,17 @@ def pruitt():
 
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result)
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result #збереження індекса
     filter_suffix = "_pruitt"
     full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def sharpen_filter():
     global images, current_index, last_processed_image
@@ -386,8 +593,84 @@ def sharpen_filter():
 
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result) 
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
+
+def clahe():
+    global images, current_index, last_processed_image
+    if not images:
+        return
+    
+    img = images[current_index]
+    array = np.array(img, dtype=np.uint8)
+    img_bw = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
+    clahe = cv2.createCLAHE(clipLimit=5)
+    clahe_img = np.clip(clahe.apply(img_bw) + 30, 0, 255).astype(np.uint8)
+
+    img_result = Image.fromarray(clahe_img) #формування назад у масив
+
+    #show_image(img_result) #відображення на екрані
+    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
+
+def dark_channel():
+    """
+    Реалізація Dark Channel Prior для усунення туману (dehazing).
+    Працює на оригінальному розмірі, без resize.
+    """
+    global images, current_index, last_processed_image
+    if not images:
+        return
+    
+    img = images[current_index].convert("RGB")
+    array = np.array(img, dtype=float) / 255.0  
+    height, width, channels = array.shape
+
+    patch_size = 15  # вікно 15×15
+    half_patch = patch_size // 2  # 7
+    omega = 0.95
+    t0 = 0.1
+
+    # Крок 1: Dark Channel
+    dark = np.ones((height, width))  # ініціалізуємо максимумом
+    for i in range(half_patch, height - half_patch):
+        for j in range(half_patch, width - half_patch):
+            patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
+            min_per_channel = np.min(patch, axis=(0,1))  # мінімум по кожному каналу в патчі
+            dark[i, j] = np.min(min_per_channel)         # мінімум з трьох мінімумів
+
+    # Крок 2: Оцінка повітряного світла A
+    flat_dark = dark.flatten()
+    flat_img = array.reshape(-1, 3)
+    
+    # Беремо 0.1% найяскравіших пікселів у dark channel
+    num_pixels = flat_dark.size
+    num_brightest = max(1, int(num_pixels * 0.001))  # 0.1%
+    brightest_indices = np.argsort(flat_dark)[-num_brightest:]
+    
+    # Середній колір цих пікселів в оригінальному зображенні
+    A = np.mean(flat_img[brightest_indices], axis=0)
+
+    # Крок 3: Оцінка transmission map t(x)
+    t = np.ones((height, width))
+    for i in range(half_patch, height - half_patch):
+        for j in range(half_patch, width - half_patch):
+            patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
+            min_patch = np.min(patch / A, axis=2)  # мінімум по каналах після ділення на A
+            t[i, j] = 1 - omega * np.min(min_patch)
+
+    # Крок 4: Відновлення J(x)
+    t = np.maximum(t, t0)  # нижня межа
+    J = np.zeros_like(array)
+    for c in range(3):
+        J[:,:,c] = (array[:,:,c] - A[c]) / t + A[c]
+
+    # Повертаємо в діапазон [0, 255]
+    J = np.clip(J * 255, 0, 255).astype(np.uint8)
+
+    img_result = Image.fromarray(J)
+    #show_image(img_result)
+    last_processed_image = img_result
+    save_image(img_result, paths[current_index], suffix="_dehazed")
 
 def white_balance():
     """
@@ -419,7 +702,7 @@ def white_balance():
     balanced = np.stack([R, G, B], axis=2).astype(np.uint8) #об'єднання каналів
     img_result = Image.fromarray(balanced) #формування назад у масив
 
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
 
 def tracehold_segmentation(tracehold):
@@ -446,17 +729,17 @@ def tracehold_segmentation(tracehold):
 
     result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
     img_result = Image.fromarray(result)
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result #збереження індекса
     filter_suffix = "_tracehold"
     full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def histogram_equalization():
     """
@@ -487,7 +770,7 @@ def histogram_equalization():
             result[i,j] = round(cdf[int(Y[i,j])] * 255) #нова яскравість пікселя через масив
 
     img_result = Image.fromarray(result) #збереження у масив
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
 
 def harris_angle_detectors(threshold):
@@ -538,17 +821,17 @@ def harris_angle_detectors(threshold):
                     result[i, j] = 255  #стає білим
 
     img_result = Image.fromarray(result.astype(np.uint8))  #конвертація 
-    show_image(img_result)  #відображення на екані
+    #show_image(img_result)  #відображення на екані
     last_processed_image = img_result #збереження індекса
     filter_suffix = "_harris"
     full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def fast(t):
     """
@@ -607,17 +890,17 @@ def fast(t):
                     result[i,j] = 255
 
     img_result = Image.fromarray(result.astype(np.uint8)) #конвертація результату
-    show_image(img_result) #відображення на екрані
+    #show_image(img_result) #відображення на екрані
     last_processed_image = img_result #збереження індекса
     filter_suffix = "_fast"
     full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
     save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
     mse = distortion_rate(paths[current_index], save_path)
     ssim = ssim_rate(paths[current_index], save_path)
-    update_metrics_display({
-    'MSE': mse,
-    'SSIM': ssim
-    })
+    fom = fom_rate(save_path)
+    psnr = psnr_rate(mse)
+    roc = auc_roc_rate(save_path)
+    update_metrics_display(mse, ssim, fom, psnr, roc)
 
 def distortion_rate(original_path, filtered_path):
     """
@@ -634,10 +917,19 @@ def distortion_rate(original_path, filtered_path):
 
     return mse
 
+def psnr_rate(mse):
+    if mse == 0:
+        psnr = float('inf')  # ідеальне зображення, немає помилок
+    else:
+        # Максимальне значення пікселя = 255
+        max_pixel = 255.0
+        psnr = 10 * np.log10((max_pixel ** 2) / mse)
+
+    return psnr
+
 def ssim_rate(original_path, filtered_path):
     """
     Обчислення SSIM за спрощеною формулою:
-    SSIM(x,y) = (2μ_x μ_y + c1) * (2σ_xy + c2) / [(μ_x² + μ_y² + c1) * (σ_x² + σ_y² + c2)]
     Повертає значення SSIM (0..1, ближче до 1 — краще).
     """
     orig = Image.open(original_path).convert("L")  # grayscale оригінал
@@ -674,50 +966,64 @@ def ssim_rate(original_path, filtered_path):
 
     return ssim_value
 
-from scipy.ndimage import distance_transform_edt
+def mask_to_edge_array(mask_path):
+    mask = Image.open(mask_path).convert("L")
+    mask_arr = np.array(mask)
 
-def fom_rate(detected_path, ground_truth_path, alpha=1/9):
-    """
-    Pratt's Figure of Merit для оцінки якості детекції країв.
-    
-    Параметри:
-        detected_path      - шлях до бінарної маски виявлених країв (255 - краї, 0 - фон)
-        ground_truth_path  - шлях до еталонної (ground truth) маски країв
-        alpha              - коефіцієнт штрафу (зазвичай 1/9 = 0.1111)
-    
-    Повертає: FOM (0..1, ближче до 1 — краще)
-    """
-    # Завантажуємо зображення як grayscale
+    mask_bin = mask_arr > 127
+
+    kernel = np.ones((3,3), np.uint8)
+    dilated = cv2.dilate(mask_bin.astype(np.uint8)*255, kernel)
+    edges = (dilated > 127) & (~mask_bin)
+
+    return edges
+
+def fom_rate(detected_path, gt_path_arg=None, alpha=1/9):
+    target_gt = gt_path_arg if gt_path_arg else ground_truth_path
+
+    if not target_gt or not os.path.exists(target_gt):
+        return None
+
     detected = Image.open(detected_path).convert("L")
-    gt       = Image.open(ground_truth_path).convert("L")
+    detected_arr = np.array(detected) > 127
 
-    detected_arr = np.array(detected) > 127  # робимо бінарну маску (True/False)
-    gt_arr       = np.array(gt)       > 127
+    # отримуємо edges з маски
+    gt_edges = mask_to_edge_array(ground_truth_path)
 
-    # Кількість виявлених і еталонних пікселів
     N_d = np.sum(detected_arr)
-    N_g = np.sum(gt_arr)
+    N_g = np.sum(gt_edges)
 
     if N_d == 0 or N_g == 0:
-        return 0.0  # немає країв — FOM = 0
+        return 0.0
 
-    # Відстань до найближчого еталонного краю для кожної точки
-    dist_map = distance_transform_edt(~gt_arr)  # відстань від НЕ-краю до найближчого краю
-
-    # Беремо відстані тільки для виявлених пікселів
+    dist_map = distance_transform_edt(~gt_edges)
     detected_distances = dist_map[detected_arr]
 
-    # Штраф для кожного виявленого пікселя
     penalties = 1 / (1 + alpha * detected_distances ** 2)
+    fom = np.sum(penalties) / max(N_d, N_g)
 
-    # Сума штрафів
-    total_penalty = np.sum(penalties)
-
-    # Фінальний FOM
-    fom = total_penalty / max(N_d, N_g)
-
-    print(f"FOM: {fom:.4f} (N_detected={N_d}, N_ground={N_g})")
     return fom
+
+def auc_roc_rate(detected_raw_path, gt_path_arg=None):
+    if not gt_path_arg or not os.path.exists(gt_path_arg):
+        return None
+        
+    detected_raw = Image.open(detected_raw_path).convert("L")
+    detected_arr = np.array(detected_raw, dtype=float)
+
+        # Завантажуємо ground truth (еталон)
+    gt = Image.open(ground_truth_path).convert("L")
+    gt_arr = np.array(gt) > 127  # бінарна маска: True — позитивний клас (край/точка)
+
+
+        # Перетворюємо в 1D масиви для roc_auc_score
+    y_true = gt_arr.flatten().astype(int)      # 0/1
+    y_score = detected_arr.flatten()           # "ймовірності" (чим вище — тим ймовірніше позитив)
+
+        # Обчислюємо AUC-ROC
+    auc = roc_auc_score(y_true, y_score)
+
+    return auc
 
 def interface(): 
     """
@@ -760,7 +1066,7 @@ def interface():
     preprocess_frame.pack_propagate(False)
     tk.Label(preprocess_frame, text="Preproccesing Panel", bg="#e9e9e9",font=("Arial", 14, "bold")).pack(pady=10)
 
-    preprocess_combobox = ttk.Combobox(preprocess_frame, values=["Default", "White Balance", "Histogram Equalization", "Sharpen Filter"], width=30)
+    preprocess_combobox = ttk.Combobox(preprocess_frame, values=["Default", "White Balance", "Histogram Equalization", "Sharpen Filter", "CLAHE", "Dark channel"], width=30)
     preprocess_combobox.pack()
     preprocess_combobox.set("Default")
 
@@ -775,6 +1081,21 @@ def interface():
         wraplength=300
     )
     metrics_label.pack(side="bottom", pady=20, padx=10, fill="x")
+
+    tk.Label(preprocess_frame, text="Ground Truth FOM:", bg="#e9e9e9").pack(pady=15)
+    gt_entry = tk.Entry(preprocess_frame, width=40)
+    gt_entry.pack(pady=5)
+    gt_entry.insert(0, ground_truth_path)  
+    def choose_ground_truth():
+        global ground_truth_path
+        path = filedialog.askopenfilename(title="Choose ground truth",filetypes=[("Image files", "*.jpg;*.png;*.jpeg;*.bmp")])
+        if path:
+            ground_truth_path = path
+            gt_entry.delete(0, tk.END)
+            gt_entry.insert(0, path)
+            print(f"Selected Ground truth: {path}")
+
+    tk.Button(preprocess_frame, text="Обрати файл", command=choose_ground_truth).pack(pady=5)
 
     tk.Button(right_frame, text="Canny Edge Detector", width=20, command=canny_filter).pack(pady=15) #кнопка для фільтра Кенніз командою 
     tk.Button(right_frame, text="Directional Filter", width=15, command=directional).pack(pady=15) #кнопка для напрямного фільтрування з командою

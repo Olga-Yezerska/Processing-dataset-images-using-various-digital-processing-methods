@@ -1,656 +1,459 @@
 import tkinter as tk
-from tkinter import filedialog
-from tkinter import ttk
+from tkinter import filedialog, ttk
 from PIL import Image, ImageTk
-import numpy as np 
+import numpy as np
 import os
 from scipy.ndimage import distance_transform_edt
 import cv2
 from sklearn.metrics import roc_auc_score
+from abc import ABC, abstractmethod
+from typing import Optional
 
-images = [] #обрані зображення
-paths = [] #шляхи до зображень
-current_index = 0
-image_label = None   #мітка для відображення зображення
-last_processed_image = None #останнє показане зображення
-ROOT_WIDTH = 1000 #розміри відображення
-ROOT_HEIGHT = 600
-IMAGE_DISPLAY_SIZE = 550 #фіксований розмір для відображення
-preprocess_combobox = None  # Глобальна змінна для combobox препроцесингу
-metrics_label = None
-ground_truth_path = ""
-
-def load_images():
+def save_image(img: Image.Image, original_path: str, suffix: str = "_processed") -> str:
     """
-    Функція для завантаження бази зображень для роботи
+    Метод збереження зображень
     """
-    global images, current_index, image_label, paths #глобальне використання змінних - не тільки читання, а й зміна
-    paths = filedialog.askopenfilenames(title="Choose an image", filetypes=[("Image files", "*.jpg;*.png;*.jpeg;*.bmp;*.gif;*.webp")]) #вибір зображень - збереження кортежом усіх
+    base, ext = os.path.splitext(original_path)
+    save_path = f"{base}{suffix}{ext}"
+    img.save(save_path)
+    return save_path
 
-    images = [] #ініціалізація масиву
-    for path in paths: #для кожного шляху у кортежі відкривається і показується зображення
-        img = Image.open(path) 
-        images.append(img)
-    
-    current_index = 0 #передача індексу
-    show_image(images[current_index])
-
-def show_image(img: Image.Image):
+class PreprocessingStrategy(ABC):
     """
-    Функція для відображення картинки на інтерфейсі
+    Клас стратегії для методів попередньої обробки
     """
-    global image_label
-    if img is None:
-        return
-    
-    img_resized = img.resize((IMAGE_DISPLAY_SIZE, IMAGE_DISPLAY_SIZE), Image.Resampling.LANCZOS) #зміна розміру під параметри вікна
-    img_tk = ImageTk.PhotoImage(img_resized)  #перетворення у формат, з яким може працювати tkinter
+    @abstractmethod
+    def apply(self, img: Image.Image) -> Image.Image:
+        """
+        Реалізація стратегії виконання методу
+        """
+        pass
+    @property
+    def suffix(self) -> str:
+        """
+        Додавання суфікусу відповдіно до методу
+        """
+        return ""
 
-    #відображення зображення і збереження його посилання
-    image_label.config(image=img_tk) #перетворення у формат, з яким може працювати tkinter
-    image_label.image = img_tk 
-
-def next_image():
+class DefaultPreprocessing(PreprocessingStrategy):
     """
-    Функція для переходу до наступної картинки на інтерфейсі
+    Конкретна реалізація класу для методу без обробки - дефолт
     """
-    global current_index
-    if images:
-        current_index = (current_index + 1) % len(images) #перехід до наступного індексу - з обробкою логіки останнього елемента і переходу до першого
-        show_image(images[current_index]) #відображення
+    def apply(self, img: Image.Image) -> Image.Image:
+        return img.copy()
 
-def prev_image():
+class WhiteBalancePreprocessing(PreprocessingStrategy):
     """
-    Функція для повернення до попереднього зображення
+    Клас конкетної реалізації стратегії балансу білого
     """
-    global current_index
-    if images:
-        current_index = (current_index - 1) % len(images) #перехід до попереднього
-        show_image(images[current_index]) #відображення
+    @property
+    def suffix(self) -> str:
+        return "_pre_white_balance"
 
-def save_image(img, original_path, suffix="_processed"):
+    def apply(self, img: Image.Image) -> Image.Image:
+        array = np.array(img, dtype=float)
+        R, G, B = array[:,:,0], array[:,:,1], array[:,:,2]
+
+        r_mean = np.mean(R)
+        g_mean = np.mean(G)
+        b_mean = np.mean(B)
+
+        kR = g_mean / r_mean if r_mean != 0 else 1
+        kB = g_mean / b_mean if b_mean != 0 else 1
+
+        R = np.clip(R * kR, 0, 255)
+        G = np.clip(G, 0, 255)
+        B = np.clip(B * kB, 0, 255)
+
+        balanced = np.stack([R, G, B], axis=2).astype(np.uint8)
+
+        return Image.fromarray(balanced)
+
+class HistogramEqualizationPreprocessing(PreprocessingStrategy):
     """
-    Функція для збереження зображення у поточну папку
+    Клас конкетної реалізації стратегії гістограмного вирівнювання
     """
-    base, ext = os.path.splitext(original_path) #отримання поточного шляху
-    save_path = f"{base}{suffix}{ext}" #створення новго шляху з суфіксом
-    img.save(save_path) #збереження
-    return save_path  # Повертаємо шлях для метрик
+    @property
+    def suffix(self) -> str:
+        return "_pre_histogram"
 
-def update_metrics_display(mse, ssim=None, fom=None, psnr=None, roc=None):
-    global metrics_label
-    if not metrics_label:
-        return
+    def apply(self, img: Image.Image) -> Image.Image:
+        array = np.array(img, dtype=float)
+        height, width, _ = array.shape
 
-    text = f"MSE: {mse:.4f}\n"
-    if ssim is not None:
-        text += f"SSIM: {ssim:.4f} (0–1)\n"
-    if fom is not None:
-        text += f"FOM: {fom:.4f} (0–1)\n"
-    if psnr is not None:
-        text += f"PSNR: {psnr:.4f}\n"
-    if roc is not None:
-        text += f"ROC: {roc:.4f}"
+        Y = 0.299 * array[:,:,0] + 0.587 * array[:,:,1] + 0.114 * array[:,:,2]
+        hist, _ = np.histogram(Y, bins=256, range=(0, 255))
 
-    metrics_label.config(text=text)
+        p = hist / Y.size
 
-def apply_preprocessing(original_img):
-    global last_processed_image, preprocess_combobox, current_preprocess_suffix
-    current_preprocess_suffix = ""  # Скидаємо перед кожним викликом
+        cdf = np.zeros(256)
+        cdf[0] = p[0]
 
-    if not preprocess_combobox:
-        return original_img
+        for i in range(1, 256):
+            cdf[i] = cdf[i-1] + p[i]
+        result = np.zeros_like(Y, dtype=np.uint8)
 
-    option = preprocess_combobox.get()
-    if option == "Default":
-        return original_img
+        for i in range(height):
+            for j in range(width):
+                result[i,j] = round(cdf[int(Y[i,j])] * 255)
 
-    # Тимчасово підставляємо зображення
-    original_current = images[current_index]
-    original_last = last_processed_image
-    images[current_index] = original_img.copy()
+        return Image.fromarray(result)
 
-    if option == "White Balance":
-        white_balance()
-        current_preprocess_suffix = "_pre_white_balance"
-    elif option == "Histogram Equalization":
-        histogram_equalization()
-        current_preprocess_suffix = "_pre_histogram"
-    elif option == "Sharpen Filter":
-        sharpen_filter()
-        current_preprocess_suffix = "_pre_sharpen"
-    elif option == "CLAHE":
-        clahe()
-        current_preprocess_suffix = "_pre_clahe"
-    elif option == "Dark channel":
-        dark_channel()
-        current_preprocess_suffix = "_pre_dark_channel"
-
-    # Беремо результат
-    processed = last_processed_image if last_processed_image else images[current_index].copy()
-
-    # Повертаємо стан
-    images[current_index] = original_current
-    last_processed_image = original_last
-
-    if current_preprocess_suffix:
-        pre_path = save_image(processed, paths[current_index], suffix=current_preprocess_suffix)
-
-    return processed
-
-def canny_filter():
+class SharpenPreprocessing(PreprocessingStrategy):
     """
-    Функція для фільтру Кенні
+    Клас конкетної реалізації стратегії фільтру "гостроти"
     """
-    global images, current_index, last_processed_image, current_preprocess_suffix
-    if not images:
-        return
-
-    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
-
-    img = img.convert("RGB") #відкриття та конвертація у rgb
-    arr = np.array(img, dtype=float) #перетворення у масив
-
-    #перетворення у відтінки сірого - перший етап фільтрації
-    gray = 0.299 * arr[:,:,0] + 0.587 * arr[:,:,1] + 0.114 * arr[:,:,2]
-
-    #гаусове згладжування 5x5 - другий етап
-    gauss_kernel = np.array([
-        [2, 4, 5, 4, 2],
-        [4, 9, 12, 9, 4],
-        [5, 12, 15, 12, 5],
-        [4, 9, 12, 9, 4],
-        [2, 4, 5, 4, 2]
-    ]) / 159.0 #маска гауса
-    padded = np.pad(gray, 2, mode='edge') #рамка 
-    blurred = np.zeros_like(gray)
-    for i in range(gray.shape[0]):
-        for j in range(gray.shape[1]):
-            blurred[i,j] = np.sum(gauss_kernel * padded[i:i+5, j:j+5]) #заміна пікселя середньозваженим з маски 5*5
-
-    #градієнти Соболя - третій етап
-    #масики для обчислень - по вертикалі та горизонталі
-    Kx = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])
-    Ky = np.array([[1,2,1],[0,0,0],[-1,-2,-1]])
-
-    Ix = np.zeros_like(blurred) #масиви для результатів
-    Iy = np.zeros_like(blurred)
-    padded_blur = np.pad(blurred, 1, mode='edge')
-
-    for i in range(blurred.shape[0]):
-        for j in range(blurred.shape[1]):
-            Ix[i,j] = np.sum(Kx * padded_blur[i:i+3, j:j+3]) #зміна яскравості у кожній точці
-            Iy[i,j] = np.sum(Ky * padded_blur[i:i+3, j:j+3])
-
-    #модуль та напрямок градієнта
-    G = np.hypot(Ix, Iy) #наскільки різко змінюється яскравість
-    theta = np.arctan2(Iy, Ix) * (180.0 / np.pi) #кут напрямку градієнта
-    theta[theta < 0] += 180  #кути від 0 до 180 - перетворення у позитивні значення
-
-    #Non-maximum suppression - четвертий етап
-    #фільтрування лише найчіткіших країв - інші занулити
-    nms = np.zeros_like(G) #масив для найсильніших
-    for i in range(1, G.shape[0]-1):
-        for j in range(1, G.shape[1]-1):
-            angle = theta[i,j] #напрям краю 
-            q = r = 255 #сусіди з обох боків
-            #сусіди по напрямках
-            if (0 <= angle < 22.5) or (157.5 <= angle <= 180):
-                q = G[i, j+1]
-                r = G[i, j-1]
-            elif 22.5 <= angle < 67.5:
-                q = G[i+1, j-1]
-                r = G[i-1, j+1]
-            elif 67.5 <= angle < 112.5:
-                q = G[i+1, j]
-                r = G[i-1, j]
-            elif 112.5 <= angle < 157.5:
-                q = G[i-1, j-1]
-                r = G[i+1, j+1]
-            #якщо поточний піксель не є найбільшим серед сусідів - занулити
-            if (G[i,j] >= q) and (G[i,j] >= r):
-                nms[i,j] = G[i,j]
-            else:
-                nms[i,j] = 0
-
-    #подвійний поріг - п'ятий етап
-    #2 пороги - сильні та слабкі пороги
-    highThreshold = nms.max() * 0.2
-    lowThreshold = highThreshold * 0.5
-
-    res = np.zeros_like(nms)
-    strong = 255 #сильні та слабкі краї
-    weak = 50
-
-    #індекси, які підпадають під умову сильних/слабких країв
-    strong_i, strong_j = np.where(nms >= highThreshold)
-    weak_i, weak_j = np.where((nms <= highThreshold) & (nms >= lowThreshold))
-
-    res[strong_i, strong_j] = strong
-    res[weak_i, weak_j] = weak
-
-    #трасування слабких країв - шостий етап
-    #слабкий піксель стає сильним біля справжнього сильно контуру
-    for i in range(1, res.shape[0]-1):
-        for j in range(1, res.shape[1]-1):
-            if res[i,j] == weak:
-                if ((res[i+1,j-1] == strong) or (res[i+1,j] == strong) or (res[i+1,j+1] == strong) or (res[i,j-1] == strong) or (res[i,j+1] == strong) or (res[i-1,j-1] == strong) or (res[i-1,j] == strong) or (res[i-1,j+1] == strong)):
-                    res[i,j] = strong
-                else:
-                    res[i,j] = 0
-
-    img_edges = Image.fromarray(res.astype(np.uint8)) #перетворення результату
-    show_image(img_edges) #відображення на екрані
-    last_processed_image = img_edges #збереження індекса
-    filter_suffix = "_canny"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_edges, paths[current_index], suffix=full_suffix)
-    mse = distortion_rate(paths[current_index], save_path)
-    ssim = ssim_rate(paths[current_index], save_path)
-    fom = fom_rate(save_path)
-    psnr = psnr_rate(mse)
-    roc = auc_roc_rate(save_path)
-    update_metrics_display(mse, ssim, fom, psnr, roc)
-
-def directional():
-    """
-    Напрямний фільтр - по куту 135
-    """
-    global images, current_index, last_processed_image, current_preprocess_suffix
-    if not images:
-        return
-
-    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
-
-    img = img.convert("L") #відкриття зображення у відтінках сірого 
-    array = np.array(img, dtype=float) #перетворення у матрицю 
-    height, width = array.shape #розміри масиву 
-    result = np.zeros_like(array) #масив для результату
-
-    k = np.array([
-        [0, 1, 2],
-        [-1, 0, 1],
-        [-2, -1, 0]
-    ]) #фільтр напрямку 135 градусів
-
-    for i in range(1, height - 1):
-        for j in range(1, width - 1):
-            region = array[i-1:i+2, j-1:j+2]  #маска 3x3
-            value = np.sum(region * k) #згортка
-            result[i, j] = value
-
-    result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
-    img_result = Image.fromarray(result) 
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result #збереження індекса
-    filter_suffix = "_directional"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
-    mse = distortion_rate(paths[current_index], save_path)
-    ssim = ssim_rate(paths[current_index], save_path)
-    fom = fom_rate(save_path)
-    psnr = psnr_rate(mse)
-    roc = auc_roc_rate(save_path)
-    update_metrics_display(mse, ssim, fom, psnr, roc)
-
-def pruitt():
-    """
-    Фільтр Прюітта
-    """
-    global images, current_index, last_processed_image, current_preprocess_suffix
-    if not images:
-        return
-
-    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
-
-    img = img.convert("L") #відкриття у відтінках сірого 
-    array = np.array(img, dtype=float) 
-    height, width = array.shape 
-    result = np.zeros_like(array)
-
-    g_x = np.array([
-        [-1, 0, 1],
-        [-1, 0, 1],
-        [-1, 0, 1]
-    ]) #ядро по горизонталі
-    g_y = np.array([
-        [-1, -1, -1],
-        [0, 0, 0],
-        [1, 1, 1]
-    ]) #ядро по вертикалі 
- 
-    for i in range(1, height - 1):
-        for j in range(1, width - 1):
-            region = array[i-1:i+2, j-1:j+2]  #маска 3x3 
-            Gx = np.sum(region * g_x) #згортка по кожному напрямку
-            Gy = np.sum(region * g_y)
-            result[i, j] = np.sqrt(Gx**2 + Gy**2) #комбінована величина градієнта
-
-    result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
-    img_result = Image.fromarray(result)
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result #збереження індекса
-    filter_suffix = "_pruitt"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
-    mse = distortion_rate(paths[current_index], save_path)
-    ssim = ssim_rate(paths[current_index], save_path)
-    fom = fom_rate(save_path)
-    psnr = psnr_rate(mse)
-    roc = auc_roc_rate(save_path)
-    update_metrics_display(mse, ssim, fom, psnr, roc)
-
-def sharpen_filter():
-    global images, current_index, last_processed_image
-    if not images:
-        return
-    
-    img = images[current_index] #поточне зображення 
-
-    img = img.convert("L") #відкриття зображення у відтінках сірого 
-    array = np.array(img, dtype=float) #перетворення у матрицю 
-    height, width = array.shape #розміри масиву 
-    result = np.zeros_like(array) #масив для результату
-
-    k = np.array([
-        [0, -1, 0],
-        [-1, 5, -1],
-        [0, -1, 0]
-    ]) #фільтр 
-
-    for i in range(1, height - 1):
-        for j in range(1, width - 1):
-            region = array[i-1:i+2, j-1:j+2]  #маска 3x3
-            value = np.sum(region * k) #згортка
-            result[i, j] = value
-
-    result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
-    img_result = Image.fromarray(result) 
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
-
-def clahe():
-    global images, current_index, last_processed_image
-    if not images:
-        return
-    
-    img = images[current_index]
-    array = np.array(img, dtype=np.uint8)
-    img_bw = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
-    clahe = cv2.createCLAHE(clipLimit=5)
-    clahe_img = np.clip(clahe.apply(img_bw) + 30, 0, 255).astype(np.uint8)
-
-    img_result = Image.fromarray(clahe_img) #формування назад у масив
-
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
-
-def dark_channel():
-    """
-    Реалізація Dark Channel Prior для усунення туману (dehazing).
-    Працює на оригінальному розмірі, без resize.
-    """
-    global images, current_index, last_processed_image
-    if not images:
-        return
-    
-    img = images[current_index].convert("RGB")
-    array = np.array(img, dtype=float) / 255.0  
-    height, width, channels = array.shape
-
-    patch_size = 15  # вікно 15×15
-    half_patch = patch_size // 2  # 7
-    omega = 0.95
-    t0 = 0.1
-
-    # Крок 1: Dark Channel
-    dark = np.ones((height, width))  # ініціалізуємо максимумом
-    for i in range(half_patch, height - half_patch):
-        for j in range(half_patch, width - half_patch):
-            patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
-            min_per_channel = np.min(patch, axis=(0,1))  # мінімум по кожному каналу в патчі
-            dark[i, j] = np.min(min_per_channel)         # мінімум з трьох мінімумів
-
-    # Крок 2: Оцінка повітряного світла A
-    flat_dark = dark.flatten()
-    flat_img = array.reshape(-1, 3)
-    
-    # Беремо 0.1% найяскравіших пікселів у dark channel
-    num_pixels = flat_dark.size
-    num_brightest = max(1, int(num_pixels * 0.001))  # 0.1%
-    brightest_indices = np.argsort(flat_dark)[-num_brightest:]
-    
-    # Середній колір цих пікселів в оригінальному зображенні
-    A = np.mean(flat_img[brightest_indices], axis=0)
-
-    # Крок 3: Оцінка transmission map t(x)
-    t = np.ones((height, width))
-    for i in range(half_patch, height - half_patch):
-        for j in range(half_patch, width - half_patch):
-            patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
-            min_patch = np.min(patch / A, axis=2)  # мінімум по каналах після ділення на A
-            t[i, j] = 1 - omega * np.min(min_patch)
-
-    # Крок 4: Відновлення J(x)
-    t = np.maximum(t, t0)  # нижня межа
-    J = np.zeros_like(array)
-    for c in range(3):
-        J[:,:,c] = (array[:,:,c] - A[c]) / t + A[c]
-
-    # Повертаємо в діапазон [0, 255]
-    J = np.clip(J * 255, 0, 255).astype(np.uint8)
-
-    img_result = Image.fromarray(J)
-    show_image(img_result)
-    last_processed_image = img_result
-    save_image(img_result, paths[current_index], suffix="_dehazed")
-
-def white_balance():
-    """
-    Баланс білого 
-    """
-    global images, current_index, last_processed_image
-    if not images:
-        return
-
-    img = images[current_index] #поточне зображення 
-    array = np.array(img, dtype=float)
-    R, G, B = array[:,:,0], array[:,:,1], array[:,:,2] #канали з зображення
-
-    #середні значення яскравості для кожного каналу
-    r_mean = np.mean(R)
-    g_mean = np.mean(G)
-    b_mean = np.mean(B)
-
-    #коефіцієнти вирівнювання
-    kR = g_mean / r_mean
-    kG = 1.0
-    kB = g_mean / b_mean
-
-    #застосовання корекції
-    R = np.clip(R * kR, 0, 255)
-    G = np.clip(G * kG, 0, 255)
-    B = np.clip(B * kB, 0, 255)
-
-    balanced = np.stack([R, G, B], axis=2).astype(np.uint8) #об'єднання каналів
-    img_result = Image.fromarray(balanced) #формування назад у масив
-
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
-
-def tracehold_segmentation(tracehold):
-    """
-    Колірна сегментація
-    """
-    global images, current_index, last_processed_image, current_preprocess_suffix
-    if not images:
-        return
-
-    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
-
-    array = np.array(img, dtype=float)
-    height, width, _ = array.shape
-    R, G, B = array[:,:,0], array[:,:,1], array[:,:,2] #канали з зображення
-    result = np.zeros_like(array) #масив для результату
-
-    for i in range(1, height- 1):
-        for j in range (1, width - 1):
-            if R[i, j] > tracehold and G[i, j] > tracehold and B[i, j] > tracehold: #якщо усі канали мають значення більше за поріг
-                result[i, j] = [255, 255, 255] #піксель вважаю світлим
-            else:
-                result[i, j] = [0, 0, 0] #інакше - темним
-
-    result = np.clip(result, 0, 255).astype(np.uint8) #обмеження результату
-    img_result = Image.fromarray(result)
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result #збереження індекса
-    filter_suffix = "_tracehold"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
-    mse = distortion_rate(paths[current_index], save_path)
-    ssim = ssim_rate(paths[current_index], save_path)
-    fom = fom_rate(save_path)
-    psnr = psnr_rate(mse)
-    roc = auc_roc_rate(save_path)
-    update_metrics_display(mse, ssim, fom, psnr, roc)
-
-def histogram_equalization():
-    """
-    Гістограмне вирівнювання
-    """
-    global images, current_index, last_processed_image
-    if not images:
-        return
-
-    img = images[current_index]
-    array = np.array(img, dtype=float)
-    height, width, _ = array.shape
-    #відтінки сірого
-    Y = 0.299 * array[:,:,0] + 0.587 * array[:,:,1] + 0.114 * array[:,:,2]
-
-    hist, _ = np.histogram(Y, bins=256, range=(0, 255)) #створення гістограми
-    p = hist / Y.size #ймовірність появи кожного рівня яскравості
-
-    #кумулятивна сума
-    cdf = np.zeros(256)
-    cdf[0] = p[0]
-    for i in range(1, 256):
-        cdf[i] = cdf[i-1] + p[i]
-
-    result = np.zeros_like(Y, dtype=np.uint8)
-    for i in range(height):
-        for j in range(width):
-            result[i,j] = round(cdf[int(Y[i,j])] * 255) #нова яскравість пікселя через масив
-
-    img_result = Image.fromarray(result) #збереження у масив
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result  # Додаємо це, щоб last_processed_image встановлювався
-
-def harris_angle_detectors(threshold):
-    """
-    Функція виділення кутів Гарісса
-    """
-    global images, current_index, last_processed_image, current_preprocess_suffix
-    if not images:
-        return
-
-    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
-
-    img = img.convert("L")  #зображення у відтінках сірого
-    array = np.array(img, dtype=float)
-    height, width = array.shape
-    result = np.zeros_like(array)
-
-    i_x = np.zeros_like(array) #горизонтальні градієнти - зміна по осі х
-    i_y = np.zeros_like(array) #вертикальні
-    R = np.zeros_like(array)  #карта Гарісса
-    
-    for i in range(1, height - 1):       
-        for j in range(1, width - 1):   
-            #градієнти яскравості 
-            i_x[i, j] = array[i, j+1] - array[i, j]  #різниця між пікселем справа і поточним
-            i_y[i, j] = array[i+1, j] - array[i, j]  #різниця між пікселем знизу і поточним
-
-    for i in range(1, height - 1):
+    @property
+    def suffix(self) -> str:
+        return "_pre_sharpen"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        img = img.convert("L")
+
+        array = np.array(img, dtype=float)
+        height, width = array.shape
+        result = np.zeros_like(array)
+
+        k = np.array([
+            [0, -1, 0], 
+            [-1, 5, -1], 
+            [0, -1, 0]
+        ])
+
+        for i in range(1, height - 1):
             for j in range(1, width - 1):
-                #маска 3*3
-                ix_block = i_x[i-1:i+2, j-1:j+2]
-                iy_block = i_y[i-1:i+2, j-1:j+2]
+                region = array[i-1:i+2, j-1:j+2]
+                result[i, j] = np.sum(region * k)
 
-                #компоненти матриці
+        result = np.clip(result, 0, 255).astype(np.uint8)
+
+        return Image.fromarray(result)
+
+class CLAHEPreprocessing(PreprocessingStrategy):
+    """
+    Клас конкетної реалізації стратегії CLAHE
+    """
+    @property
+    def suffix(self) -> str:
+        return "_pre_clahe"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        array = np.array(img, dtype=np.uint8)
+        img_bw = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
+
+        clahe = cv2.createCLAHE(clipLimit=5)
+        clahe_img = np.clip(clahe.apply(img_bw) + 30, 0, 255).astype(np.uint8)
+
+        return Image.fromarray(clahe_img)
+
+class DarkChannelPreprocessing(PreprocessingStrategy):
+    """
+    Клас конкетної реалізації стратегії dark channel фільтру 
+    """
+    @property
+    def suffix(self) -> str:
+        return "_pre_dark_channel"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        array = np.array(img.convert("RGB"), dtype=float) / 255.0
+        height, width, _ = array.shape
+
+        patch_size = 15
+        half_patch = patch_size // 2
+        omega = 0.95
+        t0 = 0.1
+
+        dark = np.ones((height, width))
+        for i in range(half_patch, height - half_patch):
+            for j in range(half_patch, width - half_patch):
+                patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
+                dark[i, j] = np.min(np.min(patch, axis=(0,1)))
+
+        flat_dark = dark.flatten()
+        flat_img = array.reshape(-1, 3)
+
+        num_brightest = max(1, int(flat_dark.size * 0.001))
+        brightest_indices = np.argsort(flat_dark)[-num_brightest:]
+        A = np.mean(flat_img[brightest_indices], axis=0)
+
+        t = np.ones((height, width))
+        for i in range(half_patch, height - half_patch):
+            for j in range(half_patch, width - half_patch):
+                patch = array[i-half_patch:i+half_patch+1, j-half_patch:j+half_patch+1, :]
+                min_patch = np.min(patch / A, axis=2)
+                t[i, j] = 1 - omega * np.min(min_patch)
+
+        t = np.maximum(t, t0)
+        J = np.zeros_like(array)
+        for c in range(3):
+            J[:,:,c] = (array[:,:,c] - A[c]) / t + A[c]
+
+        J = np.clip(J * 255, 0, 255).astype(np.uint8)
+
+        return Image.fromarray(J)
+
+class FilterStrategy(ABC):
+    """
+    Клас стратегії для методів комп'ютерного зору
+    """
+    @abstractmethod
+    def apply(self, img: Image.Image) -> Image.Image:
+        pass
+
+    @property
+    def suffix(self) -> str:
+        return ""
+
+class CannyFilter(FilterStrategy):
+    """
+    Клас конкетної реалізації стратегії фільтру Кенні
+    """
+    @property
+    def suffix(self) -> str:
+        return "_canny"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        img = img.convert("RGB")
+        arr = np.array(img, dtype=float)
+        gray = 0.299 * arr[:,:,0] + 0.587 * arr[:,:,1] + 0.114 * arr[:,:,2]
+
+        gauss_kernel = np.array([
+            [2,4,5,4,2],[4,9,12,9,4],[5,12,15,12,5],[4,9,12,9,4],[2,4,5,4,2]
+        ]) / 159.0
+        padded = np.pad(gray, 2, mode='edge')
+        blurred = np.zeros_like(gray)
+        for i in range(gray.shape[0]):
+            for j in range(gray.shape[1]):
+                blurred[i,j] = np.sum(gauss_kernel * padded[i:i+5, j:j+5])
+
+        Kx = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])
+        Ky = np.array([[1,2,1],[0,0,0],[-1,-2,-1]])
+        Ix = np.zeros_like(blurred)
+        Iy = np.zeros_like(blurred)
+        padded_blur = np.pad(blurred, 1, mode='edge')
+        for i in range(blurred.shape[0]):
+            for j in range(blurred.shape[1]):
+                Ix[i,j] = np.sum(Kx * padded_blur[i:i+3, j:j+3])
+                Iy[i,j] = np.sum(Ky * padded_blur[i:i+3, j:j+3])
+
+        G = np.hypot(Ix, Iy)
+        theta = np.arctan2(Iy, Ix) * (180.0 / np.pi)
+        theta[theta < 0] += 180
+
+        nms = np.zeros_like(G)
+        for i in range(1, G.shape[0]-1):
+            for j in range(1, G.shape[1]-1):
+                angle = theta[i,j]
+                q = r = 255
+                if (0 <= angle < 22.5) or (157.5 <= angle <= 180):
+                    q = G[i, j+1]
+                    r = G[i, j-1]
+                elif 22.5 <= angle < 67.5:
+                    q = G[i+1, j-1]
+                    r = G[i-1, j+1]
+                elif 67.5 <= angle < 112.5:
+                    q = G[i+1, j]
+                    r = G[i-1, j]
+                elif 112.5 <= angle < 157.5:
+                    q = G[i-1, j-1]
+                    r = G[i+1, j+1]
+                if (G[i,j] >= q) and (G[i,j] >= r):
+                    nms[i,j] = G[i,j]
+
+        highThreshold = nms.max() * 0.2
+        lowThreshold = highThreshold * 0.5
+        res = np.zeros_like(nms)
+        strong = 255
+        weak = 50
+        strong_i, strong_j = np.where(nms >= highThreshold)
+        weak_i, weak_j = np.where((nms <= highThreshold) & (nms >= lowThreshold))
+        res[strong_i, strong_j] = strong
+        res[weak_i, weak_j] = weak
+
+        for i in range(1, res.shape[0]-1):
+            for j in range(1, res.shape[1]-1):
+                if res[i,j] == weak:
+                    neighbors = [
+                        res[i+1,j-1], res[i+1,j], res[i+1,j+1],
+                        res[i,j-1],               res[i,j+1],
+                        res[i-1,j-1], res[i-1,j], res[i-1,j+1]
+                    ]
+                    if strong in neighbors:
+                        res[i,j] = strong
+                    else:
+                        res[i,j] = 0
+
+        return Image.fromarray(res.astype(np.uint8))
+
+class DirectionalFilter(FilterStrategy):
+    """
+    Клас конкетної реалізації стратегії напрямного фільтру 135 градусів
+    """
+    @property
+    def suffix(self) -> str:
+        return "_directional"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        img = img.convert("L")
+        array = np.array(img, dtype=float)
+        height, width = array.shape
+        result = np.zeros_like(array)
+
+        k = np.array([
+            [0,1,2],
+            [-1,0,1],
+            [-2,-1,0]
+        ])
+
+        for i in range(1, height - 1):
+            for j in range(1, width - 1):
+                result[i, j] = np.sum(array[i-1:i+2, j-1:j+2] * k)
+
+        result = np.clip(result, 0, 255).astype(np.uint8)
+        return Image.fromarray(result)
+
+class PruittFilter(FilterStrategy):
+    """
+    Клас конкетної реалізації стратегії фільтру Прьюітта
+    """
+    @property
+    def suffix(self) -> str:
+        return "_pruitt"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        img = img.convert("L")
+        array = np.array(img, dtype=float)
+        height, width = array.shape
+        result = np.zeros_like(array)
+
+        g_x = np.array([
+            [-1,0,1],
+            [-1,0,1],
+            [-1,0,1]
+        ])
+        g_y = np.array([
+            [-1,-1,-1],
+            [0,0,0],
+            [1,1,1]
+        ])
+
+        for i in range(1, height - 1):
+            for j in range(1, width - 1):
+                region = array[i-1:i+2, j-1:j+2]
+                Gx = np.sum(region * g_x)
+                Gy = np.sum(region * g_y)
+                result[i, j] = np.sqrt(Gx**2 + Gy**2)
+
+        result = np.clip(result, 0, 255).astype(np.uint8)
+        return Image.fromarray(result)
+
+class ThresholdSegmentationFilter(FilterStrategy):
+    """
+    Клас конкетної реалізації стратегії колірної сегментації
+    """
+    def __init__(self, threshold: int):
+        self.threshold = threshold
+
+    @property
+    def suffix(self) -> str:
+        return "_tracehold"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        array = np.array(img, dtype=float)
+        height, width, _ = array.shape
+        result = np.zeros_like(array)
+
+        for i in range(1, height-1):
+            for j in range(1, width-1):
+                if array[i,j,0] > self.threshold and array[i,j,1] > self.threshold and array[i,j,2] > self.threshold:
+                    result[i,j] = [255,255,255]
+                else:
+                    result[i,j] = [0,0,0]
+
+        result = np.clip(result, 0, 255).astype(np.uint8)
+        return Image.fromarray(result)
+
+class HarrisFilter(FilterStrategy):
+    """
+    Клас конкетної реалізації стратегії фільтру Гарріса
+    """
+    def __init__(self, threshold: float):
+        self.threshold = threshold
+
+    @property
+    def suffix(self) -> str:
+        return "_harris"
+
+    def apply(self, img: Image.Image) -> Image.Image:
+        img = img.convert("L")
+        array = np.array(img, dtype=float)
+        height, width = array.shape
+        result = np.zeros_like(array)
+
+        Ix = np.zeros_like(array)
+        Iy = np.zeros_like(array)
+        R = np.zeros_like(array)
+
+        for i in range(1, height-1):
+            for j in range(1, width-1):
+                Ix[i,j] = array[i,j+1] - array[i,j]
+                Iy[i,j] = array[i+1,j] - array[i,j]
+
+        for i in range(1, height-1):
+            for j in range(1, width-1):
+                ix_block = Ix[i-1:i+2, j-1:j+2]
+                iy_block = Iy[i-1:i+2, j-1:j+2]
                 Sxx = np.sum(ix_block**2)
                 Syy = np.sum(iy_block**2)
                 Sxy = np.sum(ix_block * iy_block)
+                M = np.array([[Sxx, Sxy],[Sxy, Syy]])
+                R[i,j] = np.linalg.det(M) - 0.04 * (Sxx + Syy)**2
 
-                #матриця 2*2
-                M = np.array([[Sxx, Sxy],
-                              [Sxy, Syy]])
-                R[i, j] = np.linalg.det(M) - 0.04 * (Sxx + Syy)**2  #формула Гарісса
+        t = self.threshold * np.max(R)
+        result[R > t] = 255
+        return Image.fromarray(result.astype(np.uint8))
 
-    t = threshold * np.max(R)  #визначення порогового значення
-    for i in range(1, height - 1):
-            for j in range(1, width - 1):
-                if R[i, j] > t:  #якщо значення з масиву для пікселя перевищує поріг - це кут
-                    result[i, j] = 255  #стає білим
-
-    img_result = Image.fromarray(result.astype(np.uint8))  #конвертація 
-    show_image(img_result)  #відображення на екані
-    last_processed_image = img_result #збереження індекса
-    filter_suffix = "_harris"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
-    mse = distortion_rate(paths[current_index], save_path)
-    ssim = ssim_rate(paths[current_index], save_path)
-    fom = fom_rate(save_path)
-    psnr = psnr_rate(mse)
-    roc = auc_roc_rate(save_path)
-    update_metrics_display(mse, ssim, fom, psnr, roc)
-
-def fast(t):
+class FASTFilter(FilterStrategy):
     """
-    Виділення ключових точок
+    Клас конкетної реалізації стратегії фільтру FAST
     """
-    global images, current_index, last_processed_image, current_preprocess_suffix
-    if not images:
-        return
+    def __init__(self, t: int):
+        self.t = t
 
-    img = apply_preprocessing(images[current_index])  # Отримуємо препроцесоване або оригінал
+    @property
+    def suffix(self) -> str:
+        return "_fast"
 
-    img = img.convert("L") #зображення у відтінках сірого
-    array = np.array(img, dtype=float)
-    height, width = array.shape
-    result = np.zeros_like(array) #масив на результат
+    def apply(self, img: Image.Image) -> Image.Image:
+        img = img.convert("L")
+        array = np.array(img, dtype=float)
+        height, width = array.shape
+        result = np.zeros_like(array)
 
-    #координати 16 пікселів для кола радіусом 3 
-    c = [(-3,0), (-3,1), (-2,2), (-1,3), (0,3), (1,3), (2,2), (3,1), (3,0), (3,-1), (2,-2), (1,-3), (0,-3), (-1,-3), (-2,-2), (-3,-1)]
+        c = [(-3,0),(-3,1),(-2,2),(-1,3),(0,3),(1,3),(2,2),(3,1),(3,0),(3,-1),(2,-2),(1,-3),(0,-3),(-1,-3),(-2,-2),(-3,-1)]
+        N = 12
 
-    N = 12 #мінімальна кількість яскравих пікселів
+        for i in range(3, height-3):
+            for j in range(3, width-3):
+                p = array[i,j]
+                circle = [array[i+di, j+dj] for di,dj in c]
+                bright = [cc > p + self.t for cc in circle]
+                dark   = [cc < p - self.t for cc in circle]
 
-    for i in range(3, height - 3):
-            for j in range(3, width - 3):
-                p = array[i,j] #інтенсивінсть центрального
-                circle = [array[i+di, j+dj] for (di,dj) in c] #масив точок по колу
-
-                #поділ їх на масив яскравих і темних
-                bright = [c > p + t for c in circle]
-                dark   = [c < p - t for c in circle]
-
-                #подвоєна сума, щоб повернутися у початкову точку
                 bright2 = bright + bright
                 dark2   = dark + dark
 
-                keypoint = False #булева для позначки чи є піксель кутом
-                count_bright = count_dark = 0 #лічильники послідовності
+                count_bright = count_dark = 0
+                keypoint = False
 
                 for k in range(32):
                     if bright2[k]:
                         count_bright += 1
-                        if count_bright >= N: #якщо накопичилось більше н яскравих
-                            keypoint = True #це кут
+                        if count_bright >= N:
+                            keypoint = True
                             break
                     else:
                         count_bright = 0
-
                     if dark2[k]:
                         count_dark += 1
                         if count_dark >= N:
@@ -658,256 +461,384 @@ def fast(t):
                             break
                     else:
                         count_dark = 0
-
-                if keypoint: #якщо це кут - заміна його на біллий
+                if keypoint:
                     result[i,j] = 255
 
-    img_result = Image.fromarray(result.astype(np.uint8)) #конвертація результату
-    show_image(img_result) #відображення на екрані
-    last_processed_image = img_result #збереження індекса
-    filter_suffix = "_fast"
-    full_suffix = current_preprocess_suffix + filter_suffix if current_preprocess_suffix else filter_suffix
-    save_path = save_image(img_result, paths[current_index], suffix=full_suffix)
-    mse = distortion_rate(paths[current_index], save_path)
-    ssim = ssim_rate(paths[current_index], save_path)
-    fom = fom_rate(save_path)
-    psnr = psnr_rate(mse)
-    roc = auc_roc_rate(save_path)
-    update_metrics_display(mse, ssim, fom, psnr, roc)
+        return Image.fromarray(result.astype(np.uint8))
 
-def distortion_rate(original_path, filtered_path):
+class MetricsCalculator:
     """
-    Обчислення спотворення між оригіналом і зміненим зображенням
+    Клас розрахунку метрик оцінки
     """
-    orig = Image.open(original_path).convert("RGB") #оригінал
-    filt = Image.open(filtered_path).convert("RGB") #оброблене
+    def __init__(self, gt_path: str = ""):
+        self.ground_truth_path = gt_path
 
-    orig_array = np.array(orig, dtype=float)
-    filt_array = np.array(filt, dtype=float)
+    def set_ground_truth(self, path: str):
+        """
+        Встановлення шляху до еталону
+        """
+        self.ground_truth_path = path
 
-    #середньоквадратична помилка 
-    mse = np.mean((filt_array - orig_array) ** 2)
+    def distortion_rate(self, original_path: str, filtered_path: str):
+        """
+        MSE метрика
+        """
+        orig = Image.open(original_path).convert("RGB")
+        filt = Image.open(filtered_path).convert("RGB")
 
-    return mse
+        orig_array = np.array(orig, dtype=float)
+        filt_array = np.array(filt, dtype=float)
 
-def psnr_rate(mse):
-    if mse == 0:
-        psnr = float('inf')  # ідеальне зображення, немає помилок
-    else:
-        # Максимальне значення пікселя = 255
+        return np.mean((filt_array - orig_array) ** 2)
+
+    def psnr_rate(self, mse: float):
+        """
+        PSNR
+        """
+        if mse == 0:
+            return float('inf')
         max_pixel = 255.0
-        psnr = 10 * np.log10((max_pixel ** 2) / mse)
+        return 10 * np.log10((max_pixel ** 2) / mse)
 
-    return psnr
+    def ssim_rate(self, original_path: str, filtered_path: str) -> float:
+        """
+        SSIM
+        """
+        orig = Image.open(original_path).convert("L")
+        filt = Image.open(filtered_path).convert("L")
 
-def ssim_rate(original_path, filtered_path):
-    """
-    Обчислення SSIM за спрощеною формулою:
-    Повертає значення SSIM (0..1, ближче до 1 — краще).
-    """
-    orig = Image.open(original_path).convert("L")  # grayscale оригінал
-    filt = Image.open(filtered_path).convert("L")  # grayscale оброблене
+        orig_array = np.array(orig, dtype=float)
+        filt_array = np.array(filt, dtype=float)
 
-    orig_array = np.array(orig, dtype=float)
-    filt_array = np.array(filt, dtype=float)
+        mu_x = np.mean(orig_array)
+        mu_y = np.mean(filt_array)
 
-    # Середні значення
-    mu_x = np.mean(orig_array)
-    mu_y = np.mean(filt_array)
+        sigma_x_sq = np.var(orig_array)
+        sigma_y_sq = np.var(filt_array)
 
-    # Дисперсії
-    sigma_x_sq = np.var(orig_array)  # ddof=0
-    sigma_y_sq = np.var(filt_array)
+        sigma_xy = np.mean((orig_array - mu_x) * (filt_array - mu_y))
 
-    # Коваріація
-    sigma_xy = np.mean((orig_array - mu_x) * (filt_array - mu_y))
+        c1 = (0.01 * 255) ** 2
+        c2 = (0.03 * 255) ** 2
 
-    # Константи стабілізації (стандартні)
-    c1 = (0.01 * 255) ** 2
-    c2 = (0.03 * 255) ** 2
+        num = (2 * mu_x * mu_y + c1) * (2 * sigma_xy + c2)
+        den = ((mu_x ** 2 + mu_y ** 2 + c1) * (sigma_x_sq + sigma_y_sq + c2)) + 1e-10
+        ssim_value = num / den
 
-    # Захист від ділення на нуль
-    epsilon = 1e-10
+        return max(ssim_value, 0.0)
 
-    numerator = (2 * mu_x * mu_y + c1) * (2 * sigma_xy + c2)
-    denominator = ((mu_x ** 2 + mu_y ** 2 + c1) * (sigma_x_sq + sigma_y_sq + c2)) + epsilon
+    def mask_to_edge_array(self, mask_path: str):
+        """
+        Перетворення еталонних значень у масив для порівняння
+        """
+        mask = Image.open(mask_path).convert("L")
+        mask_arr = np.array(mask)
 
-    ssim_value = numerator / denominator
+        mask_bin = mask_arr > 127
+        kernel = np.ones((3,3), np.uint8)
+        dilated = cv2.dilate(mask_bin.astype(np.uint8)*255, kernel)
+        edges = (dilated > 127) & (~mask_bin)
 
-    # Обрізаємо негативні значення (рідко, але буває)
-    ssim_value = max(ssim_value, 0.0)
+        return edges
 
-    return ssim_value
-
-def mask_to_edge_array(mask_path):
-    mask = Image.open(mask_path).convert("L")
-    mask_arr = np.array(mask)
-
-    mask_bin = mask_arr > 127
-
-    kernel = np.ones((3,3), np.uint8)
-    dilated = cv2.dilate(mask_bin.astype(np.uint8)*255, kernel)
-    edges = (dilated > 127) & (~mask_bin)
-
-    return edges
-
-
-def fom_rate(detected_path, alpha=1/9):
-    global ground_truth_path
-
-    if not ground_truth_path:
-        return None
-
-    detected = Image.open(detected_path).convert("L")
-    detected_arr = np.array(detected) > 127
-
-    # отримуємо edges з маски
-    gt_edges = mask_to_edge_array(ground_truth_path)
-
-    N_d = np.sum(detected_arr)
-    N_g = np.sum(gt_edges)
-
-    if N_d == 0 or N_g == 0:
-        return 0.0
-
-    dist_map = distance_transform_edt(~gt_edges)
-    detected_distances = dist_map[detected_arr]
-
-    penalties = 1 / (1 + alpha * detected_distances ** 2)
-    fom = np.sum(penalties) / max(N_d, N_g)
-
-    return fom
-
-def auc_roc_rate(detected_raw_path):
-    global ground_truth_path, metrics_label  # використовуємо глобальну змінну, як у тебе
-    
-    if not ground_truth_path:
-        return None
+    def fom_rate(self, detected_path: str, alpha=1/9) -> Optional[float]:
+        """
+        FOM
+        """
+        if not self.ground_truth_path:
+            return None
         
-    detected_raw = Image.open(detected_raw_path).convert("L")
-    detected_arr = np.array(detected_raw, dtype=float)
+        detected = Image.open(detected_path).convert("L")
+        detected_arr = np.array(detected) > 127
+        gt_edges = self.mask_to_edge_array(self.ground_truth_path)
 
-        # Завантажуємо ground truth (еталон)
-    gt = Image.open(ground_truth_path).convert("L")
-    gt_arr = np.array(gt) > 127  # бінарна маска: True — позитивний клас (край/точка)
+        N_d = np.sum(detected_arr)
+        N_g = np.sum(gt_edges)
 
+        if N_d == 0 or N_g == 0:
+            return 0.0
+        
+        dist_map = distance_transform_edt(~gt_edges)
+        detected_distances = dist_map[detected_arr]
+        penalties = 1 / (1 + alpha * detected_distances ** 2)
 
-        # Перетворюємо в 1D масиви для roc_auc_score
-    y_true = gt_arr.flatten().astype(int)      # 0/1
-    y_score = detected_arr.flatten()           # "ймовірності" (чим вище — тим ймовірніше позитив)
+        return np.sum(penalties) / max(N_d, N_g)
 
-        # Обчислюємо AUC-ROC
-    auc = roc_auc_score(y_true, y_score)
+    def auc_roc_rate(self, detected_path: str) -> Optional[float]:
+        """
+        AUC-ROC
+        """
+        if not self.ground_truth_path:
+            return None
+        
+        detected_raw = Image.open(detected_path).convert("L")
+        detected_arr = np.array(detected_raw, dtype=float)
+        gt = Image.open(self.ground_truth_path).convert("L")
+        gt_arr = np.array(gt) > 127
 
-    return auc
+        y_true = gt_arr.flatten().astype(int)
+        y_score = detected_arr.flatten()
 
-def interface(): 
+        if len(set(y_true)) < 2:
+            return 0.0
+        
+        return roc_auc_score(y_true, y_score)
+
+class ImageProcessingFacade:
     """
-    Інтерфейс користувача
+    Клас фасаду для застосування методів
     """
-    global root, image_label, preprocess_combobox 
-    root = tk.Tk() 
-    root.title('STEM: Image Processing') #заголовок вікна
-    root.geometry(f"{ROOT_WIDTH}x{ROOT_HEIGHT}") #розміри вікна
-    root.minsize(ROOT_WIDTH, ROOT_HEIGHT) 
-    
-    btn_load = tk.Button(text="Load set of images", command=load_images, font=("Arial", 12, "bold"))  #кнопка завантаження зображень з відповідною командою
-    btn_load.pack(side="top", pady=5)
+    def __init__(self):
+        self.pre_strategies = {
+            "Default": DefaultPreprocessing(),
+            "White Balance": WhiteBalancePreprocessing(),
+            "Histogram Equalization": HistogramEqualizationPreprocessing(),
+            "Sharpen Filter": SharpenPreprocessing(),
+            "CLAHE": CLAHEPreprocessing(),
+            "Dark channel": DarkChannelPreprocessing(),
+        }
+        self.metrics = MetricsCalculator()
 
-    left_frame = tk.Frame(width=650, bg="#ffffff") 
-    left_frame.pack(side="left", fill="y", padx=5, pady=5) 
-    left_frame.pack_propagate(False) 
+    def process_image(self, img: Image.Image, preprocess_name: str, filter_name: str,filter_param: Optional[float | int] = None) -> tuple[Image.Image, str]:
+        """
+        Повертає оброблене зображення та суфікс для збереження
+        """
+        # Препроцесинг
+        pre = self.pre_strategies.get(preprocess_name, self.pre_strategies["Default"])
+        processed = pre.apply(img)
 
-    #місце для відображення зображень
-    image_label = tk.Label(left_frame, bg="#333333", fg="white", width=IMAGE_DISPLAY_SIZE, height=IMAGE_DISPLAY_SIZE)
-    image_label.pack(side="top", padx=10, pady=10)
+        # Фільтр 
+        if filter_name == "Canny":
+            filt = CannyFilter()
+        elif filter_name == "Directional":
+            filt = DirectionalFilter()
+        elif filter_name == "Pruitt":
+            filt = PruittFilter()
+        elif filter_name == "Tracehold":
+            thresh = int(filter_param) if filter_param is not None else 200
+            filt = ThresholdSegmentationFilter(thresh)
+        elif filter_name == "Harris":
+            thresh = float(filter_param) if filter_param is not None else 0.01
+            filt = HarrisFilter(thresh)
+        elif filter_name == "FAST":
+            t = int(filter_param) if filter_param is not None else 20
+            filt = FASTFilter(t)
+        else:
+            raise ValueError(f"Unknoqn filter: {filter_name}")
 
-    #місце для кнопок
-    nav_frame = tk.Frame(left_frame, bg="#ffffff")
-    nav_frame.pack(side="bottom", pady=10)
+        result_img = filt.apply(processed)
+        #суфікс
+        suffix = pre.suffix + filt.suffix
 
-    #кнопки для переходу до наступного / попереднього зображення
-    tk.Button(nav_frame, text="Previous", command=prev_image, width=15).pack(side="left", padx=10)
-    tk.Button(nav_frame, text="Next", command=next_image, width=15).pack(side="left", padx=10)
+        return result_img, suffix
 
-    #бокова панель для кнопок всіх фільтрів
-    right_frame = tk.Frame(width=330, bg="#e9e9e9", relief=tk.RIDGE, bd=2)
-    right_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
-    right_frame.pack_propagate(False)
-    tk.Label(right_frame, text="Filter Panel", bg="#e9e9e9",font=("Arial", 14, "bold")).pack(pady=10)
+class ImageApp:
+    """
+    Клас інтерфейсу програмного модуля
+    """
+    def __init__(self):
+        self.state = {
+            "images": [],
+            "paths": [],
+            "current_index": 0,
+            "last_processed_image": None,
+        }
+        self.facade = ImageProcessingFacade()  #фасад
+        self.metrics = self.facade.metrics     #метрики теж з фасаду
 
-    #панель 
-    preprocess_frame = tk.Frame(width=330, bg="#e9e9e9", relief=tk.RIDGE, bd=2)
-    preprocess_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
-    preprocess_frame.pack_propagate(False)
-    tk.Label(preprocess_frame, text="Preproccesing Panel", bg="#e9e9e9",font=("Arial", 14, "bold")).pack(pady=10)
+        self.root = tk.Tk()
+        self.root.title('Image Processing')
+        self.root.geometry("1000x600")
+        self.root.minsize(1000, 600)
 
-    preprocess_combobox = ttk.Combobox(preprocess_frame, values=["Default", "White Balance", "Histogram Equalization", "Sharpen Filter", "CLAHE", "Dark channel"], width=30)
-    preprocess_combobox.pack()
-    preprocess_combobox.set("Default")
+        self.preprocess_combobox = None
+        self.metrics_label = None
+        self.gt_entry = None
 
-    global metrics_label
-    metrics_label = tk.Label(
-        preprocess_frame,
-        text="MSE:",
-        bg="#e9e9e9",
-        fg="#333333",
-        font=("Arial", 10),
-        justify="left",
-        wraplength=300
-    )
-    metrics_label.pack(side="bottom", pady=20, padx=10, fill="x")
+        self._create_ui()
+        self.root.mainloop()
 
-    tk.Label(preprocess_frame, text="Ground Truth FOM:", bg="#e9e9e9").pack(pady=15)
-    gt_entry = tk.Entry(preprocess_frame, width=40)
-    gt_entry.pack(pady=5)
-    gt_entry.insert(0, ground_truth_path)  
-    def choose_ground_truth():
-        global ground_truth_path
-        path = filedialog.askopenfilename(title="Choose ground truth",filetypes=[("Image files", "*.jpg;*.png;*.jpeg;*.bmp")])
+    def _create_ui(self):
+        """
+        Графічний інтерфейм модуля
+        """
+        tk.Button(self.root, text="Load set of images", command=self.load_images, font=("Arial", 12, "bold")).pack(side="top", pady=5)
+
+        left_frame = tk.Frame(self.root, width=650, bg="#ffffff")
+        left_frame.pack(side="left", fill="y", padx=5, pady=5)
+        left_frame.pack_propagate(False)
+
+        self.image_label = tk.Label(left_frame, bg="#333333", width=550, height=550)
+        self.image_label.pack(side="top", padx=10, pady=10)
+
+        nav_frame = tk.Frame(left_frame, bg="#ffffff")
+        nav_frame.pack(side="bottom", pady=10)
+        tk.Button(nav_frame, text="Previous", command=self.prev_image, width=15).pack(side="left", padx=10)
+        tk.Button(nav_frame, text="Next", command=self.next_image, width=15).pack(side="left", padx=10)
+
+        right_frame = tk.Frame(self.root, width=330, bg="#e9e9e9", relief=tk.RIDGE, bd=2)
+        right_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
+        right_frame.pack_propagate(False)
+
+        tk.Label(right_frame, text="Filter Panel", bg="#e9e9e9", font=("Arial", 14, "bold")).pack(pady=10)
+
+        preprocess_frame = tk.Frame(self.root, width=330, bg="#e9e9e9", relief=tk.RIDGE, bd=2)
+        preprocess_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
+        preprocess_frame.pack_propagate(False)
+
+        tk.Label(preprocess_frame, text="Preproccesing Panel", bg="#e9e9e9", font=("Arial", 14, "bold")).pack(pady=10)
+
+        self.preprocess_combobox = ttk.Combobox(preprocess_frame, values=list(self.facade.pre_strategies.keys()), width=30)
+        self.preprocess_combobox.pack()
+        self.preprocess_combobox.set("Default")
+
+        self.metrics_label = tk.Label(preprocess_frame, text="Metrics", bg="#e9e9e9", fg="#333333", font=("Arial", 10),
+            justify="left", wraplength=300)
+        self.metrics_label.pack(side="bottom", pady=20, padx=10, fill="x")
+
+        tk.Label(preprocess_frame, text="Ground Truth FOM:", bg="#e9e9e9").pack(pady=15)
+        self.gt_entry = tk.Entry(preprocess_frame, width=40)
+        self.gt_entry.pack(pady=5)
+
+        tk.Button(preprocess_frame, text="Обрати файл", command=self.choose_ground_truth).pack(pady=5)
+
+        tk.Button(right_frame, text="Canny Edge Detector", width=20, command=self.canny_filter).pack(pady=15)
+        tk.Button(right_frame, text="Directional Filter", width=15, command=self.directional).pack(pady=15)
+        tk.Button(right_frame, text="Pruitt Filter", width=15, command=self.pruitt).pack(pady=15)
+
+        tk.Label(right_frame, text="Tracehold Value", bg="#e9e9e9").pack()
+        entry_tracehold = tk.Entry(right_frame)
+        entry_tracehold.pack()
+        entry_tracehold.insert(0, "200")
+        tk.Button(right_frame, text="Tracehold segmentation", width=25, command=lambda: self.tracehold_segmentation(int(entry_tracehold.get()))).pack(pady=15)
+
+        tk.Label(right_frame, text="Harris angle detectors tracehold Value", bg="#e9e9e9").pack()
+        harris_entry = tk.Entry(right_frame)
+        harris_entry.pack()
+        harris_entry.insert(0, "0.01")
+        tk.Button(right_frame, text="Harris angle detectors", width=20, command=lambda: self.harris_angle_detectors(float(harris_entry.get()))).pack(pady=15)
+
+        tk.Label(right_frame, text=" Brightness threshold", bg="#e9e9e9").pack()
+        fast_entry = tk.Entry(right_frame)
+        fast_entry.pack()
+        fast_entry.insert(0, "20")
+        tk.Button(right_frame, text="Features from Accelerated Segment Test", width=35, command=lambda: self.fast(int(fast_entry.get()))).pack(pady=15)
+
+    def load_images(self):
+        """
+        Завантаження картинок користувача
+        """
+        paths = filedialog.askopenfilenames(title="Choose an image", filetypes=[("Image files", "*.jpg;*.png;*.jpeg;*.bmp;*.gif;*.webp")])
+        if not paths:
+            return
+
+        self.state["images"] = [Image.open(p) for p in paths]
+        self.state["paths"] = list(paths)
+        self.state["current_index"] = 0
+        self.show_image(self.state["images"][0])
+
+    def show_image(self, img: Image.Image):
+        """
+        Відображення після обробки
+        """
+        if img is None:
+            return
+        
+        img_resized = img.resize((550, 550), Image.Resampling.LANCZOS)
+        img_tk = ImageTk.PhotoImage(img_resized)
+        self.image_label.config(image=img_tk)
+        self.image_label.image = img_tk
+
+    def next_image(self):
+        """
+        Перехід між зображеннями
+        """
+        if not self.state["images"]:
+            return
+        
+        self.state["current_index"] = (self.state["current_index"] + 1) % len(self.state["images"])
+        self.show_image(self.state["images"][self.state["current_index"]])
+
+    def prev_image(self):
+        """
+        Перехід між зображеннями
+        """
+        if not self.state["images"]:
+            return
+        
+        self.state["current_index"] = (self.state["current_index"] - 1) % len(self.state["images"])
+        self.show_image(self.state["images"][self.state["current_index"]])
+
+    def choose_ground_truth(self):
+        """
+        Зчитування переданого еталону
+        """
+        path = filedialog.askopenfilename(title="Choose ground truth", filetypes=[("Image files", "*.jpg;*.png;*.jpeg;*.bmp")])
         if path:
-            ground_truth_path = path
-            gt_entry.delete(0, tk.END)
-            gt_entry.insert(0, path)
-            print(f"Selected Ground truth: {path}")
+            self.metrics.set_ground_truth(path)
+            self.gt_entry.delete(0, tk.END)
+            self.gt_entry.insert(0, path)
 
-    tk.Button(preprocess_frame, text="Обрати файл", command=choose_ground_truth).pack(pady=5)
+    def _update_metrics_display(self, mse, ssim=None, fom=None, psnr=None, roc=None):
+        """
+        Виведення обчислених метрик
+        """
+        text = f"MSE: {mse:.4f}\n"
+        if ssim is not None:
+            text += f"SSIM: {ssim:.4f} (0–1)\n"
+        if fom is not None:
+            text += f"FOM: {fom:.4f} (0–1)\n"
+        if psnr is not None:
+            text += f"PSNR: {psnr:.4f}\n"
+        if roc is not None:
+            text += f"ROC: {roc:.4f}"
+        self.metrics_label.config(text=text)
 
-    tk.Button(right_frame, text="Canny Edge Detector", width=20, command=canny_filter).pack(pady=15) #кнопка для фільтра Кенніз командою 
-    tk.Button(right_frame, text="Directional Filter", width=15, command=directional).pack(pady=15) #кнопка для напрямного фільтрування з командою
-    tk.Button(right_frame, text="Pruitt Filter", width=15, command=pruitt).pack(pady=15) #кнопка для фільтру Прюітта з командою
+    def _process_and_display(self, filter_name: str, filter_param: Optional[float | int] = None):
+        """
+        Загальна робота
+        """
+        if not self.state["images"]:
+            return
 
-    tk.Label(right_frame, text="Tracehold Value", bg="#e9e9e9").pack() #місце для введення значення для сегментації
-    entry_tracehold = tk.Entry(right_frame) #зчитування значення
-    entry_tracehold.pack()
-    entry_tracehold.insert(0, "200")
-    def apply_tracehold(): #передача параметру 
-        threshold = int(entry_tracehold.get())
-        tracehold_segmentation(threshold)
-    tk.Button(right_frame, text="Tracehold segmentation", width=25, command=apply_tracehold).pack(pady=15) #кнопка для колірної сегментації з командо пісдя застосування сегментації
+        current_img = self.state["images"][self.state["current_index"]]
+        current_path = self.state["paths"][self.state["current_index"]]
 
-    tk.Label(right_frame, text="Harris angle detectors tracehold Value", bg="#e9e9e9").pack() #місце для введення порогового значення для виділення кутів
-    harris_tracehold = tk.Entry(right_frame) #зчитування параметру
-    harris_tracehold.pack()
-    harris_tracehold.insert(0, "0.01")
-    def apply_harris_threshold(): #застосування параметру для функції
-        harris_threshold = float(harris_tracehold.get())
-        harris_angle_detectors(harris_threshold)
-    tk.Button(right_frame, text="Harris angle detectors", width=20, command=apply_harris_threshold).pack(pady=15) #кнопка для виділення кутів з командою пвсля застосування параметру
+        pre_name = self.preprocess_combobox.get()
 
-    tk.Label(right_frame, text=" Brightness threshold", bg="#e9e9e9").pack() #місце для введення порогу яскравості для функції виділення ключових точок
-    brightness_threshold = tk.Entry(right_frame) #зчитування параметру
-    brightness_threshold.pack()
-    brightness_threshold.insert(0, "20")
-    def apply_brightness_threshold(): #застосування параметру
-        brightness_threshold_value = int(brightness_threshold.get())
-        fast(brightness_threshold_value)
-    tk.Button(right_frame, text="Features from Accelerated Segment Test", width=35, command=apply_brightness_threshold).pack(pady=15) #кнопка для виділення ключових точок з командою після застосування параметру
+        result_img, suffix = self.facade.process_image(current_img, pre_name, filter_name, filter_param)
 
-    root.mainloop() #відображення вікна
+        save_path = save_image(result_img, current_path, suffix)
+
+        self.state["last_processed_image"] = result_img
+        self.show_image(result_img)
+
+        mse = self.metrics.distortion_rate(current_path, save_path)
+        ssim = self.metrics.ssim_rate(current_path, save_path)
+        fom = self.metrics.fom_rate(save_path)
+        psnr = self.metrics.psnr_rate(mse)
+        roc = self.metrics.auc_roc_rate(save_path)
+
+        self._update_metrics_display(mse, ssim, fom, psnr, roc)
     
-def main():
-    interface()
+    #Запуск усіх методів
+    def canny_filter(self):
+        self._process_and_display("Canny")
+
+    def directional(self):
+        self._process_and_display("Directional")
+
+    def pruitt(self):
+        self._process_and_display("Pruitt")
+
+    def tracehold_segmentation(self, threshold: int):
+        self._process_and_display("Tracehold", filter_param=threshold)
+
+    def harris_angle_detectors(self, threshold: float):
+        self._process_and_display("Harris", filter_param=threshold)
+
+    def fast(self, t: int):
+        self._process_and_display("FAST", filter_param=t)
 
 if __name__ == "__main__":
-    main()
+    ImageApp()

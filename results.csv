@@ -1,0 +1,850 @@
+﻿Image_Name;Preprocessing;Filter;MSE;SSIM;PSNR;FOM;AUC-ROC;Save_Path
+image_part_001.jpg;None;Canny;8043,8282;0,0718;9,0762;0,1222;0,5397;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_None_Canny.jpg
+image_part_001.jpg;None;Directional;5035,6653;0,0999;11,1102;0,162;0,5281;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_None_Directional.jpg
+image_part_001.jpg;None;Pruitt;3112,475;0,2783;13,1997;0,1888;0,558;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_None_Pruitt.jpg
+image_part_001.jpg;None;Harris;6875,82;0,0163;9,7576;0,2699;0,4888;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_None_Harris.jpg
+image_part_001.jpg;None;FAST;7134,2755;0,0136;9,5973;0,102;0,5556;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_None_FAST.jpg
+image_part_001.jpg;White Balance;Canny;8054,3945;0,0721;9,0705;0,1216;0,5402;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_White Balance_Canny.jpg
+image_part_001.jpg;White Balance;Directional;5035,109;0,1024;11,1107;0,1578;0,5283;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_White Balance_Directional.jpg
+image_part_001.jpg;White Balance;Pruitt;3117,9323;0,2811;13,1921;0,1828;0,5582;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_White Balance_Pruitt.jpg
+image_part_001.jpg;White Balance;Harris;6894,2749;0,0191;9,7459;0,2578;0,4914;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_White Balance_Harris.jpg
+image_part_001.jpg;White Balance;FAST;7165,7977;0,0146;9,5782;0,0993;0,559;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_White Balance_FAST.jpg
+image_part_001.jpg;Histogram Equalization;Canny;10125,3609;0,0157;8,0767;0,0659;0,6162;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Histogram Equalization_Canny.jpg
+image_part_001.jpg;Histogram Equalization;Directional;6779,2896;0,0131;9,819;0,0609;0,5906;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Histogram Equalization_Directional.jpg
+image_part_001.jpg;Histogram Equalization;Pruitt;7655,4144;0,0148;9,2911;0,0617;0,7365;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Histogram Equalization_Pruitt.jpg
+image_part_001.jpg;Histogram Equalization;Harris;9966,7895;0,001;8,1453;0,0672;0,6296;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Histogram Equalization_Harris.jpg
+image_part_001.jpg;Histogram Equalization;FAST;8769,3827;0;8,7011;0,048;0,6006;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Histogram Equalization_FAST.jpg
+image_part_001.jpg;Sharpen Filter;Canny;8883,3114;0,0881;8,6451;0,0971;0,5601;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Sharpen Filter_Canny.jpg
+image_part_001.jpg;Sharpen Filter;Directional;6331,7975;0,1175;10,1155;0,092;0,5118;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Sharpen Filter_Directional.jpg
+image_part_001.jpg;Sharpen Filter;Pruitt;6528,2394;0,2329;9,9828;0,0871;0,5553;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Sharpen Filter_Pruitt.jpg
+image_part_001.jpg;Sharpen Filter;Harris;9571,5272;0,1536;8,321;0,1031;0,5754;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Sharpen Filter_Harris.jpg
+image_part_001.jpg;Sharpen Filter;FAST;8301,8399;0,0581;8,9391;0,0831;0,4948;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Sharpen Filter_FAST.jpg
+image_part_001.jpg;CLAHE;Canny;10314,8078;0,0977;7,9962;0,0761;0,5144;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_CLAHE_Canny.jpg
+image_part_001.jpg;CLAHE;Directional;7575,7723;0,101;9,3365;0,0743;0,5244;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_CLAHE_Directional.jpg
+image_part_001.jpg;CLAHE;Pruitt;10084,3077;0,1889;8,0943;0,074;0,5544;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_CLAHE_Pruitt.jpg
+image_part_001.jpg;CLAHE;Harris;7256,3936;0,2901;9,5236;0,143;0,3811;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_CLAHE_Harris.jpg
+image_part_001.jpg;CLAHE;FAST;8805,0424;0,027;8,6835;0,0492;0,5491;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_CLAHE_FAST.jpg
+image_part_001.jpg;Dark channel;Canny;8469,4463;0,0962;8,8523;0,1013;0,5051;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Dark channel_Canny.jpg
+image_part_001.jpg;Dark channel;Directional;5477,3891;0,1235;10,7451;0,1195;0,6016;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Dark channel_Directional.jpg
+image_part_001.jpg;Dark channel;Pruitt;4092,3278;0,2884;12,0111;0,1295;0,5886;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Dark channel_Pruitt.jpg
+image_part_001.jpg;Dark channel;Harris;7112,5638;0,0598;9,6105;0,1561;0,4593;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Dark channel_Harris.jpg
+image_part_001.jpg;Dark channel;FAST;7617,5513;0,0328;9,3126;0,0799;0,5329;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_001_Dark channel_FAST.jpg
+image_part_002.jpg;None;Canny;17413,6893;0,0522;5,7219;0,3874;0,413;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_None_Canny.jpg
+image_part_002.jpg;None;Directional;14273,3687;0,0744;6,5855;0,3823;0,4504;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_None_Directional.jpg
+image_part_002.jpg;None;Pruitt;9538,5808;0,2437;8,336;0,374;0,3153;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_None_Pruitt.jpg
+image_part_002.jpg;None;Harris;17853,8937;0,0288;5,6135;0,3286;0,4325;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_None_Harris.jpg
+image_part_002.jpg;None;FAST;17793,3754;0,0195;5,6282;0,2921;0,4053;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_None_FAST.jpg
+image_part_002.jpg;White Balance;Canny;17408,387;0,0524;5,7232;0,3867;0,4125;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_White Balance_Canny.jpg
+image_part_002.jpg;White Balance;Directional;14271,3734;0,0745;6,5861;0,3824;0,4503;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_White Balance_Directional.jpg
+image_part_002.jpg;White Balance;Pruitt;9535,8181;0,2439;8,3372;0,3737;0,3152;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_White Balance_Pruitt.jpg
+image_part_002.jpg;White Balance;Harris;17850,0335;0,0289;5,6144;0,3284;0,4321;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_White Balance_Harris.jpg
+image_part_002.jpg;White Balance;FAST;17793,0776;0,0195;5,6283;0,2923;0,4052;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_White Balance_FAST.jpg
+image_part_002.jpg;Histogram Equalization;Canny;17199,2106;0,0625;5,7757;0,37;0,3986;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Histogram Equalization_Canny.jpg
+image_part_002.jpg;Histogram Equalization;Directional;14636,8782;0,0254;6,4763;0,3219;0,4951;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Histogram Equalization_Directional.jpg
+image_part_002.jpg;Histogram Equalization;Pruitt;10225,3039;0,0888;8,034;0,3351;0,4745;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Histogram Equalization_Pruitt.jpg
+image_part_002.jpg;Histogram Equalization;Harris;17765,6772;0,037;5,635;0,3173;0,4422;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Histogram Equalization_Harris.jpg
+image_part_002.jpg;Histogram Equalization;FAST;17955,9453;0,0139;5,5887;0,2537;0,4807;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Histogram Equalization_FAST.jpg
+image_part_002.jpg;Sharpen Filter;Canny;16697,3087;0,1021;5,9043;0,3387;0,378;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Sharpen Filter_Canny.jpg
+image_part_002.jpg;Sharpen Filter;Directional;13570,2432;0,1188;6,8049;0,2845;0,4603;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Sharpen Filter_Directional.jpg
+image_part_002.jpg;Sharpen Filter;Pruitt;8039,8295;0,349;9,0783;0,2885;0,3109;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Sharpen Filter_Pruitt.jpg
+image_part_002.jpg;Sharpen Filter;Harris;14909,2798;0,2541;6,3962;0,3017;0,3047;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Sharpen Filter_Harris.jpg
+image_part_002.jpg;Sharpen Filter;FAST;17728,9051;0,0345;5,644;0,2572;0,4562;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Sharpen Filter_FAST.jpg
+image_part_002.jpg;CLAHE;Canny;16299,7637;0,1376;6,009;0,2451;0,384;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_CLAHE_Canny.jpg
+image_part_002.jpg;CLAHE;Directional;14046,4117;0,0944;6,6551;0,214;0,4735;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_CLAHE_Directional.jpg
+image_part_002.jpg;CLAHE;Pruitt;9123,3897;0,2787;8,5292;0,2129;0,3753;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_CLAHE_Pruitt.jpg
+image_part_002.jpg;CLAHE;Harris;12444,4669;0,3406;7,181;0,2198;0,3232;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_CLAHE_Harris.jpg
+image_part_002.jpg;CLAHE;FAST;17817,8732;0,0297;5,6222;0,186;0,4838;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_CLAHE_FAST.jpg
+image_part_002.jpg;Dark channel;Canny;17336,8239;0,0645;5,7411;0,3572;0,393;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Dark channel_Canny.jpg
+image_part_002.jpg;Dark channel;Directional;15225,7529;0,0522;6,305;0,3617;0,5247;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Dark channel_Directional.jpg
+image_part_002.jpg;Dark channel;Pruitt;11596,2317;0,1609;7,4876;0,3546;0,4223;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Dark channel_Pruitt.jpg
+image_part_002.jpg;Dark channel;Harris;17626,8581;0,043;5,6691;0,2698;0,3894;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Dark channel_Harris.jpg
+image_part_002.jpg;Dark channel;FAST;17953,7473;0,0193;5,5893;0,2945;0,392;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_002_Dark channel_FAST.jpg
+image_part_003.jpg;None;Canny;7627,202;0,0865;9,3072;0,0428;0,4804;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_None_Canny.jpg
+image_part_003.jpg;None;Directional;4362,5512;0,0984;11,7334;0,0603;0,4903;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_None_Directional.jpg
+image_part_003.jpg;None;Pruitt;2370,6582;0,248;14,3821;0,0673;0,5852;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_None_Pruitt.jpg
+image_part_003.jpg;None;Harris;8362,6306;0,1497;8,9074;0,0285;0,5621;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_None_Harris.jpg
+image_part_003.jpg;None;FAST;6576,6276;0,0133;9,9508;0,0177;0,5701;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_None_FAST.jpg
+image_part_003.jpg;White Balance;Canny;7624,4961;0,0866;9,3087;0,0427;0,4802;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_White Balance_Canny.jpg
+image_part_003.jpg;White Balance;Directional;4370,7151;0,0999;11,7253;0,0589;0,4906;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_White Balance_Directional.jpg
+image_part_003.jpg;White Balance;Pruitt;2393,0297;0,2491;14,3413;0,0649;0,5855;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_White Balance_Pruitt.jpg
+image_part_003.jpg;White Balance;Harris;8369,018;0,1504;8,9041;0,0286;0,5596;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_White Balance_Harris.jpg
+image_part_003.jpg;White Balance;FAST;6616,2457;0,0137;9,9247;0,0176;0,5728;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_White Balance_FAST.jpg
+image_part_003.jpg;Histogram Equalization;Canny;12735,1882;0;7,0807;0,0189;0,6979;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Histogram Equalization_Canny.jpg
+image_part_003.jpg;Histogram Equalization;Directional;8203,2879;0;8,9909;0,0231;0,6153;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Histogram Equalization_Directional.jpg
+image_part_003.jpg;Histogram Equalization;Pruitt;12746,7313;0;7,0768;0,0205;0,8588;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Histogram Equalization_Pruitt.jpg
+image_part_003.jpg;Histogram Equalization;Harris;18433,7722;0;5,4747;0,0149;0,758;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Histogram Equalization_Harris.jpg
+image_part_003.jpg;Histogram Equalization;FAST;9713,7543;0;8,2569;0,0124;0,6907;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Histogram Equalization_FAST.jpg
+image_part_003.jpg;Sharpen Filter;Canny;9199,1952;0,0869;8,4933;0,0312;0,5253;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Sharpen Filter_Canny.jpg
+image_part_003.jpg;Sharpen Filter;Directional;6713,4734;0,0681;9,8613;0,0278;0,5098;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Sharpen Filter_Directional.jpg
+image_part_003.jpg;Sharpen Filter;Pruitt;8367,8462;0,128;8,9047;0,0266;0,588;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Sharpen Filter_Pruitt.jpg
+image_part_003.jpg;Sharpen Filter;Harris;10827,7187;0,1446;7,7854;0,0253;0,546;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Sharpen Filter_Harris.jpg
+image_part_003.jpg;Sharpen Filter;FAST;8462,8136;0,0438;8,8557;0,0227;0,5208;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Sharpen Filter_FAST.jpg
+image_part_003.jpg;CLAHE;Canny;12955,2883;0,0116;7,0063;0,0215;0,5832;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_CLAHE_Canny.jpg
+image_part_003.jpg;CLAHE;Directional;9185,5064;0,0279;8,4998;0,023;0,5435;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_CLAHE_Directional.jpg
+image_part_003.jpg;CLAHE;Pruitt;15577,1437;0,0388;6,2059;0,0214;0,6474;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_CLAHE_Pruitt.jpg
+image_part_003.jpg;CLAHE;Harris;7515,4833;0,2628;9,3712;0,0392;0,3966;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_CLAHE_Harris.jpg
+image_part_003.jpg;CLAHE;FAST;9917,7629;0;8,1667;0,0132;0,6041;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_CLAHE_FAST.jpg
+image_part_003.jpg;Dark channel;Canny;8343,1043;0,0865;8,9175;0,0363;0,5267;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Dark channel_Canny.jpg
+image_part_003.jpg;Dark channel;Directional;5602,2223;0,0883;10,6472;0,0424;0,6491;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Dark channel_Directional.jpg
+image_part_003.jpg;Dark channel;Pruitt;5519,0534;0,1705;10,7122;0,0387;0,7075;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Dark channel_Pruitt.jpg
+image_part_003.jpg;Dark channel;Harris;7428,5431;0,0991;9,4218;0,0159;0,5198;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Dark channel_Harris.jpg
+image_part_003.jpg;Dark channel;FAST;7697,4077;0,0179;9,2674;0,0177;0,633;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_003_Dark channel_FAST.jpg
+image_part_004.jpg;None;Canny;44319,5744;0;1,6648;0,395;0,6355;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_None_Canny.jpg
+image_part_004.jpg;None;Directional;38280,7318;0;2,301;0,3793;0,5405;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_None_Directional.jpg
+image_part_004.jpg;None;Pruitt;30009,291;0;3,3582;0,3794;0,6755;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_None_Pruitt.jpg
+image_part_004.jpg;None;Harris;45821,6451;0;1,5201;0,2375;0,5352;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_None_Harris.jpg
+image_part_004.jpg;None;FAST;45276,6336;0;1,5721;0,1748;0,5606;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_None_FAST.jpg
+image_part_004.jpg;White Balance;Canny;44317,5488;0;1,665;0,3949;0,6356;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_White Balance_Canny.jpg
+image_part_004.jpg;White Balance;Directional;38314,6087;0;2,2972;0,3786;0,5407;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_White Balance_Directional.jpg
+image_part_004.jpg;White Balance;Pruitt;30080,8688;0;3,3479;0,3801;0,6748;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_White Balance_Pruitt.jpg
+image_part_004.jpg;White Balance;Harris;45823,5675;0;1,5199;0,2358;0,535;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_White Balance_Harris.jpg
+image_part_004.jpg;White Balance;FAST;45289,4522;0;1,5708;0,172;0,5602;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_White Balance_FAST.jpg
+image_part_004.jpg;Histogram Equalization;Canny;38797,3621;0,0089;2,2428;0,2386;0,5208;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Histogram Equalization_Canny.jpg
+image_part_004.jpg;Histogram Equalization;Directional;31961,3627;0,0272;3,0846;0,2316;0,4845;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Histogram Equalization_Directional.jpg
+image_part_004.jpg;Histogram Equalization;Pruitt;15655,1266;0,1006;6,1842;0,2276;0,4648;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Histogram Equalization_Pruitt.jpg
+image_part_004.jpg;Histogram Equalization;Harris;38397,2168;0,0262;2,2878;0,2437;0,4874;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Histogram Equalization_Harris.jpg
+image_part_004.jpg;Histogram Equalization;FAST;40897,9012;0,0161;2,0138;0,1914;0,4599;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Histogram Equalization_FAST.jpg
+image_part_004.jpg;Sharpen Filter;Canny;42897,5096;0;1,8065;0,3226;0,6479;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Sharpen Filter_Canny.jpg
+image_part_004.jpg;Sharpen Filter;Directional;32715,824;0;2,9832;0,2309;0,5337;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Sharpen Filter_Directional.jpg
+image_part_004.jpg;Sharpen Filter;Pruitt;17177,8245;0;5,7811;0,2315;0,6601;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Sharpen Filter_Pruitt.jpg
+image_part_004.jpg;Sharpen Filter;Harris;38184,2964;0;2,312;0,2568;0,6479;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Sharpen Filter_Harris.jpg
+image_part_004.jpg;Sharpen Filter;FAST;42303,8797;0;1,867;0,2054;0,5275;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Sharpen Filter_FAST.jpg
+image_part_004.jpg;CLAHE;Canny;33691,4897;0,033;2,8556;0,1884;0,474;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_CLAHE_Canny.jpg
+image_part_004.jpg;CLAHE;Directional;29136,8395;0,0462;3,4864;0,1912;0,481;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_CLAHE_Directional.jpg
+image_part_004.jpg;CLAHE;Pruitt;9016,3402;0,2171;8,5805;0,1872;0,3933;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_CLAHE_Pruitt.jpg
+image_part_004.jpg;CLAHE;Harris;23754,014;0,2004;4,3734;0,164;0,3389;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_CLAHE_Harris.jpg
+image_part_004.jpg;CLAHE;FAST;39998,0672;0,0243;2,1104;0,1974;0,4793;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_CLAHE_FAST.jpg
+image_part_004.jpg;Dark channel;Canny;40728,9847;0;2,0318;0,2468;0,6093;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Dark channel_Canny.jpg
+image_part_004.jpg;Dark channel;Directional;36539,9355;0;2,5031;0,2561;0,5899;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Dark channel_Directional.jpg
+image_part_004.jpg;Dark channel;Pruitt;25609,0885;0;4,0469;0,2456;0,7026;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Dark channel_Pruitt.jpg
+image_part_004.jpg;Dark channel;Harris;36239,6765;0;2,539;0,202;0,5857;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Dark channel_Harris.jpg
+image_part_004.jpg;Dark channel;FAST;42863,4578;0;1,8099;0,196;0,5474;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_004_Dark channel_FAST.jpg
+image_part_005.jpg;None;Canny;26653,3867;0;3,8733;0,3006;0,5185;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_None_Canny.jpg
+image_part_005.jpg;None;Directional;22055,9273;0;4,6956;0,2907;0,4696;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_None_Directional.jpg
+image_part_005.jpg;None;Pruitt;16863,8857;0;5,8612;0,2859;0,4129;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_None_Pruitt.jpg
+image_part_005.jpg;None;Harris;26593,5113;0;3,883;0,2134;0,4619;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_None_Harris.jpg
+image_part_005.jpg;None;FAST;26508,9138;0;3,8969;0,2052;0,4583;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_None_FAST.jpg
+image_part_005.jpg;White Balance;Canny;26652,0562;0;3,8735;0,3005;0,5184;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_White Balance_Canny.jpg
+image_part_005.jpg;White Balance;Directional;22054,4976;0;4,6958;0,2905;0,4685;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_White Balance_Directional.jpg
+image_part_005.jpg;White Balance;Pruitt;16855,6202;0;5,8634;0,2858;0,412;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_White Balance_Pruitt.jpg
+image_part_005.jpg;White Balance;Harris;26589,601;0;3,8837;0,2134;0,4618;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_White Balance_Harris.jpg
+image_part_005.jpg;White Balance;FAST;26508,3777;0;3,897;0,2049;0,4577;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_White Balance_FAST.jpg
+image_part_005.jpg;Histogram Equalization;Canny;25389,6964;0,0029;4,0842;0,2535;0,4688;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Histogram Equalization_Canny.jpg
+image_part_005.jpg;Histogram Equalization;Directional;20884,1377;0,0329;4,9326;0,2358;0,4523;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Histogram Equalization_Directional.jpg
+image_part_005.jpg;Histogram Equalization;Pruitt;13996,3896;0,101;6,6706;0,2277;0,3407;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Histogram Equalization_Pruitt.jpg
+image_part_005.jpg;Histogram Equalization;Harris;25953,4144;0,0097;3,9889;0,1778;0,4493;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Histogram Equalization_Harris.jpg
+image_part_005.jpg;Histogram Equalization;FAST;25704,7087;0,0057;4,0307;0,1679;0,4133;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Histogram Equalization_FAST.jpg
+image_part_005.jpg;Sharpen Filter;Canny;25774,9107;0;4,0188;0,2516;0,484;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Sharpen Filter_Canny.jpg
+image_part_005.jpg;Sharpen Filter;Directional;20291,2637;0,0037;5,0577;0,2132;0,4793;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Sharpen Filter_Directional.jpg
+image_part_005.jpg;Sharpen Filter;Pruitt;13311,3208;0;6,8886;0,212;0,4135;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Sharpen Filter_Pruitt.jpg
+image_part_005.jpg;Sharpen Filter;Harris;24898,3918;0;4,1691;0,2166;0,4227;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Sharpen Filter_Harris.jpg
+image_part_005.jpg;Sharpen Filter;FAST;25381,1279;0;4,0857;0,1968;0,4551;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Sharpen Filter_FAST.jpg
+image_part_005.jpg;CLAHE;Canny;22731,9759;0,0727;4,5644;0,1803;0,4039;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_CLAHE_Canny.jpg
+image_part_005.jpg;CLAHE;Directional;18835,9024;0,0972;5,3809;0,1632;0,4576;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_CLAHE_Directional.jpg
+image_part_005.jpg;CLAHE;Pruitt;9769,4927;0,3005;8,2321;0,1612;0,3101;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_CLAHE_Pruitt.jpg
+image_part_005.jpg;CLAHE;Harris;17187,7779;0,2998;5,7786;0,0914;0,2867;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_CLAHE_Harris.jpg
+image_part_005.jpg;CLAHE;FAST;24432,2136;0,0305;4,2512;0,1481;0,4133;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_CLAHE_FAST.jpg
+image_part_005.jpg;Dark channel;Canny;27159,2132;0;3,7916;0,3205;0,5418;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Dark channel_Canny.jpg
+image_part_005.jpg;Dark channel;Directional;25010,9051;0;4,1495;0,3201;0,6603;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Dark channel_Directional.jpg
+image_part_005.jpg;Dark channel;Pruitt;23267,788;0;4,4633;0,3107;0,6748;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Dark channel_Pruitt.jpg
+image_part_005.jpg;Dark channel;Harris;26429,273;0;3,91;0,1773;0,4477;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Dark channel_Harris.jpg
+image_part_005.jpg;Dark channel;FAST;26981,1431;0;3,8202;0,2358;0,5149;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_005_Dark channel_FAST.jpg
+image_part_006.jpg;None;Canny;7884,8096;0,0033;9,1629;0,4648;0,4865;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_None_Canny.jpg
+image_part_006.jpg;None;Directional;6878,5654;0,0329;9,7558;0,4162;0,425;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_None_Directional.jpg
+image_part_006.jpg;None;Pruitt;5875,2705;0,1131;10,4405;0,4898;0,2484;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_None_Pruitt.jpg
+image_part_006.jpg;None;Harris;7869,8667;0,0002;9,1711;0,0861;0,4976;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_None_Harris.jpg
+image_part_006.jpg;None;FAST;7861,5784;0,0004;9,1757;0,1333;0,4926;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_None_FAST.jpg
+image_part_006.jpg;White Balance;Canny;7885,2446;0,0034;9,1627;0,4625;0,4865;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_White Balance_Canny.jpg
+image_part_006.jpg;White Balance;Directional;6868,1998;0,0338;9,7624;0,4142;0,4239;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_White Balance_Directional.jpg
+image_part_006.jpg;White Balance;Pruitt;5852,4522;0,1163;10,4574;0,4874;0,2454;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_White Balance_Pruitt.jpg
+image_part_006.jpg;White Balance;Harris;7870,0601;0,0002;9,171;0,0891;0,4975;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_White Balance_Harris.jpg
+image_part_006.jpg;White Balance;FAST;7860,989;0,0004;9,176;0,138;0,4923;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_White Balance_FAST.jpg
+image_part_006.jpg;Histogram Equalization;Canny;10317,5695;0;7,995;0,0038;0,6039;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Histogram Equalization_Canny.jpg
+image_part_006.jpg;Histogram Equalization;Directional;11086,9254;0;7,6827;0,0006;0,6083;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Histogram Equalization_Directional.jpg
+image_part_006.jpg;Histogram Equalization;Pruitt;14924,3729;0;6,3918;0,0009;0,8521;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Histogram Equalization_Pruitt.jpg
+image_part_006.jpg;Histogram Equalization;Harris;12376,8302;0;7,2047;0,0006;0,6757;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Histogram Equalization_Harris.jpg
+image_part_006.jpg;Histogram Equalization;FAST;11247,475;0;7,6203;0,0014;0,7045;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Histogram Equalization_FAST.jpg
+image_part_006.jpg;Sharpen Filter;Canny;7910,8159;0,0095;9,1486;0,3207;0,4806;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Sharpen Filter_Canny.jpg
+image_part_006.jpg;Sharpen Filter;Directional;6189,5614;0,1475;10,2142;0,1666;0,4338;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Sharpen Filter_Directional.jpg
+image_part_006.jpg;Sharpen Filter;Pruitt;4262,7924;0,4021;11,8339;0,2029;0,2223;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Sharpen Filter_Pruitt.jpg
+image_part_006.jpg;Sharpen Filter;Harris;7810,7155;0,0088;9,2039;0,2961;0,4475;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Sharpen Filter_Harris.jpg
+image_part_006.jpg;Sharpen Filter;FAST;7565,2169;0,0389;9,3426;0,1129;0,341;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Sharpen Filter_FAST.jpg
+image_part_006.jpg;CLAHE;Canny;7104,56;0,1067;9,6154;0,0739;0,3225;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_CLAHE_Canny.jpg
+image_part_006.jpg;CLAHE;Directional;6633,9915;0,1766;9,9131;0,0306;0,4549;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_CLAHE_Directional.jpg
+image_part_006.jpg;CLAHE;Pruitt;5025,6167;0,4153;11,1189;0,0386;0,2928;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_CLAHE_Pruitt.jpg
+image_part_006.jpg;CLAHE;Harris;5637,2602;0,2373;10,6201;0,0229;0,2811;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_CLAHE_Harris.jpg
+image_part_006.jpg;CLAHE;FAST;8361,6116;0,0296;8,9079;0,0251;0,4269;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_CLAHE_FAST.jpg
+image_part_006.jpg;Dark channel;Canny;7965,0499;0,0039;9,1189;0,2462;0,4951;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Dark channel_Canny.jpg
+image_part_006.jpg;Dark channel;Directional;7777,6638;0;9,2223;0,2221;0,8218;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Dark channel_Directional.jpg
+image_part_006.jpg;Dark channel;Pruitt;7659,2351;0;9,2889;0,2669;0,9324;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Dark channel_Pruitt.jpg
+image_part_006.jpg;Dark channel;Harris;7910,8481;0,0011;9,1486;0,3619;0,4982;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Dark channel_Harris.jpg
+image_part_006.jpg;Dark channel;FAST;7911,3905;0,0007;9,1483;0,2348;0,502;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_006_Dark channel_FAST.jpg
+image_part_007.jpg;None;Canny;10335,0682;0,0271;7,9877;0,5258;0,4473;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_None_Canny.jpg
+image_part_007.jpg;None;Directional;8153,2708;0,0525;9,0175;0,5423;0,4647;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_None_Directional.jpg
+image_part_007.jpg;None;Pruitt;6091,7947;0,1642;10,2834;0,5434;0,3835;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_None_Pruitt.jpg
+image_part_007.jpg;None;Harris;10001,2884;0,0025;8,1302;0,1345;0,4847;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_None_Harris.jpg
+image_part_007.jpg;None;FAST;10161,1492;0,0035;8,0614;0,1892;0,4936;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_None_FAST.jpg
+image_part_007.jpg;White Balance;Canny;10343,4608;0,0269;7,9841;0,5254;0,4482;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_White Balance_Canny.jpg
+image_part_007.jpg;White Balance;Directional;8153,1479;0,053;9,0176;0,5392;0,4658;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_White Balance_Directional.jpg
+image_part_007.jpg;White Balance;Pruitt;6098,6704;0,164;10,2785;0,5376;0,3858;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_White Balance_Pruitt.jpg
+image_part_007.jpg;White Balance;Harris;10006,0694;0,0028;8,1282;0,1516;0,4841;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_White Balance_Harris.jpg
+image_part_007.jpg;White Balance;FAST;10172,4782;0,0037;8,0565;0,1973;0,4922;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_White Balance_FAST.jpg
+image_part_007.jpg;Histogram Equalization;Canny;10997,2586;0,0058;7,718;0,432;0,4926;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Histogram Equalization_Canny.jpg
+image_part_007.jpg;Histogram Equalization;Directional;8942,4276;0;8,6162;0,3894;0,5423;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Histogram Equalization_Directional.jpg
+image_part_007.jpg;Histogram Equalization;Pruitt;7899,8331;0;9,1546;0,4091;0,6505;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Histogram Equalization_Pruitt.jpg
+image_part_007.jpg;Histogram Equalization;Harris;10777,7503;0;7,8055;0,4091;0,5185;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Histogram Equalization_Harris.jpg
+image_part_007.jpg;Histogram Equalization;FAST;10729,7616;0;7,8249;0,2232;0,576;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Histogram Equalization_FAST.jpg
+image_part_007.jpg;Sharpen Filter;Canny;10816,7443;0,042;7,7898;0,3958;0,452;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Sharpen Filter_Canny.jpg
+image_part_007.jpg;Sharpen Filter;Directional;8292,3696;0,1061;8,944;0,2936;0,4724;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Sharpen Filter_Directional.jpg
+image_part_007.jpg;Sharpen Filter;Pruitt;6704,2392;0,2442;9,8673;0,3001;0,3805;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Sharpen Filter_Pruitt.jpg
+image_part_007.jpg;Sharpen Filter;Harris;11198,5566;0,0799;7,6392;0,3457;0,43;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Sharpen Filter_Harris.jpg
+image_part_007.jpg;Sharpen Filter;FAST;10342,218;0,0537;7,9847;0,2623;0,4285;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Sharpen Filter_FAST.jpg
+image_part_007.jpg;CLAHE;Canny;11084,1077;0,1062;7,6838;0,254;0,4019;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_CLAHE_Canny.jpg
+image_part_007.jpg;CLAHE;Directional;9026,6772;0,0948;8,5755;0,22;0,4881;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_CLAHE_Directional.jpg
+image_part_007.jpg;CLAHE;Pruitt;8574,7314;0,2114;8,7986;0,2254;0,4332;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_CLAHE_Pruitt.jpg
+image_part_007.jpg;CLAHE;Harris;8019,3712;0,2784;9,0894;0,2347;0,3222;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_CLAHE_Harris.jpg
+image_part_007.jpg;CLAHE;FAST;11232,9803;0;7,6259;0,1757;0,4946;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_CLAHE_FAST.jpg
+image_part_007.jpg;Dark channel;Canny;10829,414;0,0199;7,7848;0,406;0,4756;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Dark channel_Canny.jpg
+image_part_007.jpg;Dark channel;Directional;9494,81;0;8,3559;0,4101;0,6692;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Dark channel_Directional.jpg
+image_part_007.jpg;Dark channel;Pruitt;9157,9223;0;8,5128;0,415;0,6922;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Dark channel_Pruitt.jpg
+image_part_007.jpg;Dark channel;Harris;10208,9624;0,0086;8,041;0,3432;0,4684;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Dark channel_Harris.jpg
+image_part_007.jpg;Dark channel;FAST;10493,1522;0,0005;7,9217;0,2781;0,5199;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_007_Dark channel_FAST.jpg
+image_part_008.jpg;None;Canny;6561,6249;0,047;9,9607;0,3706;0,4363;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_None_Canny.jpg
+image_part_008.jpg;None;Directional;4747,0843;0,0818;11,3665;0,6002;0,4626;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_None_Directional.jpg
+image_part_008.jpg;None;Pruitt;3478,5393;0,2248;12,7168;0,5899;0,3791;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_None_Pruitt.jpg
+image_part_008.jpg;None;Harris;6362,8525;0,0353;10,0943;0,4962;0,4667;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_None_Harris.jpg
+image_part_008.jpg;None;FAST;6113,207;0,0048;10,2681;0,1878;0,5009;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_None_FAST.jpg
+image_part_008.jpg;White Balance;Canny;6554,4612;0,0469;9,9654;0,3723;0,4358;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_White Balance_Canny.jpg
+image_part_008.jpg;White Balance;Directional;4745,924;0,085;11,3676;0,5836;0,462;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_White Balance_Directional.jpg
+image_part_008.jpg;White Balance;Pruitt;3474,7071;0,2311;12,7216;0,574;0,3785;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_White Balance_Pruitt.jpg
+image_part_008.jpg;White Balance;Harris;6365,4427;0,0353;10,0925;0,4962;0,4668;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_White Balance_Harris.jpg
+image_part_008.jpg;White Balance;FAST;6133,1279;0,0053;10,254;0,1987;0,5001;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_White Balance_FAST.jpg
+image_part_008.jpg;Histogram Equalization;Canny;8588,7559;0;8,7915;0,1696;0,5594;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Histogram Equalization_Canny.jpg
+image_part_008.jpg;Histogram Equalization;Directional;6348,8296;0;10,1039;0,162;0,5843;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Histogram Equalization_Directional.jpg
+image_part_008.jpg;Histogram Equalization;Pruitt;7053,7079;0;9,6466;0,1405;0,7787;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Histogram Equalization_Pruitt.jpg
+image_part_008.jpg;Histogram Equalization;Harris;8539,3596;0;8,8166;0,1192;0,609;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Histogram Equalization_Harris.jpg
+image_part_008.jpg;Histogram Equalization;FAST;7509,565;0;9,3747;0,0973;0,6451;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Histogram Equalization_FAST.jpg
+image_part_008.jpg;Sharpen Filter;Canny;6943,4758;0,0635;9,715;0,3039;0,4445;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Sharpen Filter_Canny.jpg
+image_part_008.jpg;Sharpen Filter;Directional;5510,8366;0,1413;10,7186;0,219;0,4705;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Sharpen Filter_Directional.jpg
+image_part_008.jpg;Sharpen Filter;Pruitt;5318,1891;0,2725;10,8732;0,2094;0,3798;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Sharpen Filter_Pruitt.jpg
+image_part_008.jpg;Sharpen Filter;Harris;7406,8493;0,1009;9,4345;0,2862;0,4413;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Sharpen Filter_Harris.jpg
+image_part_008.jpg;Sharpen Filter;FAST;6769,6968;0,0702;9,8251;0,1832;0,4288;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Sharpen Filter_FAST.jpg
+image_part_008.jpg;CLAHE;Canny;8622,2676;0,1239;8,7746;0,1453;0,4052;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_CLAHE_Canny.jpg
+image_part_008.jpg;CLAHE;Directional;7002,7377;0,1029;9,6781;0,1384;0,4946;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_CLAHE_Directional.jpg
+image_part_008.jpg;CLAHE;Pruitt;9305,0048;0,1703;8,4436;0,1296;0,4582;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_CLAHE_Pruitt.jpg
+image_part_008.jpg;CLAHE;Harris;5991,7319;0,2451;10,3553;0,1919;0,355;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_CLAHE_Harris.jpg
+image_part_008.jpg;CLAHE;FAST;8130,3126;0,0074;9,0297;0,0822;0,5096;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_CLAHE_FAST.jpg
+image_part_008.jpg;Dark channel;Canny;6545,99;0,0425;9,9711;0,3738;0,4398;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Dark channel_Canny.jpg
+image_part_008.jpg;Dark channel;Directional;5557,4858;0,0544;10,682;0,4275;0,6723;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Dark channel_Directional.jpg
+image_part_008.jpg;Dark channel;Pruitt;5269,635;0,1217;10,913;0,3926;0,6938;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Dark channel_Pruitt.jpg
+image_part_008.jpg;Dark channel;Harris;6218,1065;0,0227;10,1942;0,4709;0,4496;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Dark channel_Harris.jpg
+image_part_008.jpg;Dark channel;FAST;6470,6196;0,0073;10,0213;0,2154;0,5297;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_008_Dark channel_FAST.jpg
+image_part_009.jpg;None;Canny;5887,5314;0,0129;10,4315;0,3103;0,4543;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_None_Canny.jpg
+image_part_009.jpg;None;Directional;4794,9245;0,0502;11,323;0,213;0,4184;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_None_Directional.jpg
+image_part_009.jpg;None;Pruitt;3987,579;0,1363;12,1237;0,4126;0,2523;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_None_Pruitt.jpg
+image_part_009.jpg;None;Harris;5814,8306;0,0003;10,4854;0,0671;0,4945;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_None_Harris.jpg
+image_part_009.jpg;None;FAST;5804,3628;0,0003;10,4933;0,0313;0,4916;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_None_FAST.jpg
+image_part_009.jpg;White Balance;Canny;5886,7074;0,013;10,4321;0,3106;0,4541;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_White Balance_Canny.jpg
+image_part_009.jpg;White Balance;Directional;4768,4323;0,0539;11,347;0,2367;0,4163;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_White Balance_Directional.jpg
+image_part_009.jpg;White Balance;Pruitt;3934,2981;0,1463;12,1821;0,4418;0,2485;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_White Balance_Pruitt.jpg
+image_part_009.jpg;White Balance;Harris;5814,8978;0,0003;10,4854;0,0675;0,4945;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_White Balance_Harris.jpg
+image_part_009.jpg;White Balance;FAST;5804,5868;0,0004;10,4931;0,0349;0,4909;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_White Balance_FAST.jpg
+image_part_009.jpg;Histogram Equalization;Canny;15817,5094;0;6,1394;0,0172;0,6961;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Histogram Equalization_Canny.jpg
+image_part_009.jpg;Histogram Equalization;Directional;8523,5046;0;8,8246;0,0054;0,5891;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Histogram Equalization_Directional.jpg
+image_part_009.jpg;Histogram Equalization;Pruitt;11845,7101;0;7,3952;0,0043;0,7923;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Histogram Equalization_Pruitt.jpg
+image_part_009.jpg;Histogram Equalization;Harris;18625,5155;0;5,4297;0,0018;0,7447;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Histogram Equalization_Harris.jpg
+image_part_009.jpg;Histogram Equalization;FAST;9040,6717;0;8,5688;0,0028;0,6845;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Histogram Equalization_FAST.jpg
+image_part_009.jpg;Sharpen Filter;Canny;5891,2602;0,0207;10,4287;0,2574;0,4442;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Sharpen Filter_Canny.jpg
+image_part_009.jpg;Sharpen Filter;Directional;4411,864;0,1732;11,6846;0,1511;0,4325;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Sharpen Filter_Directional.jpg
+image_part_009.jpg;Sharpen Filter;Pruitt;2874,9749;0,4414;13,5445;0,1683;0,2333;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Sharpen Filter_Pruitt.jpg
+image_part_009.jpg;Sharpen Filter;Harris;5773,2327;0,0178;10,5166;0,1752;0,4278;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Sharpen Filter_Harris.jpg
+image_part_009.jpg;Sharpen Filter;FAST;5786,555;0,0428;10,5066;0,0943;0,3678;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Sharpen Filter_FAST.jpg
+image_part_009.jpg;CLAHE;Canny;5477,1811;0,1312;10,7452;0,1019;0,3339;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_CLAHE_Canny.jpg
+image_part_009.jpg;CLAHE;Directional;5181,8964;0,1804;10,9859;0,0577;0,4673;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_CLAHE_Directional.jpg
+image_part_009.jpg;CLAHE;Pruitt;4431,0822;0,3876;11,6657;0,0717;0,3601;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_CLAHE_Pruitt.jpg
+image_part_009.jpg;CLAHE;Harris;4380,4211;0,2872;11,7156;0,0938;0,2937;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_CLAHE_Harris.jpg
+image_part_009.jpg;CLAHE;FAST;6567,4026;0,0239;9,9569;0,031;0,4658;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_CLAHE_FAST.jpg
+image_part_009.jpg;Dark channel;Canny;6093,0279;0,0028;10,2825;0,135;0,4958;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Dark channel_Canny.jpg
+image_part_009.jpg;Dark channel;Directional;6071,4141;0;10,2979;0,1282;0,7782;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Dark channel_Directional.jpg
+image_part_009.jpg;Dark channel;Pruitt;6197,9562;0;10,2083;0,1302;0,8746;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Dark channel_Pruitt.jpg
+image_part_009.jpg;Dark channel;Harris;6085,7431;0,0009;10,2877;0,1109;0,5034;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Dark channel_Harris.jpg
+image_part_009.jpg;Dark channel;FAST;5920,2665;0,0003;10,4074;0,0445;0,5106;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_009_Dark channel_FAST.jpg
+image_part_010.jpg;None;Canny;24197,9683;0;4,293;0,3187;0,5472;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_None_Canny.jpg
+image_part_010.jpg;None;Directional;19969,4869;0;5,1271;0,3118;0,5075;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_None_Directional.jpg
+image_part_010.jpg;None;Pruitt;14780,6171;0;6,4339;0,3024;0,5267;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_None_Pruitt.jpg
+image_part_010.jpg;None;Harris;24817,9282;0;4,1831;0,2044;0,4672;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_None_Harris.jpg
+image_part_010.jpg;None;FAST;24273,0485;0;4,2796;0,222;0,473;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_None_FAST.jpg
+image_part_010.jpg;White Balance;Canny;24198,3474;0;4,2929;0,3187;0,5473;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_White Balance_Canny.jpg
+image_part_010.jpg;White Balance;Directional;19974,6528;0;5,126;0,3118;0,5075;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_White Balance_Directional.jpg
+image_part_010.jpg;White Balance;Pruitt;14782,7338;0;6,4333;0,3024;0,5262;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_White Balance_Pruitt.jpg
+image_part_010.jpg;White Balance;Harris;24815,9599;0;4,1835;0,2045;0,4671;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_White Balance_Harris.jpg
+image_part_010.jpg;White Balance;FAST;24282,8635;0;4,2778;0,2218;0,4726;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_White Balance_FAST.jpg
+image_part_010.jpg;Histogram Equalization;Canny;22872,4643;0,0067;4,5377;0,2824;0,4893;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Histogram Equalization_Canny.jpg
+image_part_010.jpg;Histogram Equalization;Directional;18734,6639;0,0212;5,4043;0,2774;0,4776;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Histogram Equalization_Directional.jpg
+image_part_010.jpg;Histogram Equalization;Pruitt;11931,4562;0,0528;7,3639;0,268;0,4125;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Histogram Equalization_Pruitt.jpg
+image_part_010.jpg;Histogram Equalization;Harris;23779,784;0,013;4,3687;0,1768;0,4435;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Histogram Equalization_Harris.jpg
+image_part_010.jpg;Histogram Equalization;FAST;23345,7893;0,0104;4,4487;0,2146;0,4288;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Histogram Equalization_FAST.jpg
+image_part_010.jpg;Sharpen Filter;Canny;23339,2324;0;4,4499;0,2798;0,5183;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Sharpen Filter_Canny.jpg
+image_part_010.jpg;Sharpen Filter;Directional;18825,0011;0;5,3835;0,2633;0,51;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Sharpen Filter_Directional.jpg
+image_part_010.jpg;Sharpen Filter;Pruitt;12663,6166;0;7,1052;0,2588;0,5243;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Sharpen Filter_Pruitt.jpg
+image_part_010.jpg;Sharpen Filter;Harris;22342,0354;0;4,6396;0,2628;0,4832;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Sharpen Filter_Harris.jpg
+image_part_010.jpg;Sharpen Filter;FAST;23391,3485;0;4,4403;0,2464;0,504;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Sharpen Filter_FAST.jpg
+image_part_010.jpg;CLAHE;Canny;21272,5871;0,0545;4,8526;0,2394;0,4533;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_CLAHE_Canny.jpg
+image_part_010.jpg;CLAHE;Directional;17453,3305;0,0813;5,712;0,2337;0,4695;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_CLAHE_Directional.jpg
+image_part_010.jpg;CLAHE;Pruitt;9194,7682;0,2488;8,4954;0,2269;0,362;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_CLAHE_Pruitt.jpg
+image_part_010.jpg;CLAHE;Harris;16332,4968;0,2795;6,0003;0,1455;0,3078;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_CLAHE_Harris.jpg
+image_part_010.jpg;CLAHE;FAST;22180,6528;0,0468;4,6711;0,2193;0,4385;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_CLAHE_FAST.jpg
+image_part_010.jpg;Dark channel;Canny;23334,6448;0;4,4508;0,2769;0,5045;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Dark channel_Canny.jpg
+image_part_010.jpg;Dark channel;Directional;20115,2516;0;5,0955;0,2823;0,539;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Dark channel_Directional.jpg
+image_part_010.jpg;Dark channel;Pruitt;15050,8665;0;6,3552;0,2739;0,5252;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Dark channel_Pruitt.jpg
+image_part_010.jpg;Dark channel;Harris;23817,1006;0,0034;4,3619;0,1601;0,4129;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Dark channel_Harris.jpg
+image_part_010.jpg;Dark channel;FAST;23997,5882;0;4,3291;0,2092;0,4697;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_010_Dark channel_FAST.jpg
+image_part_011.jpg;None;Canny;22100,9773;0;4,6867;0,3003;0,4893;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_None_Canny.jpg
+image_part_011.jpg;None;Directional;18143,7247;0;5,5435;0,2911;0,4883;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_None_Directional.jpg
+image_part_011.jpg;None;Pruitt;14345,2348;0;6,5637;0,2892;0,4477;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_None_Pruitt.jpg
+image_part_011.jpg;None;Harris;21840,9877;0;4,7381;0,202;0,4252;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_None_Harris.jpg
+image_part_011.jpg;None;FAST;22008,0928;0;4,705;0,2535;0,4573;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_None_FAST.jpg
+image_part_011.jpg;White Balance;Canny;22104,5951;0;4,686;0,3003;0,4895;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_White Balance_Canny.jpg
+image_part_011.jpg;White Balance;Directional;18153,6824;0;5,5412;0,2912;0,4887;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_White Balance_Directional.jpg
+image_part_011.jpg;White Balance;Pruitt;14366,6841;0;6,5572;0,2894;0,4485;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_White Balance_Pruitt.jpg
+image_part_011.jpg;White Balance;Harris;21848,5932;0;4,7366;0,2023;0,4252;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_White Balance_Harris.jpg
+image_part_011.jpg;White Balance;FAST;22013,9149;0;4,7038;0,2535;0,4577;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_White Balance_FAST.jpg
+image_part_011.jpg;Histogram Equalization;Canny;22005,7044;0;4,7055;0,2965;0,4914;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Histogram Equalization_Canny.jpg
+image_part_011.jpg;Histogram Equalization;Directional;18086,6861;0;5,5572;0,2916;0,4914;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Histogram Equalization_Directional.jpg
+image_part_011.jpg;Histogram Equalization;Pruitt;14222,4384;0;6,6011;0,2905;0,4603;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Histogram Equalization_Pruitt.jpg
+image_part_011.jpg;Histogram Equalization;Harris;21781,161;0;4,75;0,2072;0,4208;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Histogram Equalization_Harris.jpg
+image_part_011.jpg;Histogram Equalization;FAST;21794,9542;0;4,7472;0,2535;0,4614;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Histogram Equalization_FAST.jpg
+image_part_011.jpg;Sharpen Filter;Canny;21865,607;0;4,7332;0,2829;0,4841;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Sharpen Filter_Canny.jpg
+image_part_011.jpg;Sharpen Filter;Directional;17581,6066;0;5,6802;0,2638;0,4953;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Sharpen Filter_Directional.jpg
+image_part_011.jpg;Sharpen Filter;Pruitt;13720,0238;0;6,7573;0,265;0,4583;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Sharpen Filter_Pruitt.jpg
+image_part_011.jpg;Sharpen Filter;Harris;21407,2135;0;4,8252;0,2634;0,4103;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Sharpen Filter_Harris.jpg
+image_part_011.jpg;Sharpen Filter;FAST;21329,346;0;4,841;0,261;0,5041;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Sharpen Filter_FAST.jpg
+image_part_011.jpg;CLAHE;Canny;20273,3096;0,0369;5,0616;0,2554;0,4588;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_CLAHE_Canny.jpg
+image_part_011.jpg;CLAHE;Directional;16576,4072;0,0659;5,9359;0,2442;0,4776;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_CLAHE_Directional.jpg
+image_part_011.jpg;CLAHE;Pruitt;10998,1711;0,1684;7,7176;0,247;0,391;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_CLAHE_Pruitt.jpg
+image_part_011.jpg;CLAHE;Harris;15322,8413;0,2758;6,2774;0,1754;0,3073;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_CLAHE_Harris.jpg
+image_part_011.jpg;CLAHE;FAST;20549,3647;0,0263;5,0028;0,251;0,4619;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_CLAHE_FAST.jpg
+image_part_011.jpg;Dark channel;Canny;21753,7305;0;4,7555;0,2826;0,4683;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Dark channel_Canny.jpg
+image_part_011.jpg;Dark channel;Directional;18482,4192;0;5,4632;0,2781;0,5275;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Dark channel_Directional.jpg
+image_part_011.jpg;Dark channel;Pruitt;15058,9358;0;6,3529;0,2776;0,4702;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Dark channel_Pruitt.jpg
+image_part_011.jpg;Dark channel;Harris;21398,6075;0,0082;4,8269;0,1971;0,3935;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Dark channel_Harris.jpg
+image_part_011.jpg;Dark channel;FAST;21903,7861;0;4,7256;0,245;0,4568;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_011_Dark channel_FAST.jpg
+image_part_012.jpg;None;Canny;33352,5356;0;2,8995;0,3637;0,6216;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_None_Canny.jpg
+image_part_012.jpg;None;Directional;28640,9675;0;3,5609;0,344;0,532;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_None_Directional.jpg
+image_part_012.jpg;None;Pruitt;22962,5557;0;4,5206;0,3564;0,6294;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_None_Pruitt.jpg
+image_part_012.jpg;None;Harris;33736,757;0;2,8498;0,2263;0,5106;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_None_Harris.jpg
+image_part_012.jpg;None;FAST;33617,4976;0;2,8651;0,2712;0,5484;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_None_FAST.jpg
+image_part_012.jpg;White Balance;Canny;33349,8104;0;2,8999;0,3637;0,6217;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_White Balance_Canny.jpg
+image_part_012.jpg;White Balance;Directional;28629,7776;0;3,5626;0,3438;0,5321;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_White Balance_Directional.jpg
+image_part_012.jpg;White Balance;Pruitt;22938,1522;0;4,5252;0,3563;0,6291;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_White Balance_Pruitt.jpg
+image_part_012.jpg;White Balance;Harris;33734,0313;0;2,8501;0,2302;0,511;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_White Balance_Harris.jpg
+image_part_012.jpg;White Balance;FAST;33614,4887;0;2,8655;0,2711;0,5482;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_White Balance_FAST.jpg
+image_part_012.jpg;Histogram Equalization;Canny;30719,1636;0,0046;3,2567;0,2555;0,4896;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Histogram Equalization_Canny.jpg
+image_part_012.jpg;Histogram Equalization;Directional;25716,5185;0,0312;4,0287;0,2101;0,4571;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Histogram Equalization_Directional.jpg
+image_part_012.jpg;Histogram Equalization;Pruitt;16028,3573;0,0951;6,0819;0,2227;0,3704;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Histogram Equalization_Pruitt.jpg
+image_part_012.jpg;Histogram Equalization;Harris;32425,02;0,0085;3,022;0,1611;0,4536;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Histogram Equalization_Harris.jpg
+image_part_012.jpg;Histogram Equalization;FAST;31594,521;0,0074;3,1347;0,171;0,4198;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Histogram Equalization_FAST.jpg
+image_part_012.jpg;Sharpen Filter;Canny;32599,3736;0;2,9987;0,3186;0,6058;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Sharpen Filter_Canny.jpg
+image_part_012.jpg;Sharpen Filter;Directional;25442,8788;0;4,0751;0,2538;0,5231;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Sharpen Filter_Directional.jpg
+image_part_012.jpg;Sharpen Filter;Pruitt;16244,8914;0;6,0236;0,2659;0,601;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Sharpen Filter_Pruitt.jpg
+image_part_012.jpg;Sharpen Filter;Harris;31882,8124;0;3,0952;0,2976;0,5699;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Sharpen Filter_Harris.jpg
+image_part_012.jpg;Sharpen Filter;FAST;31799,0758;0;3,1067;0,245;0,5235;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Sharpen Filter_FAST.jpg
+image_part_012.jpg;CLAHE;Canny;28068,1739;0,0263;3,6487;0,2038;0,4725;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_CLAHE_Canny.jpg
+image_part_012.jpg;CLAHE;Directional;23378,2844;0,0659;4,4427;0,1683;0,4685;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_CLAHE_Directional.jpg
+image_part_012.jpg;CLAHE;Pruitt;11053,3673;0,2123;7,6959;0,1727;0,3701;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_CLAHE_Pruitt.jpg
+image_part_012.jpg;CLAHE;Harris;23584,9672;0,2017;4,4045;0,0889;0,326;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_CLAHE_Harris.jpg
+image_part_012.jpg;CLAHE;FAST;30567,1768;0,0142;3,2783;0,178;0,4496;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_CLAHE_FAST.jpg
+image_part_012.jpg;Dark channel;Canny;31396,376;0;3,162;0,2639;0,5461;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Dark channel_Canny.jpg
+image_part_012.jpg;Dark channel;Directional;27254,3473;0;3,7764;0,2357;0,5457;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Dark channel_Directional.jpg
+image_part_012.jpg;Dark channel;Pruitt;19652,511;0;5,1966;0,2468;0,558;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Dark channel_Pruitt.jpg
+image_part_012.jpg;Dark channel;Harris;31255,3196;0,0094;3,1816;0,0893;0,3891;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Dark channel_Harris.jpg
+image_part_012.jpg;Dark channel;FAST;32251,808;0;3,0453;0,191;0,4849;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_012_Dark channel_FAST.jpg
+image_part_013.jpg;None;Canny;24802,8811;0;4,1858;0,2725;0,5272;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_None_Canny.jpg
+image_part_013.jpg;None;Directional;20456,9418;0;5,0224;0,2448;0,4918;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_None_Directional.jpg
+image_part_013.jpg;None;Pruitt;14706,0063;0;6,4559;0,2612;0,4734;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_None_Pruitt.jpg
+image_part_013.jpg;None;Harris;25295,3404;0;4,1004;0,1993;0,4332;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_None_Harris.jpg
+image_part_013.jpg;None;FAST;25154,1253;0;4,1247;0,1939;0,4646;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_None_FAST.jpg
+image_part_013.jpg;White Balance;Canny;24804,1322;0;4,1856;0,2726;0,5272;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_White Balance_Canny.jpg
+image_part_013.jpg;White Balance;Directional;20463,2963;0;5,021;0,245;0,4915;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_White Balance_Directional.jpg
+image_part_013.jpg;White Balance;Pruitt;14713,9078;0;6,4535;0,2613;0,4731;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_White Balance_Pruitt.jpg
+image_part_013.jpg;White Balance;Harris;25287,8529;0;4,1017;0,199;0,433;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_White Balance_Harris.jpg
+image_part_013.jpg;White Balance;FAST;25155,8627;0;4,1244;0,1939;0,4646;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_White Balance_FAST.jpg
+image_part_013.jpg;Histogram Equalization;Canny;23296,2;0,0112;4,458;0,2344;0,4621;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Histogram Equalization_Canny.jpg
+image_part_013.jpg;Histogram Equalization;Directional;19264,8292;0,0272;5,2832;0,2124;0,467;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Histogram Equalization_Directional.jpg
+image_part_013.jpg;Histogram Equalization;Pruitt;11909,5035;0,0631;7,3719;0,2256;0,3772;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Histogram Equalization_Pruitt.jpg
+image_part_013.jpg;Histogram Equalization;Harris;23909,1089;0,0237;4,3452;0,161;0,3906;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Histogram Equalization_Harris.jpg
+image_part_013.jpg;Histogram Equalization;FAST;24100,3009;0,005;4,3106;0,1844;0,4235;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Histogram Equalization_FAST.jpg
+image_part_013.jpg;Sharpen Filter;Canny;23796,7441;0;4,3656;0,2315;0,5009;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Sharpen Filter_Canny.jpg
+image_part_013.jpg;Sharpen Filter;Directional;19080,4197;0;5,3249;0,2047;0,4932;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Sharpen Filter_Directional.jpg
+image_part_013.jpg;Sharpen Filter;Pruitt;12293,4856;0;7,2341;0,2107;0,4608;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Sharpen Filter_Pruitt.jpg
+image_part_013.jpg;Sharpen Filter;Harris;21503,8142;0,0006;4,8056;0,213;0,3982;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Sharpen Filter_Harris.jpg
+image_part_013.jpg;Sharpen Filter;FAST;24367,0982;0;4,2628;0,2028;0,5001;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Sharpen Filter_FAST.jpg
+image_part_013.jpg;CLAHE;Canny;21797,696;0,0459;4,7467;0,19;0,4558;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_CLAHE_Canny.jpg
+image_part_013.jpg;CLAHE;Directional;18051,2591;0,073;5,5657;0,1712;0,4677;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_CLAHE_Directional.jpg
+image_part_013.jpg;CLAHE;Pruitt;9619,2521;0,2086;8,2994;0,1793;0,3662;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_CLAHE_Pruitt.jpg
+image_part_013.jpg;CLAHE;Harris;16785,0935;0,2755;5,8816;0,1175;0,2933;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_CLAHE_Harris.jpg
+image_part_013.jpg;CLAHE;FAST;23047,4687;0,0345;4,5046;0,172;0,4575;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_CLAHE_FAST.jpg
+image_part_013.jpg;Dark channel;Canny;23497,419;0;4,4206;0,2187;0,4646;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Dark channel_Canny.jpg
+image_part_013.jpg;Dark channel;Directional;19973,6104;0;5,1262;0,2035;0,4997;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Dark channel_Directional.jpg
+image_part_013.jpg;Dark channel;Pruitt;13641,7511;0;6,7821;0,2164;0,4305;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Dark channel_Pruitt.jpg
+image_part_013.jpg;Dark channel;Harris;23806,9588;0,0179;4,3638;0,12;0,3498;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_013_Dark channel_Harris.jpg
+Image_Name;Preprocessing;Filter;MSE;SSIM;PSNR;FOM;AUC-ROC;Save_Path
+image_part_014.jpg;None;Canny;26175,9059;0;3,9518;0,2664;0,4925;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_None_Canny.jpg
+image_part_014.jpg;None;Directional;21828,5121;0;4,7406;0,26;0,4751;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_None_Directional.jpg
+image_part_014.jpg;None;Pruitt;17028,2768;0;5,8191;0,2519;0,4373;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_None_Pruitt.jpg
+image_part_014.jpg;None;Harris;26182,5925;0;3,9507;0,1883;0,4594;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_None_Harris.jpg
+image_part_014.jpg;None;FAST;26205,67;0;3,9469;0,2127;0,4602;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_None_FAST.jpg
+image_part_014.jpg;White Balance;Canny;26179,5422;0;3,9512;0,2665;0,4926;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_White Balance_Canny.jpg
+image_part_014.jpg;White Balance;Directional;21832,992;0;4,7397;0,26;0,4755;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_White Balance_Directional.jpg
+image_part_014.jpg;White Balance;Pruitt;17039,1102;0;5,8163;0,252;0,4378;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_White Balance_Pruitt.jpg
+image_part_014.jpg;White Balance;Harris;26183,5114;0;3,9505;0,1887;0,4594;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_White Balance_Harris.jpg
+image_part_014.jpg;White Balance;FAST;26208,6195;0;3,9464;0,2128;0,4604;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_White Balance_FAST.jpg
+image_part_014.jpg;Histogram Equalization;Canny;25083,7107;0;4,1369;0,2265;0,4615;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Histogram Equalization_Canny.jpg
+image_part_014.jpg;Histogram Equalization;Directional;20206,6448;0,0193;5,0759;0,2073;0,4607;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Histogram Equalization_Directional.jpg
+image_part_014.jpg;Histogram Equalization;Pruitt;13213,5482;0,0554;6,9206;0,2041;0,373;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Histogram Equalization_Pruitt.jpg
+image_part_014.jpg;Histogram Equalization;Harris;25048,6572;0,0152;4,143;0,1687;0,4344;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Histogram Equalization_Harris.jpg
+image_part_014.jpg;Histogram Equalization;FAST;25122,454;0,0025;4,1302;0,1727;0,4084;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Histogram Equalization_FAST.jpg
+image_part_014.jpg;Sharpen Filter;Canny;25736,5287;0;4,0253;0,2535;0,4926;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Sharpen Filter_Canny.jpg
+image_part_014.jpg;Sharpen Filter;Directional;19978,3797;0;5,1252;0,2116;0,4818;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Sharpen Filter_Directional.jpg
+image_part_014.jpg;Sharpen Filter;Pruitt;13108,2664;0;6,9554;0,2147;0,4422;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Sharpen Filter_Pruitt.jpg
+image_part_014.jpg;Sharpen Filter;Harris;24836,3528;0;4,1799;0,2231;0,4337;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Sharpen Filter_Harris.jpg
+image_part_014.jpg;Sharpen Filter;FAST;25135,4439;0;4,1279;0,2024;0,4878;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Sharpen Filter_FAST.jpg
+image_part_014.jpg;CLAHE;Canny;22890,6322;0,0414;4,5342;0,1802;0,4225;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_CLAHE_Canny.jpg
+image_part_014.jpg;CLAHE;Directional;18622,0741;0,074;5,4305;0,1612;0,4546;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_CLAHE_Directional.jpg
+image_part_014.jpg;CLAHE;Pruitt;9868,0043;0,2368;8,1885;0,159;0,327;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_CLAHE_Pruitt.jpg
+image_part_014.jpg;CLAHE;Harris;17973,4628;0,2526;5,5845;0,1097;0,3145;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_CLAHE_Harris.jpg
+image_part_014.jpg;CLAHE;FAST;24004,1435;0,0254;4,3279;0,1533;0,4371;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_CLAHE_FAST.jpg
+image_part_014.jpg;Dark channel;Canny;25428,3158;0;4,0776;0,2336;0,4622;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Dark channel_Canny.jpg
+image_part_014.jpg;Dark channel;Directional;22343,804;0;4,6392;0,2319;0,542;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Dark channel_Directional.jpg
+image_part_014.jpg;Dark channel;Pruitt;17993,1032;0;5,5797;0,2223;0,5007;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Dark channel_Pruitt.jpg
+image_part_014.jpg;Dark channel;Harris;25093,7268;0,0091;4,1352;0,1351;0,4031;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_014_Dark channel_Harris.jpg
+image_part_015.jpg;None;Canny;43111,8881;0;1,7848;0,1542;0,6551;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Canny.jpg
+image_part_015.jpg;None;Directional;38376,2742;0;2,2902;0,0699;0,5213;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Directional.jpg
+image_part_015.jpg;None;Pruitt;31764,0088;0;3,1115;0,1129;0,6978;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Pruitt.jpg
+image_part_015.jpg;None;Harris;43731,8942;0;1,7228;0,0447;0,5575;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Harris.jpg
+image_part_015.jpg;None;FAST;43517,6852;0;1,7441;0,0421;0,5849;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_FAST.jpg
+image_part_015.jpg;White Balance;Canny;43109,8631;0;1,785;0,1542;0,6529;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Canny.jpg
+image_part_015.jpg;White Balance;Directional;38334,0642;0;2,295;0,0688;0,5199;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Directional.jpg
+image_part_015.jpg;White Balance;Pruitt;31675,5525;0;3,1236;0,1135;0,6941;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Pruitt.jpg
+image_part_015.jpg;None;Canny;43111,8881;0;1,7848;0,1542;0,6551;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Canny.jpg
+image_part_015.jpg;None;Directional;38376,2742;0;2,2902;0,0699;0,5213;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Directional.jpg
+image_part_015.jpg;None;Pruitt;31764,0088;0;3,1115;0,1129;0,6978;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Pruitt.jpg
+image_part_015.jpg;None;Harris;43731,8942;0;1,7228;0,0447;0,5575;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_Harris.jpg
+image_part_015.jpg;None;FAST;43517,6852;0;1,7441;0,0421;0,5849;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_None_FAST.jpg
+image_part_015.jpg;White Balance;Canny;43109,8631;0;1,785;0,1542;0,6529;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Canny.jpg
+image_part_015.jpg;White Balance;Directional;38334,0642;0;2,295;0,0688;0,5199;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Directional.jpg
+image_part_015.jpg;White Balance;Pruitt;31675,5525;0;3,1236;0,1135;0,6941;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Pruitt.jpg
+image_part_015.jpg;White Balance;Harris;43724,1402;0;1,7236;0,045;0,5584;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_Harris.jpg
+image_part_015.jpg;White Balance;FAST;43508,0115;0;1,7451;0,0423;0,5846;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_White Balance_FAST.jpg
+image_part_015.jpg;Histogram Equalization;Canny;35698,3262;0,0014;2,6043;0,044;0,5587;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Histogram Equalization_Canny.jpg
+image_part_015.jpg;Histogram Equalization;Directional;28919,0701;0,0069;3,519;0,0325;0,4712;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Histogram Equalization_Directional.jpg
+image_part_015.jpg;Histogram Equalization;Pruitt;10247,5811;0,0176;8,0246;0,0368;0,5317;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Histogram Equalization_Pruitt.jpg
+image_part_015.jpg;Histogram Equalization;Harris;30583,7047;0,0072;3,2759;0,0345;0,5142;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Histogram Equalization_Harris.jpg
+image_part_015.jpg;Histogram Equalization;FAST;37861,5429;0;2,3488;0,0312;0,4815;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Histogram Equalization_FAST.jpg
+image_part_015.jpg;Sharpen Filter;Canny;42278,8307;0;1,8696;0,1079;0,6727;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Sharpen Filter_Canny.jpg
+image_part_015.jpg;Sharpen Filter;Directional;31717,6223;0;3,1178;0,0397;0,5089;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Sharpen Filter_Directional.jpg
+image_part_015.jpg;Sharpen Filter;Pruitt;17149,4598;0;5,7883;0,0501;0,6283;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Sharpen Filter_Pruitt.jpg
+image_part_015.jpg;Sharpen Filter;Harris;41015,899;0;2,0013;0,0488;0,6024;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Sharpen Filter_Harris.jpg
+image_part_015.jpg;Sharpen Filter;FAST;40321,1349;0;2,0755;0,0435;0,5237;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Sharpen Filter_FAST.jpg
+image_part_015.jpg;CLAHE;Canny;34351,818;0,0121;2,7713;0,0413;0,5518;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_CLAHE_Canny.jpg
+image_part_015.jpg;CLAHE;Directional;28589,5675;0,0212;3,5687;0,0335;0,4888;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_CLAHE_Directional.jpg
+image_part_015.jpg;CLAHE;Pruitt;9617,8128;0,0868;8,3;0,0378;0,557;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_CLAHE_Pruitt.jpg
+image_part_015.jpg;CLAHE;Harris;30087,5445;0,0728;3,3469;0,035;0,554;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_CLAHE_Harris.jpg
+image_part_015.jpg;CLAHE;FAST;38107,5105;0,0063;2,3207;0,033;0,4951;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_CLAHE_FAST.jpg
+image_part_015.jpg;Dark channel;Canny;38280,9411;0;2,301;0,0474;0,5823;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Dark channel_Canny.jpg
+image_part_015.jpg;Dark channel;Directional;33343,3365;0;2,9007;0,0309;0,4986;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Dark channel_Directional.jpg
+image_part_015.jpg;Dark channel;Pruitt;20179,5378;0;5,0817;0,0419;0,5613;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Dark channel_Pruitt.jpg
+image_part_015.jpg;Dark channel;Harris;36425,4905;0;2,5167;0,0219;0,4595;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Dark channel_Harris.jpg
+image_part_015.jpg;Dark channel;FAST;40079,6107;0;2,1016;0,0326;0,5076;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_015_Dark channel_FAST.jpg
+image_part_016.jpg;None;Canny;32504,8512;0;3,0113;0,1875;0,5935;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_None_Canny.jpg
+image_part_016.jpg;None;Directional;27361,2452;0;3,7594;0,1728;0,5219;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_None_Directional.jpg
+image_part_016.jpg;None;Pruitt;20497,6188;0;5,0138;0,1744;0,5991;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_None_Pruitt.jpg
+image_part_016.jpg;None;Harris;33506,8306;0;2,8795;0,1485;0,5134;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_None_Harris.jpg
+image_part_016.jpg;None;FAST;32706,5689;0;2,9845;0,0863;0,5021;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_None_FAST.jpg
+image_part_016.jpg;White Balance;Canny;32490,9098;0;3,0132;0,1862;0,5922;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_White Balance_Canny.jpg
+image_part_016.jpg;White Balance;Directional;27348,2439;0;3,7615;0,1723;0,5214;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_White Balance_Directional.jpg
+image_part_016.jpg;White Balance;Pruitt;20468,523;0;5,0199;0,1737;0,5972;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_White Balance_Pruitt.jpg
+image_part_016.jpg;White Balance;Harris;33499,2348;0;2,8805;0,1535;0,5133;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_White Balance_Harris.jpg
+image_part_016.jpg;White Balance;FAST;32700,9318;0;2,9852;0,0861;0,502;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_White Balance_FAST.jpg
+image_part_016.jpg;Histogram Equalization;Canny;27789,9316;0,0534;3,6919;0,0653;0,4378;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Histogram Equalization_Canny.jpg
+image_part_016.jpg;Histogram Equalization;Directional;22476,5899;0,0918;4,6135;0,0561;0,4268;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Histogram Equalization_Directional.jpg
+image_part_016.jpg;Histogram Equalization;Pruitt;9282,2353;0,3261;8,4543;0,0542;0,3143;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Histogram Equalization_Pruitt.jpg
+image_part_016.jpg;Histogram Equalization;Harris;26979,1057;0,0711;3,8205;0,0505;0,41;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Histogram Equalization_Harris.jpg
+image_part_016.jpg;Histogram Equalization;FAST;29461,5728;0,0282;3,4382;0,0419;0,3929;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Histogram Equalization_FAST.jpg
+image_part_016.jpg;Sharpen Filter;Canny;31051,1573;0;3,21;0,1295;0,5813;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Sharpen Filter_Canny.jpg
+image_part_016.jpg;Sharpen Filter;Directional;23340,6247;0;4,4497;0,0927;0,5074;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Sharpen Filter_Directional.jpg
+image_part_016.jpg;Sharpen Filter;Pruitt;11492,9075;0;7,5265;0,0932;0,5401;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Sharpen Filter_Pruitt.jpg
+image_part_016.jpg;Sharpen Filter;Harris;28294,0289;0;3,6139;0,0955;0,5093;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Sharpen Filter_Harris.jpg
+image_part_016.jpg;Sharpen Filter;FAST;30588,2323;0;3,2753;0,0784;0,4891;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Sharpen Filter_FAST.jpg
+image_part_016.jpg;CLAHE;Canny;25836,7464;0,0654;4,0084;0,0632;0,4358;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_CLAHE_Canny.jpg
+image_part_016.jpg;CLAHE;Directional;21482,9691;0,0839;4,8099;0,0573;0,4546;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_CLAHE_Directional.jpg
+image_part_016.jpg;CLAHE;Pruitt;7207,5237;0,3307;9,5529;0,0578;0,3505;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_CLAHE_Pruitt.jpg
+image_part_016.jpg;CLAHE;Harris;20234,6636;0,2188;5,0698;0,0433;0,3855;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_CLAHE_Harris.jpg
+image_part_016.jpg;CLAHE;FAST;29029,0154;0,0361;3,5025;0,0512;0,417;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_CLAHE_FAST.jpg
+image_part_016.jpg;Dark channel;Canny;32071,2776;0;3,0696;0,1411;0,555;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Dark channel_Canny.jpg
+image_part_016.jpg;Dark channel;Directional;30440,6983;0;3,2963;0,1405;0,6178;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Dark channel_Directional.jpg
+image_part_016.jpg;Dark channel;Pruitt;26922,6694;0;3,8296;0,1356;0,6576;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Dark channel_Pruitt.jpg
+image_part_016.jpg;Dark channel;Harris;32718,9463;0;2,9828;0,0676;0,4761;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Dark channel_Harris.jpg
+image_part_016.jpg;Dark channel;FAST;32936,8168;0;2,954;0,0868;0,5185;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_016_Dark channel_FAST.jpg
+image_part_017.jpg;None;Canny;39836,0699;0;2,128;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_None_Canny.jpg
+image_part_017.jpg;None;Directional;34819,0191;0;2,7126;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_None_Directional.jpg
+image_part_017.jpg;None;Pruitt;29214,108;0;3,4749;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_None_Pruitt.jpg
+image_part_017.jpg;None;Harris;40147,7487;0;2,0942;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_None_Harris.jpg
+image_part_017.jpg;None;FAST;39919,1868;0;2,119;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_None_FAST.jpg
+image_part_017.jpg;White Balance;Canny;39821,1994;0;2,1297;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_White Balance_Canny.jpg
+image_part_017.jpg;White Balance;Directional;34774,9065;0;2,7181;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_White Balance_Directional.jpg
+image_part_017.jpg;White Balance;Pruitt;29118,662;0;3,4891;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_White Balance_Pruitt.jpg
+image_part_017.jpg;White Balance;Harris;40145,2599;0;2,0945;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_White Balance_Harris.jpg
+image_part_017.jpg;White Balance;FAST;39908,7675;0;2,1201;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_White Balance_FAST.jpg
+image_part_017.jpg;Histogram Equalization;Canny;31631,9399;0,0268;3,1295;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Histogram Equalization_Canny.jpg
+image_part_017.jpg;Histogram Equalization;Directional;25546,9148;0,0539;4,0574;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Histogram Equalization_Directional.jpg
+image_part_017.jpg;Histogram Equalization;Pruitt;8065,8673;0,2224;9,0643;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Histogram Equalization_Pruitt.jpg
+image_part_017.jpg;Histogram Equalization;Harris;25356,5151;0,0621;4,0899;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Histogram Equalization_Harris.jpg
+image_part_017.jpg;Histogram Equalization;FAST;34472,5917;0,0166;2,7561;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Histogram Equalization_FAST.jpg
+image_part_017.jpg;Sharpen Filter;Canny;39324,7871;0;2,1841;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Sharpen Filter_Canny.jpg
+image_part_017.jpg;Sharpen Filter;Directional;28770,7005;0;3,5413;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Sharpen Filter_Directional.jpg
+image_part_017.jpg;Sharpen Filter;Pruitt;15567,2905;0;6,2087;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Sharpen Filter_Pruitt.jpg
+image_part_017.jpg;Sharpen Filter;Harris;37576,0808;0;2,3817;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Sharpen Filter_Harris.jpg
+image_part_017.jpg;Sharpen Filter;FAST;36733,8662;0;2,4801;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Sharpen Filter_FAST.jpg
+image_part_017.jpg;CLAHE;Canny;30970,2378;0,0329;3,2214;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_CLAHE_Canny.jpg
+image_part_017.jpg;CLAHE;Directional;25729,3407;0,048;4,0265;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_CLAHE_Directional.jpg
+image_part_017.jpg;CLAHE;Pruitt;8520,1529;0,2049;8,8263;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_CLAHE_Pruitt.jpg
+image_part_017.jpg;CLAHE;Harris;26178,1661;0,1053;3,9514;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_CLAHE_Harris.jpg
+image_part_017.jpg;CLAHE;FAST;34884,4832;0,0207;2,7045;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_CLAHE_FAST.jpg
+image_part_017.jpg;Dark channel;Canny;37405,8869;0;2,4014;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Dark channel_Canny.jpg
+image_part_017.jpg;Dark channel;Directional;33099,3591;0;2,9326;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Dark channel_Directional.jpg
+image_part_017.jpg;Dark channel;Pruitt;25045,8497;0;4,1434;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Dark channel_Pruitt.jpg
+image_part_017.jpg;Dark channel;Harris;36648,0485;0;2,4903;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Dark channel_Harris.jpg
+image_part_017.jpg;Dark channel;FAST;37782,4641;0;2,3579;0;0;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_017_Dark channel_FAST.jpg
+image_part_018.jpg;None;Canny;22387,5722;0;4,6307;0,3423;0,5072;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_018_None_Canny.jpg
+image_part_018.jpg;None;Directional;17513,0116;0;5,6972;0,3148;0,478;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_018_None_Directional.jpg
+image_part_023.jpg;None;Canny;25045,9601;0,0003;4,1434;0,3594;0,4845;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_None_Canny.jpg
+image_part_023.jpg;None;Directional;21730,1165;0;4,7602;0,3487;0,4988;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_None_Directional.jpg
+image_part_023.jpg;None;Pruitt;17730,9978;0;5,6435;0,352;0,5094;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_None_Pruitt.jpg
+image_part_023.jpg;None;Harris;25425,3075;0,0002;4,0781;0,1286;0,4852;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_None_Harris.jpg
+image_part_023.jpg;None;FAST;25289,9619;0;4,1013;0,159;0,5393;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_None_FAST.jpg
+image_part_023.jpg;White Balance;Canny;25045,8921;0,0003;4,1434;0,3598;0,4843;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_White Balance_Canny.jpg
+image_part_023.jpg;White Balance;Directional;21753,4354;0;4,7555;0,3503;0,4998;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_White Balance_Directional.jpg
+image_part_023.jpg;White Balance;Pruitt;17778,5804;0;5,6318;0,3529;0,5107;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_White Balance_Pruitt.jpg
+image_part_023.jpg;White Balance;Harris;25424,3765;0,0002;4,0783;0,1288;0,4851;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_White Balance_Harris.jpg
+image_part_023.jpg;White Balance;FAST;25291,7827;0;4,101;0,1597;0,5387;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_White Balance_FAST.jpg
+image_part_023.jpg;Histogram Equalization;Canny;24530,9498;0,0092;4,2337;0,2689;0,4649;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Histogram Equalization_Canny.jpg
+image_part_023.jpg;Histogram Equalization;Directional;20792,6461;0,0165;4,9517;0,2156;0,4942;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Histogram Equalization_Directional.jpg
+image_part_023.jpg;Histogram Equalization;Pruitt;15669,0286;0,0448;6,1804;0,2134;0,4799;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Histogram Equalization_Pruitt.jpg
+image_part_023.jpg;Histogram Equalization;Harris;25273,5074;0,001;4,1041;0,1093;0,4809;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Histogram Equalization_Harris.jpg
+image_part_023.jpg;Histogram Equalization;FAST;24866,4597;0,0021;4,1747;0,1175;0,4921;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Histogram Equalization_FAST.jpg
+image_part_023.jpg;Sharpen Filter;Canny;25231,4714;0;4,1114;0,2573;0,5283;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Sharpen Filter_Canny.jpg
+image_part_023.jpg;Sharpen Filter;Directional;20038,2034;0;5,1122;0,1725;0,5026;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Sharpen Filter_Directional.jpg
+image_part_023.jpg;Sharpen Filter;Pruitt;14472,3169;0;6,5254;0,1771;0,5211;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Sharpen Filter_Pruitt.jpg
+image_part_023.jpg;Sharpen Filter;Harris;25714,7858;0;4,029;0,2153;0,5547;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Sharpen Filter_Harris.jpg
+image_part_023.jpg;Sharpen Filter;FAST;24519,5759;0;4,2357;0,1527;0,485;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Sharpen Filter_FAST.jpg
+image_part_023.jpg;CLAHE;Canny;23302,1559;0,03;4,4568;0,1187;0,4775;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_CLAHE_Canny.jpg
+image_part_023.jpg;CLAHE;Directional;18999,5977;0,0576;5,3434;0,0985;0,4952;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_CLAHE_Directional.jpg
+image_part_023.jpg;CLAHE;Pruitt;12274,3139;0,1539;7,2408;0,0941;0,4773;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_CLAHE_Pruitt.jpg
+image_part_023.jpg;CLAHE;Harris;19176,8498;0,1946;5,303;0,055;0,3838;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_CLAHE_Harris.jpg
+image_part_023.jpg;CLAHE;FAST;24215,3224;0,006;4,2899;0,0722;0,4896;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_CLAHE_FAST.jpg
+image_part_023.jpg;Dark channel;Canny;24777,4634;0,0029;4,1902;0,2888;0,4636;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Dark channel_Canny.jpg
+image_part_023.jpg;Dark channel;Directional;23069,2239;0;4,5005;0,2936;0,6572;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Dark channel_Directional.jpg
+image_part_023.jpg;Dark channel;Pruitt;20355,6355;0;5,044;0,2962;0,6676;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Dark channel_Pruitt.jpg
+image_part_023.jpg;Dark channel;Harris;24885,518;0,005;4,1713;0,2057;0,4454;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Dark channel_Harris.jpg
+image_part_023.jpg;Dark channel;FAST;25137,5076;0;4,1276;0,1609;0,5247;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_023_Dark channel_FAST.jpg
+image_part_025.jpg;None;Canny;25070,5962;0,003;4,1392;0,2841;0,4764;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_None_Canny.jpg
+image_part_025.jpg;None;Directional;22585,6459;0,0108;4,5925;0,4489;0,458;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_None_Directional.jpg
+image_part_025.jpg;None;Pruitt;19650,6257;0,0379;5,197;0,4261;0,3423;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_None_Pruitt.jpg
+image_part_025.jpg;None;Harris;25406,6372;0,0002;4,0813;0,3293;0,494;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_None_Harris.jpg
+image_part_025.jpg;None;FAST;25392,3869;0,0001;4,0838;0,0759;0,4899;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_None_FAST.jpg
+image_part_025.jpg;White Balance;Canny;25067,9514;0,003;4,1396;0,2836;0,4763;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_White Balance_Canny.jpg
+image_part_025.jpg;White Balance;Directional;22585,3713;0,0108;4,5925;0,4477;0,4592;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_White Balance_Directional.jpg
+image_part_025.jpg;White Balance;Pruitt;19648,0758;0,0379;5,1976;0,4248;0,3433;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_White Balance_Pruitt.jpg
+image_part_025.jpg;White Balance;Harris;25405,3172;0,0002;4,0816;0,3324;0,494;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_White Balance_Harris.jpg
+image_part_025.jpg;White Balance;FAST;25389,1649;0,0001;4,0843;0,0761;0,4893;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_White Balance_FAST.jpg
+image_part_025.jpg;Histogram Equalization;Canny;24042,056;0,0235;4,3211;0,0533;0,4273;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Histogram Equalization_Canny.jpg
+image_part_025.jpg;Histogram Equalization;Directional;21729,2629;0,0102;4,7604;0,0758;0,4829;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Histogram Equalization_Directional.jpg
+image_part_025.jpg;Histogram Equalization;Pruitt;17772,5992;0,0308;5,6333;0,0697;0,4381;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Histogram Equalization_Pruitt.jpg
+image_part_025.jpg;Histogram Equalization;Harris;24101,7384;0,0211;4,3103;0,0387;0,4276;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Histogram Equalization_Harris.jpg
+image_part_025.jpg;Histogram Equalization;FAST;25094,7901;0,0011;4,135;0,0328;0,4661;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Histogram Equalization_FAST.jpg
+image_part_025.jpg;Sharpen Filter;Canny;25031,1141;0,0037;4,146;0,2898;0,4755;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Sharpen Filter_Canny.jpg
+image_part_025.jpg;Sharpen Filter;Directional;20100,5994;0,0428;5,0987;0,1625;0,473;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Sharpen Filter_Directional.jpg
+image_part_025.jpg;Sharpen Filter;Pruitt;14191,0039;0,1497;6,6107;0,1854;0,3486;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Sharpen Filter_Pruitt.jpg
+image_part_025.jpg;Sharpen Filter;Harris;24698,278;0,0082;4,2041;0,2965;0,4356;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Sharpen Filter_Harris.jpg
+image_part_025.jpg;Sharpen Filter;FAST;24289,6956;0,0102;4,2766;0,1166;0,4069;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Sharpen Filter_FAST.jpg
+image_part_025.jpg;CLAHE;Canny;21777,386;0,0826;4,7507;0,0459;0,341;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_CLAHE_Canny.jpg
+image_part_025.jpg;CLAHE;Directional;18590,2772;0,1135;5,4379;0,0394;0,4566;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_CLAHE_Directional.jpg
+image_part_025.jpg;CLAHE;Pruitt;10604,1998;0,3833;7,876;0,0317;0,3055;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_CLAHE_Pruitt.jpg
+image_part_025.jpg;CLAHE;Harris;18449,9712;0,1995;5,4708;0,0239;0,2945;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_CLAHE_Harris.jpg
+image_part_025.jpg;CLAHE;FAST;23867,237;0,0189;4,3528;0,0227;0,4088;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_CLAHE_FAST.jpg
+image_part_025.jpg;Dark channel;Canny;24986,4115;0,0043;4,1538;0,2408;0,475;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Dark channel_Canny.jpg
+image_part_025.jpg;Dark channel;Directional;24145,9815;0;4,3024;0,2949;0,7352;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Dark channel_Directional.jpg
+image_part_025.jpg;Dark channel;Pruitt;22633,5888;0;4,5833;0,2671;0,7971;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Dark channel_Pruitt.jpg
+image_part_025.jpg;Dark channel;Harris;24988,7006;0,0031;4,1534;0,1468;0,458;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Dark channel_Harris.jpg
+image_part_025.jpg;Dark channel;FAST;25198,3971;0,0009;4,1171;0,1266;0,4706;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_025_Dark channel_FAST.jpg
+image_part_028.jpg;None;Canny;30774,8351;0;3,2488;0,4908;0,5603;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_None_Canny.jpg
+image_part_028.jpg;None;Directional;26324,7615;0;3,9272;0,5082;0,5077;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_None_Directional.jpg
+image_part_028.jpg;None;Pruitt;20569,1777;0;4,9986;0,5004;0,5453;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_None_Pruitt.jpg
+image_part_028.jpg;None;Harris;31013,6089;0;3,2153;0,4341;0,508;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_None_Harris.jpg
+image_part_028.jpg;None;FAST;31289,8577;0;3,1768;0,2563;0,5285;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_None_FAST.jpg
+image_part_028.jpg;White Balance;Canny;30771,6731;0;3,2493;0,4902;0,5602;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_White Balance_Canny.jpg
+image_part_028.jpg;White Balance;Directional;26303,339;0;3,9307;0,5077;0,5079;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_White Balance_Directional.jpg
+image_part_028.jpg;White Balance;Pruitt;20527,0766;0;5,0075;0,4999;0,5459;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_White Balance_Pruitt.jpg
+image_part_028.jpg;White Balance;Harris;31015,8567;0;3,215;0,4347;0,5076;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_White Balance_Harris.jpg
+image_part_028.jpg;White Balance;FAST;31282,8107;0;3,1777;0,2601;0,5288;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_White Balance_FAST.jpg
+image_part_028.jpg;Histogram Equalization;Canny;29182,254;0,0111;3,4796;0,369;0,4788;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Histogram Equalization_Canny.jpg
+image_part_028.jpg;Histogram Equalization;Directional;23883,254;0,0433;4,3499;0,3184;0,4568;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Histogram Equalization_Directional.jpg
+image_part_028.jpg;Histogram Equalization;Pruitt;15005,6821;0,1543;6,3682;0,3252;0,356;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Histogram Equalization_Pruitt.jpg
+image_part_028.jpg;Histogram Equalization;Harris;29231,766;0,0272;3,4723;0,2621;0,4137;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Histogram Equalization_Harris.jpg
+image_part_028.jpg;Histogram Equalization;FAST;29792,7883;0,0103;3,3897;0,2349;0,4142;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Histogram Equalization_FAST.jpg
+image_part_028.jpg;Sharpen Filter;Canny;30166,1583;0;3,3356;0,4277;0,5563;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Sharpen Filter_Canny.jpg
+image_part_028.jpg;Sharpen Filter;Directional;23293,5599;0;4,4584;0,3159;0,5098;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Sharpen Filter_Directional.jpg
+image_part_028.jpg;Sharpen Filter;Pruitt;13776,762;0;6,7393;0,3226;0,5494;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Sharpen Filter_Pruitt.jpg
+image_part_028.jpg;Sharpen Filter;Harris;28136,495;0;3,6381;0,3787;0,5335;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Sharpen Filter_Harris.jpg
+image_part_028.jpg;Sharpen Filter;FAST;29787,0381;0;3,3905;0,2878;0,5145;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Sharpen Filter_FAST.jpg
+image_part_028.jpg;CLAHE;Canny;25955,6821;0,055;3,9885;0,2487;0,442;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_CLAHE_Canny.jpg
+image_part_028.jpg;CLAHE;Directional;21338,8498;0,079;4,8391;0,2235;0,4622;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_CLAHE_Directional.jpg
+image_part_028.jpg;CLAHE;Pruitt;9227,6938;0,2915;8,4799;0,2186;0,3421;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_CLAHE_Pruitt.jpg
+image_part_028.jpg;CLAHE;Harris;19314,2148;0,2851;5,272;0,1392;0,2657;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_CLAHE_Harris.jpg
+image_part_028.jpg;CLAHE;FAST;28347,5883;0,0288;3,6056;0,2112;0,4584;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_CLAHE_FAST.jpg
+image_part_028.jpg;Dark channel;Canny;30919,59;0;3,2285;0,4753;0,5715;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Dark channel_Canny.jpg
+image_part_028.jpg;Dark channel;Directional;29067,3041;0;3,4968;0,5033;0,6991;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Dark channel_Directional.jpg
+image_part_028.jpg;Dark channel;Pruitt;26195,4198;0;3,9485;0,4933;0,7572;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Dark channel_Pruitt.jpg
+image_part_028.jpg;Dark channel;Harris;31077,9464;0;3,2063;0,4333;0,4938;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Dark channel_Harris.jpg
+image_part_028.jpg;Dark channel;FAST;31529,7082;0;3,1436;0,3663;0,5804;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_028_Dark channel_FAST.jpg
+image_part_029.jpg;None;Canny;16438,0006;0,0357;5,9723;0,3063;0,4011;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_None_Canny.jpg
+image_part_029.jpg;None;Directional;14427,1068;0,0474;6,539;0,3078;0,4487;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_None_Directional.jpg
+image_part_029.jpg;None;Pruitt;11063,8945;0,1668;7,6917;0,3148;0,3198;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_None_Pruitt.jpg
+image_part_029.jpg;None;Harris;17226,1995;0,0088;5,7689;0,2463;0,4506;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_None_Harris.jpg
+image_part_029.jpg;None;FAST;17268,0139;0,0045;5,7584;0,1794;0,4209;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_None_FAST.jpg
+image_part_029.jpg;White Balance;Canny;16441,3244;0,0356;5,9714;0,3069;0,4017;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_White Balance_Canny.jpg
+image_part_029.jpg;White Balance;Directional;14424,9954;0,0476;6,5396;0,3077;0,4488;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_White Balance_Directional.jpg
+image_part_029.jpg;White Balance;Pruitt;11060,4164;0,1672;7,6931;0,3138;0,3198;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_White Balance_Pruitt.jpg
+image_part_029.jpg;White Balance;Harris;17221,7469;0,009;5,77;0,2472;0,4501;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_White Balance_Harris.jpg
+image_part_029.jpg;White Balance;FAST;17267,7009;0,0045;5,7585;0,1805;0,4204;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_White Balance_FAST.jpg
+image_part_029.jpg;Histogram Equalization;Canny;23875,5027;0;4,3513;0,0711;0,6083;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Histogram Equalization_Canny.jpg
+image_part_029.jpg;Histogram Equalization;Directional;17713,9045;0;5,6477;0,0415;0,5477;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Histogram Equalization_Directional.jpg
+image_part_029.jpg;Histogram Equalization;Pruitt;18429,8743;0;5,4756;0,0391;0,7279;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Histogram Equalization_Pruitt.jpg
+image_part_029.jpg;Histogram Equalization;Harris;35096,5078;0;2,6782;0,0074;0,812;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Histogram Equalization_Harris.jpg
+image_part_029.jpg;Histogram Equalization;FAST;19485,0452;0;5,2338;0,0413;0,6104;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Histogram Equalization_FAST.jpg
+image_part_029.jpg;Sharpen Filter;Canny;16158,7831;0,0504;6,0467;0,2867;0,387;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Sharpen Filter_Canny.jpg
+image_part_029.jpg;Sharpen Filter;Directional;13389,3226;0,1167;6,8632;0,1827;0,4617;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Sharpen Filter_Directional.jpg
+image_part_029.jpg;Sharpen Filter;Pruitt;8319,8727;0,3493;8,9296;0,2019;0,3158;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Sharpen Filter_Pruitt.jpg
+image_part_029.jpg;Sharpen Filter;Harris;14212,2094;0,2026;6,6042;0,2561;0,283;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Sharpen Filter_Harris.jpg
+image_part_029.jpg;Sharpen Filter;FAST;17206,0832;0,0281;5,774;0,1496;0,465;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Sharpen Filter_FAST.jpg
+image_part_029.jpg;CLAHE;Canny;16264,1718;0,1487;6,0185;0,1324;0,3753;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_CLAHE_Canny.jpg
+image_part_029.jpg;CLAHE;Directional;14600,0533;0,1013;6,4873;0,1067;0,4699;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_CLAHE_Directional.jpg
+image_part_029.jpg;CLAHE;Pruitt;11166,0093;0,2753;7,6518;0,1081;0,3508;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_CLAHE_Pruitt.jpg
+image_part_029.jpg;CLAHE;Harris;10292,6978;0,4181;8,0055;0,1807;0,2316;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_CLAHE_Harris.jpg
+image_part_029.jpg;CLAHE;FAST;18563,626;0,0035;5,4442;0,0811;0,4977;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_CLAHE_FAST.jpg
+image_part_029.jpg;Dark channel;Canny;16059,4977;0,0573;6,0735;0,2796;0,3748;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Dark channel_Canny.jpg
+image_part_029.jpg;Dark channel;Directional;14879,5205;0,0535;6,4049;0,289;0,5752;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Dark channel_Directional.jpg
+image_part_029.jpg;Dark channel;Pruitt;11832,7173;0,1908;7,4;0,2971;0,5241;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Dark channel_Pruitt.jpg
+image_part_029.jpg;Dark channel;Harris;15739,037;0,0824;6,161;0,2644;0,3632;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Dark channel_Harris.jpg
+image_part_029.jpg;Dark channel;FAST;16899,239;0,0159;5,8521;0,2434;0,3778;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_029_Dark channel_FAST.jpg
+image_part_030.jpg;None;Canny;37371,5197;0;2,4054;0,3623;0,5389;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_None_Canny.jpg
+image_part_030.jpg;None;Directional;32461,1742;0;3,0172;0,3665;0,5107;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_None_Directional.jpg
+image_part_030.jpg;None;Pruitt;24724,4566;0;4,1995;0,3922;0,525;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_None_Pruitt.jpg
+image_part_030.jpg;None;Harris;38485,5075;0;2,2778;0,2972;0,491;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_None_Harris.jpg
+image_part_030.jpg;None;FAST;38475,2975;0;2,279;0,189;0,4718;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_None_FAST.jpg
+image_part_030.jpg;White Balance;Canny;37372,9439;0;2,4052;0,3621;0,5394;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_White Balance_Canny.jpg
+image_part_030.jpg;White Balance;Directional;32458,3974;0;3,0175;0,3671;0,5116;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_White Balance_Directional.jpg
+image_part_030.jpg;White Balance;Pruitt;24719,9243;0;4,2003;0,392;0,5263;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_White Balance_Pruitt.jpg
+image_part_030.jpg;White Balance;Harris;38474,8668;0;2,279;0,2975;0,4904;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_White Balance_Harris.jpg
+image_part_030.jpg;White Balance;FAST;38472,751;0;2,2793;0,191;0,473;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_White Balance_FAST.jpg
+image_part_030.jpg;Histogram Equalization;Canny;33106,5523;0,0441;2,9317;0,27;0,4532;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Histogram Equalization_Canny.jpg
+image_part_030.jpg;Histogram Equalization;Directional;28177,8336;0,0744;3,6317;0,263;0,4577;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Histogram Equalization_Directional.jpg
+image_part_030.jpg;Histogram Equalization;Pruitt;14933,3995;0,2551;6,3892;0,2695;0,3615;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Histogram Equalization_Pruitt.jpg
+image_part_030.jpg;Histogram Equalization;Harris;35113,6996;0,0307;2,676;0,2522;0,4299;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Histogram Equalization_Harris.jpg
+image_part_030.jpg;Histogram Equalization;FAST;35555,7939;0,0254;2,6217;0,2136;0,4058;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Histogram Equalization_FAST.jpg
+image_part_030.jpg;Sharpen Filter;Canny;36084,9715;0;2,5575;0,311;0,5251;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Sharpen Filter_Canny.jpg
+image_part_030.jpg;Sharpen Filter;Directional;28264,3727;0;3,6184;0,2473;0,5123;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Sharpen Filter_Directional.jpg
+image_part_030.jpg;Sharpen Filter;Pruitt;15325,9953;0;6,2765;0,2559;0,5228;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Sharpen Filter_Pruitt.jpg
+image_part_030.jpg;Sharpen Filter;Harris;32663,8955;0;2,9901;0,2597;0,4906;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Sharpen Filter_Harris.jpg
+image_part_030.jpg;Sharpen Filter;FAST;36543,8036;0;2,5027;0,2217;0,5056;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Sharpen Filter_FAST.jpg
+image_part_030.jpg;CLAHE;Canny;30285,7652;0,0637;3,3184;0,2276;0,4534;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_CLAHE_Canny.jpg
+image_part_030.jpg;CLAHE;Directional;25746,2327;0,0802;4,0237;0,221;0,48;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_CLAHE_Directional.jpg
+image_part_030.jpg;CLAHE;Pruitt;9506,5714;0,3045;8,3506;0,2261;0,3883;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_CLAHE_Pruitt.jpg
+image_part_030.jpg;CLAHE;Harris;23535,6131;0,2373;4,4135;0,224;0,3633;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_CLAHE_Harris.jpg
+image_part_030.jpg;CLAHE;FAST;34428,9721;0,0351;2,7616;0,2132;0,4556;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_CLAHE_FAST.jpg
+image_part_030.jpg;Dark channel;Canny;33772,8444;0,0103;2,8451;0,2502;0,4795;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Dark channel_Canny.jpg
+image_part_030.jpg;Dark channel;Directional;29545,4994;0,0036;3,4259;0,2416;0,5114;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Dark channel_Directional.jpg
+image_part_030.jpg;Dark channel;Pruitt;18017,0209;0,0004;5,574;0,2485;0,4766;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Dark channel_Pruitt.jpg
+image_part_030.jpg;Dark channel;Harris;30483,6586;0,0459;3,2901;0,1709;0,387;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Dark channel_Harris.jpg
+image_part_030.jpg;Dark channel;FAST;36124,8454;0;2,5527;0,1923;0,4404;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_030_Dark channel_FAST.jpg
+image_part_031.jpg;None;Canny;35942,9;0;2,5747;0,3767;0,5775;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_None_Canny.jpg
+image_part_031.jpg;None;Directional;31189,5465;0;3,1907;0,4007;0,5217;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_None_Directional.jpg
+image_part_031.jpg;None;Pruitt;24288,8315;0;4,2767;0,4012;0,5665;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_None_Pruitt.jpg
+image_part_031.jpg;None;Harris;36807,2471;0;2,4715;0,4024;0,5528;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_None_Harris.jpg
+image_part_031.jpg;None;FAST;36856,5931;0;2,4657;0,1478;0,5201;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_None_FAST.jpg
+image_part_031.jpg;White Balance;Canny;35937,7672;0;2,5753;0,3766;0,5776;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_White Balance_Canny.jpg
+image_part_031.jpg;White Balance;Directional;31198,1202;0;3,1895;0,4008;0,5222;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_White Balance_Directional.jpg
+image_part_031.jpg;White Balance;Pruitt;24307,6631;0;4,2734;0,4015;0,5676;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_White Balance_Pruitt.jpg
+image_part_031.jpg;White Balance;Harris;36810,3446;0;2,4711;0,4028;0,5532;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_White Balance_Harris.jpg
+image_part_031.jpg;White Balance;FAST;36861,5081;0;2,4651;0,1473;0,5203;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_White Balance_FAST.jpg
+image_part_031.jpg;Histogram Equalization;Canny;31886,8752;0,0513;3,0947;0,2942;0,4361;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Histogram Equalization_Canny.jpg
+image_part_031.jpg;Histogram Equalization;Directional;26608,4318;0,0904;3,8806;0,2755;0,44;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Histogram Equalization_Directional.jpg
+image_part_031.jpg;Histogram Equalization;Pruitt;13845,2773;0,3225;6,7178;0,2755;0,2975;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Histogram Equalization_Pruitt.jpg
+image_part_031.jpg;Histogram Equalization;Harris;30299,7886;0,0793;3,3164;0,2571;0,3825;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Histogram Equalization_Harris.jpg
+image_part_031.jpg;Histogram Equalization;FAST;33754,1523;0,029;2,8475;0,2281;0,3839;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Histogram Equalization_FAST.jpg
+image_part_031.jpg;Sharpen Filter;Canny;35117,22;0;2,6756;0,3386;0,5748;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Sharpen Filter_Canny.jpg
+image_part_031.jpg;Sharpen Filter;Directional;26849,9713;0;3,8414;0,2759;0,5195;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Sharpen Filter_Directional.jpg
+image_part_031.jpg;Sharpen Filter;Pruitt;14425,6759;0;6,5394;0,2787;0,5665;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Sharpen Filter_Pruitt.jpg
+image_part_031.jpg;Sharpen Filter;Harris;32641,1114;0;2,9932;0,3122;0,5558;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Sharpen Filter_Harris.jpg
+image_part_031.jpg;Sharpen Filter;FAST;34690,5265;0;2,7287;0,2489;0,511;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Sharpen Filter_FAST.jpg
+image_part_031.jpg;CLAHE;Canny;28526,6533;0,0896;3,5783;0,2418;0,42;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_CLAHE_Canny.jpg
+image_part_031.jpg;CLAHE;Directional;24126,1041;0,1031;4,3059;0,2296;0,4654;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_CLAHE_Directional.jpg
+image_part_031.jpg;CLAHE;Pruitt;8198,5539;0,4027;8,9934;0,2279;0,3256;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_CLAHE_Pruitt.jpg
+image_part_031.jpg;CLAHE;Harris;20013,5635;0,3018;5,1176;0,2083;0,2876;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_CLAHE_Harris.jpg
+image_part_031.jpg;CLAHE;FAST;32736,3663;0,0402;2,9805;0,2241;0,4389;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_CLAHE_FAST.jpg
+image_part_031.jpg;Dark channel;Canny;35329,918;0;2,6494;0,3592;0,5951;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Dark channel_Canny.jpg
+image_part_031.jpg;Dark channel;Directional;33044,3342;0;2,9398;0,379;0,6699;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Dark channel_Directional.jpg
+image_part_031.jpg;Dark channel;Pruitt;28024,6575;0;3,6554;0,3639;0,7508;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Dark channel_Pruitt.jpg
+image_part_031.jpg;Dark channel;Harris;35610,4412;0;2,615;0,3112;0,5298;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Dark channel_Harris.jpg
+image_part_031.jpg;Dark channel;FAST;36327,979;0;2,5284;0,2972;0,5462;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_031_Dark channel_FAST.jpg
+image_part_032.jpg;None;Canny;37657,3409;0;2,3723;0,3198;0,483;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_None_Canny.jpg
+image_part_032.jpg;None;Directional;32979,3729;0;2,9484;0,3334;0,4799;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_None_Directional.jpg
+image_part_032.jpg;None;Pruitt;25083,5044;0;4,1369;0,3378;0,4317;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_None_Pruitt.jpg
+image_part_032.jpg;None;Harris;38713,5768;0;2,2522;0,3033;0,4853;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_None_Harris.jpg
+image_part_032.jpg;None;FAST;38857,9957;0;2,236;0,1633;0,4453;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_None_FAST.jpg
+image_part_032.jpg;White Balance;Canny;37675,3238;0;2,3702;0,3206;0,4841;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_White Balance_Canny.jpg
+image_part_032.jpg;White Balance;Directional;32987,5936;0;2,9473;0,3333;0,4806;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_White Balance_Directional.jpg
+image_part_032.jpg;White Balance;Pruitt;25103,3411;0;4,1335;0,3381;0,4329;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_White Balance_Pruitt.jpg
+image_part_032.jpg;White Balance;Harris;38730,5989;0;2,2503;0,304;0,4858;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_White Balance_Harris.jpg
+image_part_032.jpg;White Balance;FAST;38858,3184;0;2,236;0,163;0,4455;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_White Balance_FAST.jpg
+image_part_032.jpg;Histogram Equalization;Canny;32945,5836;0,0543;2,9528;0,2084;0,389;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Histogram Equalization_Canny.jpg
+image_part_032.jpg;Histogram Equalization;Directional;28103,6155;0,0846;3,6432;0,2005;0,4121;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Histogram Equalization_Directional.jpg
+image_part_032.jpg;Histogram Equalization;Pruitt;14230,6823;0,2993;6,5985;0,2031;0,2278;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Histogram Equalization_Pruitt.jpg
+image_part_032.jpg;Histogram Equalization;Harris;28170,5021;0,1247;3,6329;0,1868;0,3283;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Histogram Equalization_Harris.jpg
+image_part_032.jpg;Histogram Equalization;FAST;35593,6899;0,0297;2,6171;0,162;0,3588;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Histogram Equalization_FAST.jpg
+image_part_032.jpg;Sharpen Filter;Canny;35847,3278;0,0074;2,5862;0,2517;0,4588;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Sharpen Filter_Canny.jpg
+image_part_032.jpg;Sharpen Filter;Directional;28744,7537;0;3,5452;0,2222;0,4999;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Sharpen Filter_Directional.jpg
+image_part_032.jpg;Sharpen Filter;Pruitt;15468,04;0;6,2365;0,2263;0,4769;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Sharpen Filter_Pruitt.jpg
+image_part_032.jpg;Sharpen Filter;Harris;32256,2712;0;3,0447;0,2424;0,4709;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Sharpen Filter_Harris.jpg
+image_part_032.jpg;Sharpen Filter;FAST;37051,5462;0;2,4427;0,1819;0,4995;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Sharpen Filter_FAST.jpg
+image_part_032.jpg;CLAHE;Canny;29881,445;0,0948;3,3768;0,182;0,3709;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_CLAHE_Canny.jpg
+image_part_032.jpg;CLAHE;Directional;25696,7695;0,0958;4,032;0,1737;0,451;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_CLAHE_Directional.jpg
+image_part_032.jpg;CLAHE;Pruitt;8873,3858;0,3779;8,6499;0,1719;0,296;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_CLAHE_Pruitt.jpg
+image_part_032.jpg;CLAHE;Harris;20823,3003;0,2996;4,9453;0,144;0,2727;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_CLAHE_Harris.jpg
+image_part_032.jpg;CLAHE;FAST;34633,6579;0,04;2,7358;0,1774;0,4304;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_CLAHE_FAST.jpg
+image_part_032.jpg;Dark channel;Canny;36196,4714;0,0002;2,5441;0,2679;0,4672;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Dark channel_Canny.jpg
+image_part_032.jpg;Dark channel;Directional;33586,1766;0;2,8692;0,2699;0,5599;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Dark channel_Directional.jpg
+image_part_032.jpg;Dark channel;Pruitt;26338,4612;0;3,9249;0,2742;0,5528;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Dark channel_Pruitt.jpg
+image_part_032.jpg;Dark channel;Harris;36071,3405;0;2,5592;0,2093;0,4422;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Dark channel_Harris.jpg
+image_part_032.jpg;Dark channel;FAST;38052,8494;0;2,3269;0,1706;0,4337;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_032_Dark channel_FAST.jpg
+image_part_033.jpg;None;Canny;24127,3594;0;4,3057;0,3394;0,5618;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_None_Canny.jpg
+image_part_033.jpg;None;Directional;19728,9438;0;5,1798;0,3535;0,5116;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_None_Directional.jpg
+image_part_033.jpg;None;Pruitt;13910,9127;0;6,6972;0,3555;0,5321;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_None_Pruitt.jpg
+image_part_033.jpg;None;Harris;24621,4974;0;4,2177;0,2989;0,501;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_None_Harris.jpg
+image_part_033.jpg;None;FAST;24437,0994;0;4,2503;0,2558;0,4822;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_None_FAST.jpg
+image_part_033.jpg;White Balance;Canny;24123,3619;0;4,3064;0,3393;0,5615;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_White Balance_Canny.jpg
+image_part_033.jpg;White Balance;Directional;19726,3038;0;5,1803;0,3534;0,5117;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_White Balance_Directional.jpg
+image_part_033.jpg;White Balance;Pruitt;13904,5513;0;6,6992;0,3555;0,532;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_White Balance_Pruitt.jpg
+image_part_033.jpg;White Balance;Harris;24616,5336;0;4,2185;0,2986;0,5002;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_White Balance_Harris.jpg
+image_part_033.jpg;White Balance;FAST;24435,0157;0;4,2507;0,2558;0,4822;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_White Balance_FAST.jpg
+image_part_033.jpg;Histogram Equalization;Canny;23382,1485;0;4,442;0,3001;0,5116;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Histogram Equalization_Canny.jpg
+image_part_033.jpg;Histogram Equalization;Directional;18955,5414;0;5,3534;0,2996;0,4868;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Histogram Equalization_Directional.jpg
+image_part_033.jpg;Histogram Equalization;Pruitt;12229,9219;0;7,2566;0,2983;0,4335;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Histogram Equalization_Pruitt.jpg
+image_part_033.jpg;Histogram Equalization;Harris;23950,1999;0,0035;4,3377;0,2626;0,4726;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Histogram Equalization_Harris.jpg
+image_part_033.jpg;Histogram Equalization;FAST;23725,4865;0;4,3787;0,2272;0,4407;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Histogram Equalization_FAST.jpg
+image_part_033.jpg;Sharpen Filter;Canny;23819,8114;0;4,3614;0,304;0,543;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Sharpen Filter_Canny.jpg
+image_part_033.jpg;Sharpen Filter;Directional;18274,3018;0;5,5124;0,2661;0,5069;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Sharpen Filter_Directional.jpg
+image_part_033.jpg;Sharpen Filter;Pruitt;11001,159;0;7,7164;0,2637;0,4982;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Sharpen Filter_Pruitt.jpg
+image_part_033.jpg;Sharpen Filter;Harris;22146,5991;0;4,6777;0,2544;0,4493;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Sharpen Filter_Harris.jpg
+image_part_033.jpg;Sharpen Filter;FAST;23350,4387;0;4,4479;0,2452;0,496;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Sharpen Filter_FAST.jpg
+image_part_033.jpg;CLAHE;Canny;21067,9818;0,0368;4,8946;0,2219;0,4487;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_CLAHE_Canny.jpg
+image_part_033.jpg;CLAHE;Directional;16868,8042;0,0677;5,86;0,2172;0,467;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_CLAHE_Directional.jpg
+image_part_033.jpg;CLAHE;Pruitt;7783,4663;0,2265;9,2191;0,2113;0,3319;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_CLAHE_Pruitt.jpg
+image_part_033.jpg;CLAHE;Harris;16837,6333;0,2498;5,868;0,1194;0,3263;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_CLAHE_Harris.jpg
+image_part_033.jpg;CLAHE;FAST;22540,5194;0,029;4,6012;0,2024;0,4215;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_CLAHE_FAST.jpg
+image_part_033.jpg;Dark channel;Canny;23412,6649;0;4,4363;0,2745;0,5133;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Dark channel_Canny.jpg
+image_part_033.jpg;Dark channel;Directional;19872,6746;0;5,1482;0,2827;0,5366;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Dark channel_Directional.jpg
+image_part_033.jpg;Dark channel;Pruitt;14136,1414;0;6,6275;0,2776;0,5147;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Dark channel_Pruitt.jpg
+image_part_033.jpg;Dark channel;Harris;23921,1963;0,0014;4,343;0,1734;0,4335;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Dark channel_Harris.jpg
+image_part_033.jpg;Dark channel;FAST;24044,7686;0;4,3206;0,2094;0,4671;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_033_Dark channel_FAST.jpg
+image_part_034.jpg;None;Canny;24657,2826;0;4,2114;0,1874;0,5638;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_None_Canny.jpg
+image_part_034.jpg;None;Directional;20310,5006;0;5,0536;0,1663;0,511;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_None_Directional.jpg
+image_part_034.jpg;None;Pruitt;13257,4241;0;6,9062;0,1929;0,5344;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_None_Pruitt.jpg
+image_part_034.jpg;None;Harris;25478,1754;0;4,0691;0,1378;0,48;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_None_Harris.jpg
+image_part_034.jpg;None;FAST;25563,1587;0;4,0547;0,1066;0,4387;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_None_FAST.jpg
+image_part_034.jpg;White Balance;Canny;24648,9481;0;4,2128;0,1869;0,5637;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_White Balance_Canny.jpg
+image_part_034.jpg;White Balance;Directional;20305,4564;0;5,0547;0,1666;0,511;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_White Balance_Directional.jpg
+image_part_034.jpg;White Balance;Pruitt;13250,5353;0;6,9085;0,1926;0,5342;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_White Balance_Pruitt.jpg
+image_part_034.jpg;White Balance;Harris;25464,7337;0;4,0714;0,1374;0,4804;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_White Balance_Harris.jpg
+image_part_034.jpg;White Balance;FAST;25552,9104;0;4,0564;0,1066;0,4371;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_White Balance_FAST.jpg
+image_part_034.jpg;Histogram Equalization;Canny;22308,2561;0,0297;4,6461;0,1393;0,4419;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Histogram Equalization_Canny.jpg
+image_part_034.jpg;Histogram Equalization;Directional;18259,6532;0,0363;5,5159;0,1236;0,4493;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Histogram Equalization_Directional.jpg
+image_part_034.jpg;Histogram Equalization;Pruitt;8910,1046;0,104;8,632;0,1334;0,3253;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Histogram Equalization_Pruitt.jpg
+image_part_034.jpg;Histogram Equalization;Harris;21784,9098;0,0539;4,7492;0,0958;0,3929;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Histogram Equalization_Harris.jpg
+image_part_034.jpg;Histogram Equalization;FAST;23923,8456;0,0102;4,3425;0,0989;0,3869;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Histogram Equalization_FAST.jpg
+image_part_034.jpg;Sharpen Filter;Canny;23559,0093;0;4,4092;0,1574;0,5217;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Sharpen Filter_Canny.jpg
+image_part_034.jpg;Sharpen Filter;Directional;18225,8106;0;5,5239;0,1409;0,5036;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Sharpen Filter_Directional.jpg
+image_part_034.jpg;Sharpen Filter;Pruitt;9184,3683;0;8,5003;0,1466;0,4913;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Sharpen Filter_Pruitt.jpg
+image_part_034.jpg;Sharpen Filter;Harris;19112,8188;0;5,3176;0,1271;0,4359;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Sharpen Filter_Harris.jpg
+image_part_034.jpg;Sharpen Filter;FAST;24215,653;0;4,2898;0,1324;0,4886;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Sharpen Filter_FAST.jpg
+image_part_034.jpg;CLAHE;Canny;20962,1431;0,0512;4,9164;0,1226;0,4353;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_CLAHE_Canny.jpg
+image_part_034.jpg;CLAHE;Directional;17252,3761;0,0716;5,7623;0,1087;0,4567;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_CLAHE_Directional.jpg
+image_part_034.jpg;CLAHE;Pruitt;6771,6509;0,2516;9,8239;0,1145;0,3009;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_CLAHE_Pruitt.jpg
+image_part_034.jpg;CLAHE;Harris;16471,0794;0,243;5,9636;0,0743;0,3185;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_CLAHE_Harris.jpg
+image_part_034.jpg;CLAHE;FAST;22989,1304;0,0481;4,5156;0,1022;0,4053;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_CLAHE_FAST.jpg
+image_part_034.jpg;Dark channel;Canny;23586,328;0;4,4042;0,1497;0,5027;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Dark channel_Canny.jpg
+image_part_034.jpg;Dark channel;Directional;20391,1231;0;5,0364;0,1409;0,5336;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Dark channel_Directional.jpg
+image_part_034.jpg;Dark channel;Pruitt;13718,3551;0;6,7578;0,1557;0,5264;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Dark channel_Pruitt.jpg
+image_part_034.jpg;Dark channel;Harris;24373,7772;0;4,2616;0,083;0,3957;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Dark channel_Harris.jpg
+image_part_034.jpg;Dark channel;FAST;25279,4376;0;4,1031;0,1005;0,4482;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_034_Dark channel_FAST.jpg
+image_part_035.jpg;None;Canny;30669,3385;0;3,2638;0,2898;0,4786;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_None_Canny.jpg
+image_part_035.jpg;None;Directional;26262,3366;0,0023;3,9375;0,3293;0,4695;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_None_Directional.jpg
+image_part_035.jpg;None;Pruitt;20042,9908;0,0045;5,1112;0,329;0,4084;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_None_Pruitt.jpg
+image_part_035.jpg;None;Harris;31584,9484;0;3,136;0,3077;0,472;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_None_Harris.jpg
+image_part_035.jpg;None;FAST;31238,0767;0;3,184;0,1783;0,4541;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_None_FAST.jpg
+image_part_035.jpg;White Balance;Canny;30666,9024;0;3,2641;0,2892;0,479;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_White Balance_Canny.jpg
+image_part_035.jpg;White Balance;Directional;26263,2257;0,0022;3,9373;0,3294;0,4695;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_White Balance_Directional.jpg
+image_part_035.jpg;White Balance;Pruitt;20044,1635;0,0045;5,1109;0,3295;0,4081;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_White Balance_Pruitt.jpg
+image_part_035.jpg;White Balance;Harris;31577,6222;0;3,137;0,3071;0,4718;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_White Balance_Harris.jpg
+image_part_035.jpg;White Balance;FAST;31241,3687;0;3,1835;0,1785;0,4544;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_White Balance_FAST.jpg
+image_part_035.jpg;Histogram Equalization;Canny;28340,0927;0,0392;3,6068;0,2071;0,4246;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Histogram Equalization_Canny.jpg
+image_part_035.jpg;Histogram Equalization;Directional;22828,7592;0,0845;4,546;0,1573;0,4372;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Histogram Equalization_Directional.jpg
+image_part_035.jpg;Histogram Equalization;Pruitt;12170,3648;0,3134;7,2778;0,1687;0,2817;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Histogram Equalization_Pruitt.jpg
+image_part_035.jpg;Histogram Equalization;Harris;24251,3218;0,1428;4,2834;0,1286;0,3188;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Histogram Equalization_Harris.jpg
+image_part_035.jpg;Histogram Equalization;FAST;29020,9552;0,0279;3,5037;0,128;0,3578;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Histogram Equalization_FAST.jpg
+image_part_035.jpg;Sharpen Filter;Canny;29682,1331;0,0064;3,4059;0,2371;0,4594;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Sharpen Filter_Canny.jpg
+image_part_035.jpg;Sharpen Filter;Directional;22473,0762;0,022;4,6142;0,1657;0,4776;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Sharpen Filter_Directional.jpg
+image_part_035.jpg;Sharpen Filter;Pruitt;11309,9466;0,0899;7,5962;0,1697;0,404;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Sharpen Filter_Pruitt.jpg
+image_part_035.jpg;Sharpen Filter;Harris;23070,3285;0,0904;4,5003;0,1729;0,3599;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Sharpen Filter_Harris.jpg
+image_part_035.jpg;Sharpen Filter;FAST;29318,9042;0;3,4593;0,1397;0,4724;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Sharpen Filter_FAST.jpg
+image_part_035.jpg;CLAHE;Canny;24494,1668;0,1163;4,2402;0,1284;0,3678;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_CLAHE_Canny.jpg
+image_part_035.jpg;CLAHE;Directional;21139,8494;0,0947;4,8798;0,1118;0,4599;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_CLAHE_Directional.jpg
+image_part_035.jpg;CLAHE;Pruitt;8298,5534;0,3635;8,9408;0,1115;0,3338;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_CLAHE_Pruitt.jpg
+image_part_035.jpg;CLAHE;Harris;17038,5696;0,3655;5,8165;0,0861;0,2532;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_CLAHE_Harris.jpg
+image_part_035.jpg;CLAHE;FAST;28419,2063;0,0296;3,5947;0,115;0,4684;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_CLAHE_FAST.jpg
+image_part_035.jpg;Dark channel;Canny;29269,3286;0,0118;3,4667;0,2205;0,4549;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Dark channel_Canny.jpg
+image_part_035.jpg;Dark channel;Directional;26512,0491;0;3,8964;0,2202;0,5597;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Dark channel_Directional.jpg
+image_part_035.jpg;Dark channel;Pruitt;20388,3809;0;5,037;0,2237;0,5397;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Dark channel_Pruitt.jpg
+image_part_035.jpg;Dark channel;Harris;28715,2702;0,0241;3,5497;0,1514;0,4399;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Dark channel_Harris.jpg
+image_part_035.jpg;Dark channel;FAST;30349,8596;0,0019;3,3092;0,1392;0,4195;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_035_Dark channel_FAST.jpg
+image_part_036.jpg;None;Canny;23793,4001;0,0143;4,3662;0,389;0,4246;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_None_Canny.jpg
+image_part_036.jpg;None;Directional;19899,8643;0,0387;5,1423;0,4083;0,4486;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_None_Directional.jpg
+image_part_036.jpg;None;Pruitt;14619,0267;0,1331;6,4816;0,416;0,3096;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_None_Pruitt.jpg
+image_part_036.jpg;None;Harris;24504,8298;0,0031;4,2383;0,3069;0,4519;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_None_Harris.jpg
+image_part_036.jpg;None;FAST;24211,6213;0,0042;4,2906;0,1766;0,4081;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_None_FAST.jpg
+image_part_036.jpg;White Balance;Canny;23800,1057;0,0142;4,365;0,3897;0,4249;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_White Balance_Canny.jpg
+image_part_036.jpg;White Balance;Directional;19902,2767;0,0382;5,1418;0,4082;0,4498;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_White Balance_Directional.jpg
+image_part_036.jpg;White Balance;Pruitt;14619,8932;0,131;6,4814;0,4149;0,3139;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_White Balance_Pruitt.jpg
+image_part_036.jpg;White Balance;Harris;24516,8716;0,003;4,2362;0,3082;0,4516;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_White Balance_Harris.jpg
+image_part_036.jpg;White Balance;FAST;24228,8967;0,0039;4,2875;0,1787;0,4105;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_White Balance_FAST.jpg
+image_part_036.jpg;Histogram Equalization;Canny;22372,1711;0,0499;4,6337;0,3423;0,3788;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Histogram Equalization_Canny.jpg
+image_part_036.jpg;Histogram Equalization;Directional;18908,751;0,0407;5,3642;0,2653;0,4778;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Histogram Equalization_Directional.jpg
+image_part_036.jpg;Histogram Equalization;Pruitt;12123,3676;0,1369;7,2946;0,2781;0,4281;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Histogram Equalization_Pruitt.jpg
+image_part_036.jpg;Histogram Equalization;Harris;22478,1075;0,0499;4,6132;0,2646;0,4275;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Histogram Equalization_Harris.jpg
+image_part_036.jpg;Histogram Equalization;FAST;23605,0853;0,0114;4,4007;0,2016;0,4607;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Histogram Equalization_FAST.jpg
+image_part_036.jpg;Sharpen Filter;Canny;22761,7669;0,0408;4,5587;0,332;0,3844;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Sharpen Filter_Canny.jpg
+image_part_036.jpg;Sharpen Filter;Directional;17894,1144;0,071;5,6037;0,2367;0,4687;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Sharpen Filter_Directional.jpg
+image_part_036.jpg;Sharpen Filter;Pruitt;9560,2155;0,2474;8,3261;0,2413;0,3489;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Sharpen Filter_Pruitt.jpg
+image_part_036.jpg;Sharpen Filter;Harris;18282,4928;0,2114;5,5104;0,2686;0,305;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Sharpen Filter_Harris.jpg
+image_part_036.jpg;Sharpen Filter;FAST;23420,4767;0,0124;4,4348;0,2067;0,4657;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Sharpen Filter_FAST.jpg
+image_part_036.jpg;CLAHE;Canny;19695,0036;0,1548;5,1872;0,2289;0,3457;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_CLAHE_Canny.jpg
+image_part_036.jpg;CLAHE;Directional;17431,4162;0,1107;5,7175;0,1938;0,4688;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_CLAHE_Directional.jpg
+image_part_036.jpg;CLAHE;Pruitt;8683,8156;0,3747;8,7437;0,1941;0,3391;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_CLAHE_Pruitt.jpg
+image_part_036.jpg;CLAHE;Harris;13894,3614;0,4018;6,7024;0,2275;0,2554;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_CLAHE_Harris.jpg
+image_part_036.jpg;CLAHE;FAST;22900,2312;0,03;4,5324;0,1785;0,473;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_CLAHE_FAST.jpg
+image_part_036.jpg;Dark channel;Canny;24432,0514;0,0039;4,2512;0,3717;0,4512;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Dark channel_Canny.jpg
+image_part_036.jpg;Dark channel;Directional;23638,998;0;4,3945;0,4291;0,6738;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Dark channel_Directional.jpg
+image_part_036.jpg;Dark channel;Pruitt;22308,4545;0;4,6461;0,411;0,7146;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Dark channel_Pruitt.jpg
+image_part_036.jpg;Dark channel;Harris;24751,4844;0,0005;4,1948;0,1942;0,4596;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Dark channel_Harris.jpg
+image_part_036.jpg;Dark channel;FAST;24823,5032;0;4,1822;0,1242;0,4703;D:\Новая папка\Uni 2 course  1 semestr\КГВ\STEM\images\image_part_036_Dark channel_FAST.jpg
