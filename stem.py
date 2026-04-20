@@ -211,6 +211,56 @@ class CannyFilter(FilterStrategy):
     @property
     def suffix(self) -> str:
         return "_canny"
+    
+    def _connect_endpoints(self, edge_map: np.ndarray) -> np.ndarray:
+        """
+        Пост-обробка: знаходить кінцеві точки розірваних країв і з'єднує найближчі пари
+        """
+        edges = edge_map.copy().astype(np.uint8)
+        edge_points = np.argwhere(edges > 127)
+        if len(edge_points) < 2:
+            return edges
+        endpoints = []
+        for y, x in edge_points:
+            # 8-сусідів
+            neighbors = 0
+            for dy in [-1, 0, 1]:
+                for dx in [-1, 0, 1]:
+                    if dy == 0 and dx == 0:
+                        continue
+                    ny, nx = y + dy, x + dx
+                    if 0 <= ny < edges.shape[0] and 0 <= nx < edges.shape[1]:
+                        if edges[ny, nx] > 127:
+                            neighbors += 1
+            if neighbors <= 1:          
+                endpoints.append((y, x))
+
+        if len(endpoints) < 2:
+            return edges
+
+        endpoints = np.array(endpoints)
+        from scipy.spatial.distance import cdist
+        dist_matrix = cdist(endpoints, endpoints)
+
+        paired = set()
+        for i in range(len(endpoints)):
+            if i in paired:
+                continue
+            min_dist = float('inf')
+            best_j = -1
+            for j in range(len(endpoints)):
+                if i != j and j not in paired:
+                    if dist_matrix[i, j] < min_dist and dist_matrix[i, j] < 30:  
+                        min_dist = dist_matrix[i, j]
+                        best_j = j
+            if best_j != -1:
+                y1, x1 = endpoints[i]
+                y2, x2 = endpoints[best_j]
+                cv2.line(edges, (x1, y1), (x2, y2), 255, thickness=1)
+                paired.add(i)
+                paired.add(best_j)
+
+        return edges
 
     def apply(self, img: Image.Image) -> Image.Image:
         img = img.convert("RGB")
@@ -282,6 +332,8 @@ class CannyFilter(FilterStrategy):
                         res[i,j] = strong
                     else:
                         res[i,j] = 0
+
+        res = self._connect_endpoints(res)
 
         return Image.fromarray(res.astype(np.uint8))
 
